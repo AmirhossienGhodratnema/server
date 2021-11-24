@@ -31,13 +31,19 @@ module.exports = class Aplication {
 
     // Module Config.
     configuration() {
+
+        app.set('view engine', 'ejs');
+        app.set('views', path.join(__dirname, '/resourse/views'));
         app.use(bodyParser.json());
         app.use(bodyParser.urlencoded({ extended: true }));
         
-        app.use(express.static('public'));
+        app.use(express.static(path.join(__dirname, 'public')));
 
-        app.set('view engin', 'ejs');
-        app.set('views', path.resolve('./resourse/views'));
+        
+
+        
+
+
 
         app.use(validator());
 
