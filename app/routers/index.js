@@ -7,6 +7,8 @@ const router = express.Router();
 const HomeRouter = require('./web/home');
 const AdminController = require('./web/admin/admin');
 
+console.log('amirhossien')
+console.log('amirhossien')
 
 // Admin Router
 router.use('/admin', AdminController);
