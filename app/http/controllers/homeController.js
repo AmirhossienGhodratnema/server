@@ -7,7 +7,7 @@ module.exports = new class HomeController extends Controller {
     };
 
     loginPage(req , res) {
-        res.json('lgoinPage');
+        res.render('login');
     };
 
 };
