@@ -5,4 +5,9 @@ module.exports = new class HomeController extends Controller {
     index(req, res) {
         res.render('home');
     };
+
+    loginPage(req , res) {
+        res.json('lgoinPage');
+    };
+
 };
