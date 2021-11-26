@@ -11,10 +11,10 @@ module.exports = new class HomeController extends Controller {
     };
 
     loginPageGet(req, res) {
-        
+
         this.validationData(req)
             .then(result => {
-                if(result) res.json('Register Data')
+                if (result) res.json('Register Data')
                 else res.render('login')
             })
 
@@ -40,15 +40,10 @@ module.exports = new class HomeController extends Controller {
                 const msg = [];
                 errors.forEach(item => msg.push(item.msg));
 
-
                 if (errors.length == 0)
                     return true;
-                    req.flash('massage' , msg)
+                req.flash('massage', msg)
                 return false;
             })
-        // password
     }
-
-
-
 };
