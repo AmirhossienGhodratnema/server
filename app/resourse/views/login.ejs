@@ -1,20 +1,44 @@
 <%- include('fixedFiles/header'); -%>
 
 <div class="full-h">
-    <div class="h-100 w-100 d-flex align-items-center justify-content-center">
-        <div class="w-50">
-            <div class="container mt-5">
-                <form>
-                    <!-- <img class="mb-4" src="/docs/5.1/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57"> -->
-                    <h1 class="h3 mb-3 fw-normal">ورود</h1>
-                
-                    <div class="form-floating">
-                      <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-                      <label for="floatingInput">نام کاربری</label>
+  <div class="h-100 w-100 d-flex align-items-center justify-content-center">
+    <div class="w-50 mt-4">
+      <div class="container mt-5">
+        <div class="card">
+          <div class="card-header">
+            <h3>ورود</h3>
+          </div>
+          <div class="card-body">
+            <form class="d-flex flex-column" action="/login" method="post">
+              <div class="form-group mt-3">
+                <label for="name" class="mb-2">نام کاربری یا ایمیل</label>
+                <input type="text" class="form-control" id="name" name="name">
+              </div>
+
+              <div class="form-group my-4">
+                <label for="password" class="mb-2">پسورد</label>
+                <input type="password" class="form-control" id="password" name="password">
+              </div>
+               
+              <button type="submit" class="btn btn-primary my-4">ورود</button>
+            </form>
+          </div>
+          <!-- <div class="card-footer">
+
+          </div> -->
+        </div>
+
+        <!-- <form method="POST" action="/login"> -->
+        <!-- <img class="mb-4" src="/docs/5.1/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57"> -->
+        <!-- <h1 class="h3 mb-3 fw-normal">ورود</h1> -->
+
+        <!-- <div class="form-floating"> -->
+        <!-- <input type="email" class="form-control" id="name" name="name"> -->
+        <!-- <label for="name">نام کاربری</label>
                     </div>
                     <div class="form-floating mt-4">
-                      <input type="password" class="form-control" id="floatingPassword">
-                      <label for="floatingPassword">پسورد</label>
+                      <input type="password" class="form-control" id="password" name="password">
+                      <label for="password">پسورد</label>
                     </div>
                 
                     <div class="checkbox mb-3 mt-3">
@@ -24,10 +48,10 @@
                     </div>
                     <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
                     <p class="mt-5  text-muted">© 2017–2021</p>
-                  </form>
-              </div>
-        </div>
+                  </form> -->
+      </div>
     </div>
+  </div>
 </div>
 
 <%- include('fixedFiles/footer'); -%>
