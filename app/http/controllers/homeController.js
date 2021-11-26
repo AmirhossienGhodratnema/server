@@ -2,34 +2,26 @@
 const Controller = require('./controller')
 
 module.exports = new class HomeController extends Controller {
+    // Home Page MT=Get
     index(req, res) {
         res.render('home');
     };
 
+    // MT=Get
     loginPage(req, res) {
         res.render('login');
     };
 
+    // MT=Post
     loginPageGet(req, res) {
-
         this.validationData(req)
             .then(result => {
                 if (result) res.json('Register Data')
                 else res.render('login')
-            })
-
-
-
-        // console.log(this.validationData(req)
-        //     .then(result => {
-        //         console.log(result)
-        //     })
-        //     .catch(err => {
-        //         console.log(err)
-        //     }))
+            });
     };
 
-
+    // Validation Data Method
     validationData(req) {
         req.checkBody('name', 'نام کاربری یا ایمیل خود را وارد کنید').notEmpty()
         req.checkBody('password', 'پسورد را وارد کنید').notEmpty()
