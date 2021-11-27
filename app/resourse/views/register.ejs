@@ -13,9 +13,9 @@
 
             <% if(massageRegister.length > 0) { %>
             
-                <div class="d-flex justify-content-between align-items-center alert alert-danger alert-dismissible fade show">
+                <div class=" alert alert-danger alert-dismissible fade show">
                   <% massageRegister.forEach(err => { %>
-                    <div><p class="m-0"><%= err %></p></div>
+                    <div class="d-flex flex-column"><p class="m-0"><%= err %></p></div>
                   <% }) %>
                   <button
                     type="button"
