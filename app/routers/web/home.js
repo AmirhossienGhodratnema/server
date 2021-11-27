@@ -10,6 +10,8 @@ const HomeController = require('app/http/controllers/homeController');
 router.get('/', HomeController.index);
 router.get('/login', HomeController.loginPage);
 router.post('/login', HomeController.loginPagePost);
+router.get('/register', HomeController.registerData);
+router.post('/register', HomeController.registerDataPost);
 
 
 module.exports = router;
