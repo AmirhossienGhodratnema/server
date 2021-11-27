@@ -9,7 +9,7 @@ const validator = require('express-validator')
 const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
-var favicon = require('serve-favicon');
+// var favicon = require('serve-favicon');
 
 module.exports = class Aplication {
     constructor() {
@@ -52,7 +52,7 @@ module.exports = class Aplication {
         }));
         app.use(cookieParser('mysecretkey'));
         app.use(flash());
-        app.use(favicon(path.join(__dirname, 'public', 'image/pageIcon/index.png')))
+        // app.use(favicon(path.join(__dirname, 'public', 'image/pageIcon/index.png')))
     };
 
     setRouters() {

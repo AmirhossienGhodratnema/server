@@ -9,7 +9,7 @@ const HomeController = require('app/http/controllers/homeController');
 // Route
 router.get('/', HomeController.index);
 router.get('/login', HomeController.loginPage);
-router.post('/login', HomeController.loginPageGet);
+router.post('/login', HomeController.loginPagePost);
 
 
 module.exports = router;

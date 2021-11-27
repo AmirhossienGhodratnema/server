@@ -9,16 +9,25 @@ module.exports = new class HomeController extends Controller {
 
     // MT=Get
     loginPage(req, res) {
-        res.render('login');
+        res.render('login' , {
+            massage : req.flash('massage')
+        });
     };
 
+    
+
     // MT=Post
-    loginPageGet(req, res) {
+    loginPagePost(req, res) {
         this.validationData(req)
             .then(result => {
                 if (result) res.json('Register Data')
-                else res.render('login')
+                else {
+                    res.redirect('/login')
+                
+                }
+                
             });
+
     };
 
     // Validation Data Method
@@ -34,6 +43,7 @@ module.exports = new class HomeController extends Controller {
 
                 if (errors.length == 0)
                     return true;
+
                 req.flash('massage', msg)
                 return false;
             })
