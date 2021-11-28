@@ -39,7 +39,7 @@ module.exports = new class HomeController extends Controller {
             .then(result => this.validationDataRegister(req))
             .then(result => {
                 if (result) res.json('Create Acc');
-                else res.redirect('/register')
+                else res.redirect(req.url)
             })
     };
 
