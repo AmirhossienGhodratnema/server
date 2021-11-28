@@ -1,5 +1,7 @@
 // Require
 const Controller = require('./controller')
+var Recaptcha = require('express-recaptcha').Recaptcha;
+
 
 module.exports = new class HomeController extends Controller {
     // Home Page MT=Get
@@ -31,7 +33,12 @@ module.exports = new class HomeController extends Controller {
     };
 
     registerData(req, res) {
-        res.render('register' , {massageRegister : req.flash('massageRegister')})
+        const recaptcha = new Recaptcha('6LeQE2QdAAAAAB7JT9Ys6f3aj-OcLrgPUn0BsJDa', '6LeQE2QdAAAAABMcNv-lUFOqjBnQKNPniuHEv-p6', { 'hl': 'fa' });
+        res.render('register', {
+            captcha: recaptcha.render(),
+            massageRegister: req.flash('massageRegister'),
+        })
+
     }
 
     registerDataPost(req, res) {
@@ -60,19 +67,13 @@ module.exports = new class HomeController extends Controller {
                 const errors = result.array();
                 const msg = [];
 
-
                 errors.forEach(item => msg.push(item.msg));
-
                 if (errors.length == 0) {
                     return true;
                 } else {
                     req.flash('massageRegister', msg)
                     return false;
                 }
-
-                    
-
-                
             })
     }
 
@@ -94,8 +95,4 @@ module.exports = new class HomeController extends Controller {
                 return false;
             })
     }
-
-
-
-
 };
