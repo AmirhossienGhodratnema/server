@@ -1,7 +1,5 @@
 // Require
 const Controller = require('./controller')
-var Recaptcha = require('express-recaptcha').Recaptcha;
-
 
 module.exports = new class HomeController extends Controller {
     // Home Page MT=Get
@@ -17,7 +15,6 @@ module.exports = new class HomeController extends Controller {
     };
 
 
-
     // MT=Post
     loginPagePost(req, res) {
         this.validationData(req)
@@ -25,34 +22,25 @@ module.exports = new class HomeController extends Controller {
                 if (result) res.json('Register Data')
                 else {
                     res.redirect('/login')
-
                 }
 
             });
-
     };
 
     registerData(req, res) {
-        const recaptcha = new Recaptcha('6LeQE2QdAAAAAB7JT9Ys6f3aj-OcLrgPUn0BsJDa', '6LeQE2QdAAAAABMcNv-lUFOqjBnQKNPniuHEv-p6', { 'hl': 'fa' });
         res.render('register', {
-            captcha: recaptcha.render(),
+            captcha: this.recaptcha.render(),
             massageRegister: req.flash('massageRegister'),
-        })
-
-    }
+        });
+    };
 
     registerDataPost(req, res) {
-
-
-        this.validationDataRegister(req)
+        this.validationRecaptcha(req, res)
+            .then(result => this.validationDataRegister(req))
             .then(result => {
-                if (result) {
-                    res.json('Create Acc');
-                } else {
-                    res.redirect('register');
-                }
-
-            });
+                if (result) res.json('Create Acc');
+                else res.redirect('/register')
+            })
     };
 
     validationDataRegister(req) {
