@@ -9,7 +9,12 @@ const validator = require('express-validator')
 const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
+const passport = require('passport');
 // var favicon = require('serve-favicon');
+
+
+
+
 
 module.exports = class Aplication {
     constructor() {
@@ -17,6 +22,8 @@ module.exports = class Aplication {
         this.setMongoConnection();
         this.configuration();
         this.setRouters();
+
+ 
     };
 
     // Express Config.
@@ -33,11 +40,13 @@ module.exports = class Aplication {
     // Module Config.
     configuration() {
 
+
         app.set('view engine', 'ejs');
         app.set('views', path.join(__dirname, '/resourse/views'));
+
         app.use(bodyParser.json());
         app.use(bodyParser.urlencoded({ extended: true }));
-        
+
         app.use(express.static(path.join(__dirname, 'public')));
 
         app.use(validator());
@@ -52,6 +61,10 @@ module.exports = class Aplication {
         }));
         app.use(cookieParser('mysecretkey'));
         app.use(flash());
+
+        // after ( cookieParser session bodyParser )
+        app.use(passport.initialize());
+        app.use(passport.session());
         // app.use(favicon(path.join(__dirname, 'public', 'image/pageIcon/index.png')))
     };
 
