@@ -39,7 +39,7 @@ module.exports = class Aplication {
 
     // Module Config.
     configuration() {
-
+        require('app/passport/passport-local');
 
         app.set('view engine', 'ejs');
         app.set('views', path.join(__dirname, '/resourse/views'));
@@ -65,7 +65,7 @@ module.exports = class Aplication {
         // after ( cookieParser session bodyParser )
         app.use(passport.initialize());
         app.use(passport.session());
-        // app.use(favicon(path.join(__dirname, 'public', 'image/pageIcon/index.png')))
+
     };
 
     setRouters() {

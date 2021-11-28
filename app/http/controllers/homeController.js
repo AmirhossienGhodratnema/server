@@ -1,5 +1,6 @@
 // Require
-const Controller = require('./controller')
+const Controller = require('./controller');
+const passport = require('passport')
 
 module.exports = new class HomeController extends Controller {
     // Home Page MT=Get
@@ -34,13 +35,26 @@ module.exports = new class HomeController extends Controller {
         });
     };
 
+
+
     registerDataPost(req, res) {
+
+        this.register(req, res)
+
         this.validationRecaptcha(req, res)
             .then(result => this.validationDataRegister(req))
             .then(result => {
-                if (result) res.json('Create Acc');
+                if (result) this.register(req, res)
                 else res.redirect(req.url)
             })
+    };
+
+    register(req, res) {
+        passport.authenticate('local.register', {
+            successRedirect: '/',
+            failureRedirect: '/register',
+            failureFlash: true,
+        })
     };
 
     validationDataRegister(req) {
