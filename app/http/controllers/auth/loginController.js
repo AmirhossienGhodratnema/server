@@ -1,5 +1,6 @@
 // Require
 const Controller = require('app/http/controllers/controller');
+const passport = require('passport');
 
 module.exports = new class LoginController extends Controller {
 
@@ -13,11 +14,11 @@ module.exports = new class LoginController extends Controller {
 
 
     // Post Data 
-    loginPagePost(req, res) {
-        this.validationRecaptcha(req ,res)
+    loginPagePost(req, res, next) {
+        this.validationRecaptcha(req, res)
             .then(result => this.validationData(req))
             .then(result => {
-                if (result) res.json('Register Data')
+                if (result) this.login(req, res, next)
                 else {
                     res.redirect('/login')
                 }
@@ -27,7 +28,7 @@ module.exports = new class LoginController extends Controller {
 
     // Validation Data Method
     validationData(req) {
-        req.checkBody('name', 'نام کاربری یا ایمیل خود را وارد کنید').notEmpty()
+        req.checkBody('email', 'نام کاربری یا ایمیل خود را وارد کنید').notEmpty()
         req.checkBody('password', 'پسورد را وارد کنید').notEmpty()
 
         return req.getValidationResult()
@@ -43,4 +44,13 @@ module.exports = new class LoginController extends Controller {
                 return false;
             })
     }
+
+
+    login(req, res, next) {
+        passport.authenticate('local.login', {
+            successRedirect: '/',
+            failureRedirect: '/login',
+            failureFlash: true,
+        })(req, res, next);
+    };
 };

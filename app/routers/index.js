@@ -12,7 +12,6 @@ const AdminController = require('./web/admin/admin');
 // Admin Router
 router.use('/admin', AdminController);
 
-
 // Home Router
 router.use('/' , HomeRouter);
 

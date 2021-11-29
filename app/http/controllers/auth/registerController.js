@@ -16,22 +16,10 @@ module.exports = new class RegisterController extends Controller {
         this.validationRecaptcha(req, res)
             .then(result => this.validationData(req))
             .then(result => {
-                if (result) {
-                    this.register(req, res, next)
-                }
+                if (result) this.register(req, res, next)
                 else res.redirect('/register');
             })
     };
-
-
-    register(req, res, next) {
-        passport.authenticate('local.register', {
-            successRedirect: '/',
-            failureRedirect: '/register',
-            failureFlash: true,
-        })(req, res, next);
-    };
-
 
     // Validation Data Method
     validationData(req) {
@@ -54,4 +42,13 @@ module.exports = new class RegisterController extends Controller {
                 return false;
             })
     }
+
+    // Check Data in DB
+    register(req, res, next) {
+        passport.authenticate('local.register', {
+            successRedirect: '/',
+            failureRedirect: '/register',
+            failureFlash: true,
+        })(req, res, next);
+    };
 };
