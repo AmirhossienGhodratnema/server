@@ -34,7 +34,7 @@ module.exports = class Aplication {
 
     setMongoConnection() {
         mongoose.Promise = global.Promise;
-        mongoose.connect('mongodb://localhost/nodejsCMS');
+        mongoose.connect('mongodb://localhost/application');
     }
 
     // Module Config.

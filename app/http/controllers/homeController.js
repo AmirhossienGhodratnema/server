@@ -37,25 +37,26 @@ module.exports = new class HomeController extends Controller {
 
 
 
-    registerDataPost(req, res) {
-
-        this.register(req, res)
-
+    registerDataPost(req, res, next) {
         this.validationRecaptcha(req, res)
             .then(result => this.validationDataRegister(req))
             .then(result => {
-                if (result) this.register(req, res)
-                else res.redirect(req.url)
+                if (result) {
+                    this.register(req, res, next)
+                }
+                else res.redirect('/register');
             })
     };
 
-    register(req, res) {
+    register(req, res, next) {
         passport.authenticate('local.register', {
             successRedirect: '/',
             failureRedirect: '/register',
             failureFlash: true,
-        })
+        })(req, res, next);
     };
+
+
 
     validationDataRegister(req) {
         req.checkBody('name', 'نام کاربری یا ایمیل خود را وارد کنید').notEmpty()
