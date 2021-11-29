@@ -5,14 +5,17 @@ const router = express.Router();
 
 // Require Routres
 const HomeController = require('app/http/controllers/homeController');
+const RegisterController = require('app/http/controllers/auth/registerController');
+const LoginController = require('app/http/controllers/auth/loginController');
+
 
 
 // Route
 router.get('/', HomeController.index);
-router.get('/login', HomeController.loginPage);
-router.post('/login', HomeController.loginPagePost);
-router.get('/register', HomeController.registerData);
-router.post('/register', HomeController.registerDataPost);
+router.get('/login', LoginController.loginPage);
+router.post('/login', LoginController.loginPagePost);
+router.get('/register', RegisterController.registerData);
+router.post('/register', RegisterController.registerDataPost);
 
 
 

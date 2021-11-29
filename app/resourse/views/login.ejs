@@ -9,22 +9,31 @@
             <h3>ورود</h3>
           </div>
           <% if(massage.length > 0) { %>
-            
-            <div class="d-flex justify-content-between align-items-center alert alert-danger alert-dismissible fade show">
-              <% massage.forEach(err => { %>
-                <div><p class="m-0"><%= err %></p></div>
-              <% }) %>
-              <button
-                type="button"
-                class="close btn"
-                data-dismiss="alert"
-                aria-label="Close"
-              >
-                <span  aria-hidden="true">&times;</span>
-              </button>
-            </div>
-  
-            <% } %>
+
+          <div
+            class="
+              d-flex
+              justify-content-between
+              align-items-center
+              alert alert-danger alert-dismissible
+              fade
+              show
+            "
+          >
+            <% massage.forEach(err => { %>
+            <div><p class="m-0"><%= err %></p></div>
+            <% }) %>
+            <button
+              type="button"
+              class="close btn"
+              data-dismiss="alert"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <% } %>
 
           <div class="card-body">
             <form class="d-flex flex-column" action="/login" method="post">
@@ -42,6 +51,8 @@
                   name="password"
                 />
               </div>
+
+              <div><%- captcha %></div>
 
               <button type="submit" class="btn btn-primary my-4">ورود</button>
             </form>

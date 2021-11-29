@@ -18,7 +18,7 @@ module.exports = class Controller {
         return new Promise((resolve, reject) => {
             this.recaptcha.verify(req, (err, data) => {
                 if (err) {
-                    req.flash('massageRegister', 'من رباط نیستم را وارد کنید');
+                    req.flash('massage', 'من رباط نیستم را وارد کنید');
                     res.redirect(req.url)
                 } else {
                     resolve(true)

@@ -1,31 +1,27 @@
 // Require
-const Controller = require('./controller');
-const passport = require('passport')
+const Controller = require('app/http/controllers/controller');
 
-module.exports = new class HomeController extends Controller {
-    // Home Page MT=Get
-    index(req, res) {
-        res.render('home');
-    };
+module.exports = new class LoginController extends Controller {
 
-    // MT=Get
+    // Get Page
     loginPage(req, res) {
         res.render('login', {
+            captcha: this.recaptcha.render(),
             massage: req.flash('massage')
         });
     };
 
 
-    // MT=Post
+    // Post Data 
     loginPagePost(req, res) {
-        this.validationData(req)
+        this.validationRecaptcha(req ,res)
+            .then(result => this.validationData(req))
             .then(result => {
                 if (result) res.json('Register Data')
                 else {
                     res.redirect('/login')
                 }
-
-            });
+            })
     };
 
 
