@@ -9,21 +9,7 @@
             <h3>ورود</h3>
           </div>
 
-          <% if(massage.length > 0) { %>
-          <div class="alert alert-danger alert-dismissible fade show">
-            <% massage.forEach(err => { %>
-            <div class="d-flex flex-column"><p class="m-0"><%= err %></p></div>
-            <% }) %>
-            <button
-              type="button"
-              class="close btn"
-              data-dismiss="alert"
-              aria-label="Close"
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <% } %>
+          <%- include('layout/errorMassage'); -%>
 
           <div class="card-body">
             <form class="d-flex flex-column" action="/register" method="post">
