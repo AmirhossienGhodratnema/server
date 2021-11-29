@@ -56,7 +56,7 @@ module.exports = class Aplication {
             resave: true,
             saveUninitialized: true,
             store: MongoStore.create({
-                mongoUrl: 'mongodb://localhost/test-app',
+                mongoUrl: 'mongodb://localhost/application',
             })
         }));
         app.use(cookieParser('mysecretkey'));
