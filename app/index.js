@@ -10,10 +10,10 @@ const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const passport = require('passport');
-// var favicon = require('serve-favicon');
 
 
-
+// Require Files
+const helpers = require('./helpers');
 
 
 module.exports = class Aplication {
@@ -55,7 +55,7 @@ module.exports = class Aplication {
             secret: 'mysecretkey',
             resave: true,
             saveUninitialized: true,
-            cookie: { expires: new Date(Date.now() + 1000 * 60 * 60 * 3) },
+            cookie: { expires: new Date(Date.now() + 40000) },
             store: MongoStore.create({
                 mongoUrl: 'mongodb://localhost/application',
             })
@@ -66,6 +66,13 @@ module.exports = class Aplication {
         // after ( cookieParser session bodyParser )
         app.use(passport.initialize());
         app.use(passport.session());
+
+        // Helpers Next Configuration Passport
+        app.use((req, res, next) => {
+            app.locals = new helpers(req, res).getObjects();
+            next();
+
+        })
 
     };
 

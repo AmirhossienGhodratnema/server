@@ -50,8 +50,21 @@
                 aria-label="Search"
               />
             </form>
-            <a href="/login" class="btn btn-outline-light me-2">ورود</a>
-            <a href="/register" class="btn btn-warning me-2">ثبت نام</a>
+
+            <% if (auth.check) { %>
+
+              <a href="/login" class="btn btn-outline-light me-2">پنل کاربری</a>
+              <a href="/register" class="btn btn-warning me-2">خروج</a>
+
+            <% } else { %>
+
+              <a href="/login" class="btn btn-outline-light me-2">ورود</a>
+              <a href="/register" class="btn btn-warning me-2">ثبت نام</a>
+
+            <% } %>
+
+            
+
           </div>
         </div>
       </div>
