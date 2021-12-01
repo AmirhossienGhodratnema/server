@@ -21,6 +21,7 @@ module.exports = new class RegisterController extends Controller {
             })
     };
 
+
     // Validation Data Method
     validationData(req) {
         req.checkBody('name', 'نام کاربری یا ایمیل خود را وارد کنید').notEmpty()
@@ -43,6 +44,7 @@ module.exports = new class RegisterController extends Controller {
             })
     }
 
+    
     // Check Data in DB
     register(req, res, next) {
         passport.authenticate('local.register', {

@@ -8,6 +8,7 @@ module.exports = new class HomeController extends Controller {
         res.render('home');
     };
 
+
     // MT=Get
     loginPage(req, res) {
         res.render('login', {
@@ -46,5 +47,5 @@ module.exports = new class HomeController extends Controller {
                 req.flash('massage', msg)
                 return false;
             })
-    }
+    };
 };
