@@ -19,7 +19,6 @@ module.exports = class RememberLogin extends middleware {
                         if (err) next(err);
                         next();
                     })
-
                 })
                 .catch(err => next(err))
         };

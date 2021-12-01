@@ -6,12 +6,14 @@ module.exports = class Helpers {
         this.res = res;
     };
 
+    
     getObjects() {
         // console.log(this.auth.bind(this))
         return {
             auth: this.auth(),
         }
     }
+
 
     auth() {
         return {

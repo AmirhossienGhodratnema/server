@@ -15,22 +15,23 @@ const UserSchema = mongoose.Schema({
 UserSchema.pre('save', function (next) {
     bcrypt.hash(this.password, bcrypt.genSaltSync(15), (err, hash) => {
         this.password = hash;
-        next()
+        next();
     });
 });
 
 
 UserSchema.methods.comparePassword = function (password) {
     return bcrypt.compareSync(password, this.password)
-}
+};
+
 
 UserSchema.methods.setrememberToken = function (res) {
     const token = uniqueString()
     res.cookie('remember_token', token, { maxAge: 1000 * 60 * 60 * 24 * 90, httpOnly: true, signed: true })
     this.updateOne({ rememberToken: token }, err => {
         console.log('err in remember token', err)
-    })
-}
+    });
+};
 
 module.exports = mongoose.model("User", UserSchema);
 
