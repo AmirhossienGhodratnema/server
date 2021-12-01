@@ -43,14 +43,32 @@ module.exports = new class LoginController extends Controller {
                 req.flash('massage', msg)
                 return false;
             })
-    }
+    };
 
 
     login(req, res, next) {
-        passport.authenticate('local.login', {
-            successRedirect: '/',
-            failureRedirect: '/login',
-            failureFlash: true,
+        passport.authenticate('local.login', (err, user) => {
+            if (!user) return res.redirect('/login');
+            req.login(user, err => {
+                if (req.body.remember) {
+                    //    user.setrememberToken(res);
+                    console.log(user)
+                    console.log('ok')
+                } else {
+                    console.log('no')
+
+                }
+
+
+            })
+
+
         })(req, res, next);
+
+        // passport.authenticate('local.login', {
+        //     successRedirect: '/',
+        //     failureRedirect: '/login',
+        //     failureFlash: true,
+        // })(req, res, next);
     };
 };

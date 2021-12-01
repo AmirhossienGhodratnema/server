@@ -46,8 +46,7 @@ passport.use('local.login', new localStrategy({
 }, (req, email, password, done) => {
     User.findOne({ 'email': email }, (err, user) => {
         if (err) return done(err);
-        // console.log(err, user)
-
+        
         if (!user || !user.comparePassword(password)) {
             return done(null, false, req.flash('massage', 'اطلاعات وارد شده مطابقت ندارد'))
         };

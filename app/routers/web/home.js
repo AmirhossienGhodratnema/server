@@ -14,8 +14,12 @@ const RegisterRoute = require('app/routers/web/auth/register');
 router.get('/', HomeController.index);
 
 router.use('/login', LoginRoute);
-router.use('/register' , RegisterRoute)
-// router.use('/register', RegisterRoute);
+router.use('/register', RegisterRoute)
+
+router.get('/logout', (req, res) => {
+    req.logOut();
+    res.redirect('/');
+});
 
 
 
