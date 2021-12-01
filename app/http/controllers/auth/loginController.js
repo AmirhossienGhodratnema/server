@@ -51,18 +51,15 @@ module.exports = new class LoginController extends Controller {
             if (!user) return res.redirect('/login');
             req.login(user, err => {
                 if (req.body.remember) {
-                    //    user.setrememberToken(res);
+                    user.setrememberToken(res);
+                    res.redirect('/')
                     console.log(user)
-                    console.log('ok')
+
                 } else {
-                    console.log('no')
-
+                    return res.redirect('/')
                 }
-
-
             })
-
-
+                 
         })(req, res, next);
 
         // passport.authenticate('local.login', {

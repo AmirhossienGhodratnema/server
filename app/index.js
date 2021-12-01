@@ -50,17 +50,17 @@ module.exports = class Aplication {
         app.use(express.static(path.join(__dirname, 'public')));
 
         app.use(validator());
+        app.use(cookieParser('mysecretkey'));
 
         app.use(session({
             secret: 'mysecretkey',
             resave: true,
             saveUninitialized: true,
-            cookie: { expires: new Date(Date.now() + 40000) },
+            cookie: { expires: new Date(Date.now() + 1000 * 60 * 60 * 4) },
             store: MongoStore.create({
                 mongoUrl: 'mongodb://localhost/application',
             })
         }));
-        app.use(cookieParser('mysecretkey'));
         app.use(flash());
 
         // after ( cookieParser session bodyParser )

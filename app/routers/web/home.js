@@ -18,6 +18,7 @@ router.use('/register', RegisterRoute)
 
 router.get('/logout', (req, res) => {
     req.logOut();
+    res.clearCookie('remember_token');
     res.redirect('/');
 });
 
