@@ -1,9 +1,9 @@
 const middleware = require('./middleware')
 
-module.exports = class RedirectFauthentucated extends middleware {
+module.exports = new class RedirectFauthentucated extends middleware {
     handel(req, res, next) {
         if (req.isAuthenticated()) {
-            return req.redirect('/')
+            return res.redirect('/')
         }
         next();
     };

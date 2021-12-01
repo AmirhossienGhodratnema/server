@@ -5,10 +5,11 @@ const router = express.Router();
 
 // Require Routres
 const RegisterController = require('app/http/controllers/auth/registerController');
+const redirectFauthenticated = require('app/middleware/redirectFauthenticated');
 
 // Route
-router.get('/', RegisterController.registerData);
-router.post('/', RegisterController.registerDataPost);
+router.get('/', redirectFauthenticated.handel, RegisterController.registerData);
+router.post('/', redirectFauthenticated.handel, RegisterController.registerDataPost);
 
 
 
