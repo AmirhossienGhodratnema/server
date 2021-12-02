@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 
 
-// Require Routres
+// Require routres
 const LoginController = require('app/http/controllers/auth/loginController');
 const redirectFauthenticated = require('app/middleware/redirectFauthenticated');
 

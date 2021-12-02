@@ -14,13 +14,10 @@ module.exports = class Helpers {
         }
     }
 
-
     auth() {
         return {
             check: this.req.isAuthenticated(),
             user: this.req.user,
-            text:'Amirhossien',
-
         }
     }
 }

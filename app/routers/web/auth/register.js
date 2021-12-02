@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 
 
-// Require Routres
+// Require routres
 const RegisterController = require('app/http/controllers/auth/registerController');
 const redirectFauthenticated = require('app/middleware/redirectFauthenticated');
 

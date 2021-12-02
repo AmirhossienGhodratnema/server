@@ -4,16 +4,17 @@ const passport = require('passport')
 
 module.exports = new class RegisterController extends Controller {
 
+    // Get view informantion Register.
     registerData(req, res) {
         res.render('register', {
-            captcha: this.recaptcha.render(),
-            massage: req.flash('massage'),
+            captcha: this.recaptcha.render(),           // Show view Recaptcha.
+            massage: req.flash('massage'),          // Send validation errors.
         });
     };
 
-
+    // Send information register.
     registerDataPost(req, res, next) {
-        this.validationRecaptcha(req, res)
+        this.validationRecaptcha(req, res)          // Recaptcha validation.
             .then(result => this.validationData(req))
             .then(result => {
                 if (result) this.register(req, res, next)
@@ -22,7 +23,7 @@ module.exports = new class RegisterController extends Controller {
     };
 
 
-    // Validation Data Method
+    // Validation of input information.
     validationData(req) {
         req.checkBody('name', 'نام کاربری یا ایمیل خود را وارد کنید').notEmpty()
         req.checkBody('password', 'پسورد را وارد کنید').notEmpty()
@@ -45,7 +46,7 @@ module.exports = new class RegisterController extends Controller {
     }
 
     
-    // Check Data in DB
+    //  User register.
     register(req, res, next) {
         passport.authenticate('local.register', {
             successRedirect: '/',
