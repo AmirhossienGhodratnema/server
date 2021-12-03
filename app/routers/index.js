@@ -3,14 +3,13 @@ const express = require('express');
 const router = express.Router();
 
 
-// Require Routers
+// Require routers
 const HomeRouter = require('./web/home');
 const AdminController = require('./web/admin/admin');
 
 
 // Admin Router
 router.use('/admin', AdminController);
-
 
 // Home Router
 router.use('/' , HomeRouter);

@@ -4,17 +4,18 @@ const Recaptcha = require('express-recaptcha').Recaptcha;
 
 module.exports = class Controller {
     constructor() {
-        autoBind(this);
-        this.recaptcha();
+        autoBind(this);         // Automatic binding for inherited classes.
+        this.recaptcha();           // Start-up recaptcha.
     };
 
 
-    // Show Recaptcha
+    // Recaptcha sampling  
     recaptcha() {
-        this.recaptcha = new Recaptcha('6LeQE2QdAAAAAB7JT9Ys6f3aj-OcLrgPUn0BsJDa', '6LeQE2QdAAAAABMcNv-lUFOqjBnQKNPniuHEv-p6', { 'hl': 'fa' });
+        this.recaptcha = new Recaptcha(config.recaptcha.site_key, config.recaptcha.secret_key, config.recaptcha.options);
     };
 
 
+    // Start-up recaptcha. 
     validationRecaptcha(req, res) {
         return new Promise((resolve, reject) => {
             this.recaptcha.verify(req, (err, data) => {

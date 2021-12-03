@@ -2,9 +2,9 @@ const middleware = require('./middleware')
 const user = require('app/models/user');
 
 
-module.exports = class RememberLogin extends middleware {
+module.exports = new class RememberLogin extends middleware {
     handel(req, res, next) {
-        if (!user.isAuthenticated()) {
+        if (!req.isAuthenticated()) {
             const rememberToken = req.signedCookies.remember_token;
             if (rememberToken) return this.userFind(req, res, next);
         };

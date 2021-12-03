@@ -8,8 +8,8 @@ const flash = require('connect-flash');
 const validator = require('express-validator')
 const mongoose = require('mongoose');
 const session = require('express-session');
-const MongoStore = require('connect-mongo');
 const passport = require('passport');
+const rememberLogin = require('app/middleware/rememberlogin');
 
 
 // Require Files
@@ -22,19 +22,17 @@ module.exports = class Aplication {
         this.setMongoConnection();
         this.configuration();
         this.setRouters();
-
-
     };
 
     // Express Config.
     setupExpress() {
         const server = http.createServer(app);
-        server.listen(3000, () => console.log('Running Server on Port 3000 ...'));
+        server.listen(config.port, () => console.log(`Running Server on Port ${config.port} ...`));
     }
 
     setMongoConnection() {
         mongoose.Promise = global.Promise;
-        mongoose.connect('mongodb://localhost/application');
+        mongoose.connect(config.database.database_url);
     }
 
     // Module Config.
@@ -50,26 +48,21 @@ module.exports = class Aplication {
         app.use(express.static(path.join(__dirname, 'public')));
 
         app.use(validator());
-        app.use(cookieParser('mysecretkey'));
+        app.use(cookieParser(config.cookie_secret));
 
-        app.use(session({
-            secret: 'mysecretkey',
-            resave: true,
-            saveUninitialized: true,
-            cookie: { expires: new Date(Date.now() + 1000 * 60 * 60 * 4) },
-            store: MongoStore.create({
-                mongoUrl: 'mongodb://localhost/application',
-            })
-        }));
+        app.use(session({ ...config.session }));
         app.use(flash());
 
         // after ( cookieParser session bodyParser )
         app.use(passport.initialize());
         app.use(passport.session());
 
+        // RememberLogin Not User login.
+        app.use(rememberLogin.handel);
+
         // Helpers Next Configuration Passport
         app.use((req, res, next) => {
-            app.locals = new helpers(req, res).getObjects();
+            app.locals = new helpers(req, res).getObjects();            // Send global information.
             next();
         })
 

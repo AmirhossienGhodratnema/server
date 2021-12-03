@@ -24,12 +24,14 @@ passport.use('local.register', new localStrategy({
         if (err) return done(err);
         if (user) return done(null, false, req.flash('massage', 'اطلاعات وارد شده وجود دارد'))
 
+        // Create new user
         const newUser = new User({
             name: req.body.name,
             email,
             password,
         })
 
+        // Save new user
         newUser.save(err => {
             if (err) return done(null, false, req.flash('massage', 'عملیات ناموفق بود دوباره امتحان کنید'))
             done(null, newUser);
@@ -46,7 +48,8 @@ passport.use('local.login', new localStrategy({
 }, (req, email, password, done) => {
     User.findOne({ 'email': email }, (err, user) => {
         if (err) return done(err);
-        
+
+        // Validation user and password for login
         if (!user || !user.comparePassword(password)) {
             return done(null, false, req.flash('massage', 'اطلاعات وارد شده مطابقت ندارد'))
         };
