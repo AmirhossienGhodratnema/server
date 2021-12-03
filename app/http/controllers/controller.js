@@ -1,6 +1,8 @@
 // Require
 const autoBind = require('auto-bind');
 const Recaptcha = require('express-recaptcha').Recaptcha;
+const { validationResult } = require('express-validator/check')
+
 
 module.exports = class Controller {
     constructor() {
@@ -21,11 +23,29 @@ module.exports = class Controller {
             this.recaptcha.verify(req, (err, data) => {
                 if (err) {
                     req.flash('massage', 'من رباط نیستم را وارد کنید');
-                    res.redirect(req.url)
+                    res.redirect(req.url);
+                    console.log(req.url)
                 } else {
                     resolve(true)
                 };
             });
         });
     };
+
+
+    // Validation of input information.
+    async validationData(req) {
+        const result = validationResult(req);
+
+        if (!result.isEmpty()) {
+            const errors = result.array();
+            const msg = [];
+
+            errors.forEach(item => msg.push(item.msg));
+
+            req.flash('massage', msg);
+            return false;
+        }
+        return true;
+    }
 };

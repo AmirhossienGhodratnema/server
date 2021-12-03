@@ -49,7 +49,7 @@ passport.use('local.login', new localStrategy({
     User.findOne({ 'email': email }, (err, user) => {
         if (err) return done(err);
 
-        // Validation user and password for login
+        // Validation user and password for login.
         if (!user || !user.comparePassword(password)) {
             return done(null, false, req.flash('massage', 'اطلاعات وارد شده مطابقت ندارد'))
         };

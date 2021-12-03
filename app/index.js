@@ -11,10 +11,8 @@ const session = require('express-session');
 const passport = require('passport');
 const rememberLogin = require('app/middleware/rememberlogin');
 
-
 // Require Files
 const helpers = require('./helpers');
-
 
 module.exports = class Aplication {
     constructor() {
@@ -65,7 +63,6 @@ module.exports = class Aplication {
             app.locals = new helpers(req, res).getObjects();            // Send global information.
             next();
         })
-
     };
 
     setRouters() {
