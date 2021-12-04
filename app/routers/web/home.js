@@ -5,8 +5,8 @@ const router = express.Router();
 
 // Require routres
 const HomeController = require('app/http/controllers/homeController');
-const LoginRoute = require('app/routers/web/auth/login');
-const RegisterRoute = require('app/routers/web/auth/register');
+// const LoginRoute = require('app/routers/web/auth/login');
+const auth = require('app/routers/web/auth');
 
 
 // Route
@@ -14,8 +14,9 @@ router.get('/', HomeController.index);
 
 
 // Roots in other files.
-router.use('/login', LoginRoute);
-router.use('/register', RegisterRoute)
+router.use('/auth', auth);
+// router.use('/register', RegisterRoute)
+
 
 // User logout root settings
 router.get('/logout', (req, res) => {
