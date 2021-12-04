@@ -6,9 +6,11 @@ module.exports = new class RegisterController extends Controller {
 
     // Get view informantion Register.
     registerData(req, res) {
-        res.render('register', {
+        const title = 'ثبت نام'
+        res.render('home/register', {
             captcha: this.recaptcha.render(),           // Show view Recaptcha.
             massage: req.flash('massage'),          // Send validation errors.
+            title,
         });
     };
 

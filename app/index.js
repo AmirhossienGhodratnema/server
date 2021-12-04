@@ -10,6 +10,7 @@ const mongoose = require('mongoose');
 const session = require('express-session');
 const passport = require('passport');
 const rememberLogin = require('app/middleware/rememberlogin');
+const expressLayouts = require('express-ejs-layouts')
 
 // Require Files
 const helpers = require('./helpers');
@@ -44,6 +45,11 @@ module.exports = class Aplication {
         app.use(bodyParser.urlencoded({ extended: true }));
 
         app.use(express.static(path.join(__dirname, 'public')));
+
+        app.use(expressLayouts)
+        app.set('layout', 'home/master');
+        app.set('layout extractScripts', true);
+        app.set('layout extractStyle', true);
 
         app.use(validator());
         app.use(cookieParser(config.cookie_secret));

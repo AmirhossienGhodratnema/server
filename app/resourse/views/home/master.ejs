@@ -8,8 +8,7 @@
     <link rel="stylesheet" href="/css/bootstrap.min.css" />
     <link rel="stylesheet" href="/css/bootstrap-rtl.min.css" />
     <link rel="stylesheet" href="/css/home.css" />
-    <link rel="icon" type="image/png" href="image/pageIcon/index.png" />
-    <title>خانه</title>
+    <title><%- defineContent('title' || 'خانه') %></title>
   </head>
   <body>
     <header class="p-3 bg-dark text-white">
@@ -62,12 +61,26 @@
               <a href="/register" class="btn btn-info me-2">ثبت نام</a>
 
             <% } %>
-
-            
-
           </div>
         </div>
       </div>
     </header>
+
+
+
+    <%- body %>
+
+    <%- defineContent('footer') %>
+
+
   </body>
+
+
+
+<script src="/js/jquery-3.5.1.slim.min.js"></script>
+<script src="/js/popper.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<%- script %>
+
+</body>
 </html>
