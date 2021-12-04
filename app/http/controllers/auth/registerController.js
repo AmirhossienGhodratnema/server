@@ -20,7 +20,7 @@ module.exports = new class RegisterController extends Controller {
             .then(result => this.validationData(req))
             .then(result => {
                 if (result) this.register(req, res, next)
-                else res.redirect('/register');
+                else res.redirect('/auth/register');
             })
     };
 
@@ -29,7 +29,7 @@ module.exports = new class RegisterController extends Controller {
     register(req, res, next) {
         passport.authenticate('local.register', {
             successRedirect: '/',
-            failureRedirect: '/register',
+            failureRedirect: '/auth/register',
             failureFlash: true,
         })(req, res, next);
     };

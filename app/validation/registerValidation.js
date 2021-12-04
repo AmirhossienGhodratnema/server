@@ -6,7 +6,7 @@ module.exports = new class ValidationRegister extends validation {
         return [
             check('name')
                 .not().isEmpty()
-                .withMessage('نام کاربری خود را وارد کنید'),
+                .withMessage('نام کاربری خود را وارد کنید '),
 
             check('email')
                 .isEmail()

@@ -22,7 +22,7 @@ module.exports = new class LoginController extends Controller {
             .then(result => {
                 if (result) this.login(req, res, next)
                 else {
-                    res.redirect('/login')
+                    res.redirect('/auth/login')
                 }
             })
     };
