@@ -8,7 +8,6 @@
           </div>
           <%- include('layout/errorMassage'); -%>
 
-
           <div class="card-body">
             <form
               class="d-flex flex-column"
@@ -42,7 +41,15 @@
 
               <div><%- captcha %></div>
 
-              <button type="submit" class="btn btn-primary my-4">ورود</button>
+              <div class="d-flex align-items-center">
+                <button type="submit" class="btn btn-primary my-4">ثبت نام</button>
+                
+                <a href="/auth/google" class="btn btn-danger mx-2">
+                  ورود با اکانت گوگل
+                </a>
+
+                <a href="/" class="mx-2" >رمز عبور خود را فراموش کرده‌ام</a>
+              </div>
             </form>
           </div>
           <!-- <div class="card-footer">

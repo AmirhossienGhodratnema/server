@@ -37,7 +37,8 @@ module.exports = class Aplication {
     // Module Config.
     configuration() {
         require('app/passport/passport-local');
-
+        require('app/passport/passport-google');
+        
         app.set('view engine', 'ejs');
         app.set('views', path.join(__dirname, '/resourse/views'));
 
