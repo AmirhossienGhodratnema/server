@@ -23,7 +23,7 @@ module.exports = class Controller {
             this.recaptcha.verify(req, (err, data) => {
                 if (err) {
                     req.flash('massage', 'من رباط نیستم را وارد کنید');
-                    res.redirect(req.originalUrl);
+                    this.back(req, res)
                 } else {
                     resolve(true)
                 };
@@ -46,5 +46,9 @@ module.exports = class Controller {
             return false;
         }
         return true;
+    };
+
+    back(req, res) {
+        return res.redirect(req.headers.referer || '/')
     }
 };
