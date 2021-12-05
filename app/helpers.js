@@ -8,7 +8,6 @@ module.exports = class Helpers {
 
     
     getObjects() {
-        // console.log(this.auth.bind(this))
         return {
             auth: this.auth(),
         }
