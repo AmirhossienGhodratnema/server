@@ -1,6 +1,10 @@
 // Require
 const Controller = require('app/http/controllers/controller');
-const passport = require('passport');
+const User = require('app/models/user');
+const PasswordReset = require('app/models/passwordReset');
+const uniqueString = require('unique-string');
+
+
 
 module.exports = new class LoginController extends Controller {
 
@@ -15,15 +19,39 @@ module.exports = new class LoginController extends Controller {
     };
 
 
-    passwordResetPagePost(req, res, next) {
-        this.validationRecaptcha(req, res)          // Recaptcha validation.
-            .then(result => this.validationData(req))
-            .then(result => {
-                if (result) this.login(req, res, next)
-                else {
-                    // res.redirect('/auth/login')
-                    this.back(req, res)
-                }
-            })
+    async passwordResetPagePost(req, res, next) {
+        await this.validationRecaptcha(req, res)            // Recaptcha validation.
+        let result = await this.validationData(req)
+
+        if (result) {
+            return this.sendResetLink(req, res);
+        } else {
+            this.back(req, res)
+
+        }
     };
+
+
+    async sendResetLink(req, res) {
+        let user = await User.findOne({ email: req.body.email });
+
+        if (!user) {
+            req.flash('massage', 'چنین کاربری وجود ندارد');
+            this.back(req, res);
+        };
+
+
+        let newPasswordReset = new PasswordReset({
+            email: req.body.email,
+            token: uniqueString()
+        });
+
+        let pReset = await newPasswordReset.save();
+
+        // Send
+
+        // req.flash('seccess', 'عملیات با موفقیت انجام شد')
+        res.redirect('/')
+
+    }
 };
