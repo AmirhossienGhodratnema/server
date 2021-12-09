@@ -3,16 +3,20 @@ const express = require('express');
 const router = express.Router();
 
 
+// Middlewares
+const redirectIfNotAdmin = require('app/middleware/redirectIfNotAdmin');
+
+
 // Require routers
 const HomeRouter = require('./web/home');
-const AdminController = require('./web/admin/admin');
+const AdminRouter = require('./web/admin/admin');
 
 
 // Admin Router
-router.use('/admin', AdminController);
+router.use('/admin', AdminRouter);
 
 // Home Router
-router.use('/' , HomeRouter);
+router.use('/', HomeRouter);
 
 
 module.exports = router;

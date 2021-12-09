@@ -55,6 +55,6 @@ module.exports = new class LoginController extends Controller {
         }
 
         await field.updateOne({ use: true });
-        return res.redirect('/')
+        return res.redirect('/auth/login')
     }
 };

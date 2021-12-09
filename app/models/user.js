@@ -12,14 +12,32 @@ const UserSchema = mongoose.Schema({
 }, { timestamps: true });
 
 
-// Password hashing.
+// Password hashing create user.
 UserSchema.pre('save', function (next) {
-    bcrypt.hash(this.password, bcrypt.genSaltSync(15), (err, hash) => {
-        this.password = hash;
-        next();
-    });
+
+    let salt = bcrypt.genSaltSync(15);
+    let hash = bcrypt.hashSync(this.password, salt);
+
+
+    this.password = hash;
+
+
+
+    next()
 });
 
+
+// Password hashing change password user.
+UserSchema.pre('findOneAndUpdate', function (next) {
+    let password = this.getUpdate().$set.password
+
+    let salt = bcrypt.genSaltSync(15);
+    let hash = bcrypt.hashSync(this.getUpdate().$set.password, salt);
+
+    this.getUpdate().$set.password = hash;
+
+    next()
+});
 
 // Hashed password validation.
 UserSchema.methods.comparePassword = function (password) {

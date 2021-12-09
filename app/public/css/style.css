@@ -1,0 +1,57 @@
+body {
+  text-align: right;
+  direction: rtl;
+  font-family: vazir;
+}
+
+.box-shadow {
+  box-shadow: 0rem -5rem 4.25rem 3.05rem;
+}
+
+.fwp {
+  font-weight: 400;
+}
+
+@media (min-width: 768px) {
+  #sidebar {
+    height: calc(100vh - 62px) !important;
+    position: fixed;
+    transition: transform 160ms cubic-bezier(0.65, 0.05, 0.36, 1);
+    width: 16.8rem;
+  }
+  #sidebar.collapse.show {
+    transform: translate(0, 0);
+  }
+  #sidebar.collapsing {
+    transform: translate(100%, 0);
+  }
+  #sidebar.collapse {
+    transform: translate(100%, 0);
+  }
+}
+
+#sidebar ul li a {
+  color: white;
+}
+
+#sidebar .oi-chevron-left {
+  transform: rotate(-90deg);
+  transition: 200ms;
+}
+
+#sidebar .collapsed .oi-chevron-left {
+  transform: rotate(0deg);
+}
+
+#sidebar.collapsing {
+  height: 0;
+}
+
+.nav-link {
+  display: block;
+  padding: 0.5rem .5rem;
+  color: #0d6efd;
+  text-decoration: none;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out;
+}

@@ -29,16 +29,15 @@ router.get('/register', redirectFauthenticated.handel, RegisterController.regist
 router.post('/register', redirectFauthenticated.handel, validationRegister.handel(), RegisterController.registerDataPost);
 
 router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
-router.get('/google/callback', passport.authenticate('google', { successRedirect: '/', failureRedirect: '/auth/register' }))
+router.get('/google/callback', passport.authenticate('google', { successRedirect: '/', failureRedirect: '/auth/register' }));
 
 
-router.get('/password/reset', forgotPasswordController.show)
-router.post('/password/email', forgotValidation.handel(), forgotPasswordController.passwordResetPagePost)
+router.get('/password/reset', forgotPasswordController.show);
+router.post('/password/email', forgotValidation.handel(), forgotPasswordController.passwordResetPagePost);
 
 
 router.get('/password/reset/:token', ResetPasswordController.show);
 router.post('/password/reset', resetPasswordValidation.handel(), ResetPasswordController.resetPasswordProccess);
 
-ResetPasswordController
 
 module.exports = router;

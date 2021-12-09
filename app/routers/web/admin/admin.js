@@ -3,12 +3,24 @@ const express = require('express');
 const router = express.Router();
 
 
-// Require Routers
+router.use((req, res, next) => {
+    res.locals.layout = 'admin/master';
+    next()
+});
+
+
+// Require controller
 const AdminController = require('app/http/controllers/admin/adminController');
 
 
+// Require Routers
+const courses = require('./courses')
+
+router.use('/courses' , courses)
+
+
 // Route
-router.get('/' ,AdminController.index);
-router.get('/course' ,AdminController.course);
+router.get('/', AdminController.index);
+
 
 module.exports = router;
