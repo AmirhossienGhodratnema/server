@@ -4,8 +4,10 @@ const user = require('app/models/user');
 
 module.exports = new class RedirectIfNotAdmin extends middleware {
     handel(req, res, next) {
-        console.log('Amirhossien');
-        next();
+        if (req.isAuthenticated() && req.user.admin) next();
+
+        return res.redirect('/')
+
     };
 
 };

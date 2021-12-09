@@ -16,6 +16,8 @@ const AdminController = require('app/http/controllers/admin/adminController');
 // Require Routers
 const courses = require('./courses')
 
+
+// Middleware
 router.use('/courses' , courses)
 
 

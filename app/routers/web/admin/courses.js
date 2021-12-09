@@ -2,10 +2,9 @@ const express = require('express');
 const router = express.Router();
 
 
+const CourseController = require('app/http/controllers/admin/courseController')
 
-
-router.get('/' , (req ,res) => {
-    res.render('admin/courses')
-})
+router.get('/',CourseController.index);
+router.get('/create',CourseController.create);
 
 module.exports = router;
