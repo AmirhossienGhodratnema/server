@@ -6,7 +6,10 @@ module.exports = new class RedirectIfNotAdmin extends middleware {
     handel(req, res, next) {
         if (req.isAuthenticated() && req.user.admin) next();
 
-        return res.redirect('/')
+        else {
+            res.redirect('/');
+            next();
+        };
 
     };
 

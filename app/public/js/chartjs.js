@@ -94,7 +94,8 @@ var My_Three_chart = new Chart(Chart3, {
         labels: xValues,
         datasets: [{
             backgroundColor: barColors,
-            data: yValues
+            data: yValues,
+            label: 'My First Dataset',
         }]
     },
     options: {
