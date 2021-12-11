@@ -19,7 +19,12 @@ module.exports = new class RegisterController extends Controller {
             .then(result => this.validationData(req))
             .then(result => {
                 if (result) this.register(req, res, next)
-                else res.redirect('/auth/register');
+
+                else {
+                    req.flash('formData', req.body)
+                    res.redirect('/auth/register');
+                }
+
             })
     };
 
