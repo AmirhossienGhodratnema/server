@@ -25,17 +25,16 @@ module.exports = new class CourseController extends Controller {
 
             let newCourse = new Course({
                 user: req.user._id,
-                slug: this.slug(title),
                 title,
+                slug: 'amirhosisne',
                 type,
+                image,
                 body,
                 tags,
                 price
             });
 
-            slug(title) {
-                return title.replace(/()[^0-9ا-یa-z]/)
-            }
+
 
             await newCourse.save(err => {
                 if (err) throw err;
@@ -43,11 +42,13 @@ module.exports = new class CourseController extends Controller {
 
             return res.redirect('/admin/courses');
 
-        };
 
+        };
 
 
         return this.back(req, res);
 
-    }
+    };
+
+  
 };
