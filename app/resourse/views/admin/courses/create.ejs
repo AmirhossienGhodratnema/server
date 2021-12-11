@@ -9,7 +9,7 @@
     <%- include(viewPath('resourse/views/home/layout/errorMassage.ejs')); -%>
 
     <div>
-      <form>
+      <form action="/admin/courses/create" method="post">
         <div class="form-group">
           <label for="name">عنوان دوره</label>
           <input type="text" class="form-control mt-2" id="name" name="name" />
@@ -17,12 +17,11 @@
 
         <div class="form-group">
           <label for="coursetype">نوع دوره</label>
-          <input
-            type="text"
-            class="form-control mt-2"
-            id="coursetype"
-            name="coursetype"
-          />
+          <select class="form-control mt-2" name="type" id="type" >
+            <option>نقدی</option>
+            <option>ویژه</option>
+            <option>رایگان</option>
+          </select>
         </div>
 
         <div class="form-group">
@@ -48,11 +47,11 @@
         <div class="row">
           <div class="col">
             <label for="image">قیمت</label>
-            <input type="text" class="form-control mt-2"/>
+            <input type="price" class="form-control mt-2" name="price" />
           </div>
           <div class="col">
             <label for="image">تگ ها</label>
-            <input type="text" class="form-control mt-2"/>
+            <input type="tags" class="form-control mt-2" name="tags"/>
           </div>
         </div>
 
