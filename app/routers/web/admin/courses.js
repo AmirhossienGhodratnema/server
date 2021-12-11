@@ -2,14 +2,18 @@ const express = require('express');
 const router = express.Router();
 
 
-const CourseController = require('app/http/controllers/admin/courseController')
+// Controller
+const CourseController = require('app/http/controllers/admin/courseController');
+
+
+// Validation
+const CourseCreateValidation = require('app/validation/CourseCreateValidation');
 
 
 router.get('/', CourseController.index);
 
 router.get('/create', CourseController.create);
-router.post('/create', CourseController.store);
-
+router.post('/create', CourseCreateValidation.handel(), CourseController.store);
 
 
 

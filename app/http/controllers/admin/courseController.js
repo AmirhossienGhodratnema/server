@@ -11,6 +11,12 @@ module.exports = new class CourseController extends Controller {
     };
 
     async store(req, res, next) {
-        res.json(req.body);
+        let result = await this.validationData(req);
+
+        if (result)
+            return res.redirect('/admin/courses');
+
+        return this.back(req, res)
+
     }
 };
