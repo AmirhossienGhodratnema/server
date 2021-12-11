@@ -11,12 +11,12 @@
     <div>
       <form action="/admin/courses/create" method="post">
         <div class="form-group">
-          <label for="name">عنوان دوره</label>
+          <label for="title">عنوان دوره</label>
           <input
             type="text"
             class="form-control mt-2"
-            id="name"
-            name="name"
+            id="title"
+            name="title"
             value="<% old('title') %>"
           />
         </div>
@@ -31,8 +31,8 @@
         </div>
 
         <div class="form-group">
-          <label for="text">متن</label>
-          <textarea class="form-control mt-2" id="text" rows="3" name="text">
+          <label for="body">متن</label>
+          <textarea class="form-control mt-2" id="body" rows="3" name="body">
 <%= old('value') %></textarea
           >
         </div>
@@ -43,7 +43,7 @@
             type="file"
             class="form-control-file mt-2"
             id="image"
-            name="image"
+            name="images"
           />
         </div>
 

@@ -20,7 +20,7 @@ module.exports = new class CourseController extends Controller {
 
         if (result) {
 
-            let image = req.body.images;
+            let images = req.body.images;
             let { title, type, body, tags, price } = req.body;
 
             let newCourse = new Course({
@@ -28,7 +28,7 @@ module.exports = new class CourseController extends Controller {
                 title,
                 slug: 'amirhosisne',
                 type,
-                image,
+                images,
                 body,
                 tags,
                 price
