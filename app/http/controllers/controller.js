@@ -49,6 +49,7 @@ module.exports = class Controller {
     };
 
     back(req, res) {
+        req.flash('formData', req.body)
         return res.redirect(req.headers.referer || '/')
     }
 };
