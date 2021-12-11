@@ -4,10 +4,10 @@ const uniqueString = require('unique-string');
 
 // Register of user information.
 const UserSchema = mongoose.Schema({
-    name: { type: String, required: true },
+    name: { type: String, require: true },
     admin: { type: Boolean, default: 0 },
-    email: { type: String, required: true },
-    password: { type: String, required: true },
+    email: { type: String, require: true },
+    password: { type: String, require: true },
     rememberToken: { type: String, default: null }
 }, { timestamps: true });
 
