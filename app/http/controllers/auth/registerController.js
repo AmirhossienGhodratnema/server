@@ -9,7 +9,6 @@ module.exports = new class RegisterController extends Controller {
         const title = 'ثبت نام'
         res.render('home/register', {
             captcha: this.recaptcha.render(),           // Show view Recaptcha.
-            massage: req.flash('massage'),          // Send validation errors.
             title,
         });
     };

@@ -13,8 +13,6 @@ module.exports = new class RememberLogin extends middleware {
 
     userFind(req, res, next) {
         if (user) {
-            // console.log('Amirhossine');
-            // next()
             user.findOne({ rememberToken })
                 .then(user => {
                     req.login(user, err => {

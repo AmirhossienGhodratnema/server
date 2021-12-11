@@ -6,7 +6,8 @@
           <div class="card-header">
             <h3>ورود</h3>
           </div>
-          <%- include('layout/errorMassage'); -%>
+          <%- include(viewPath('resourse/views/home/layout/errorMassage.ejs'));
+          -%>
 
           <div class="card-body">
             <form class="d-flex flex-column" action="/auth/login" method="post">

@@ -28,7 +28,6 @@ module.exports = new class LoginController extends Controller {
         if (result) {
             return this.resetPassword(req, res);
         } else {
-            console.log(req.body)
             return res.redirect('/auth/password/reset/' + req.body.token)
         }
     };

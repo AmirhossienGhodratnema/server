@@ -1,7 +1,9 @@
-const { Console } = require('console');
+
+const autoBind = require('auto-bind')
 const path = require('path');
 module.exports = class Helpers {
     constructor(req, res) {
+        autoBind(this);
         this.req = req;
         this.res = res;
     };
@@ -11,6 +13,7 @@ module.exports = class Helpers {
         return {
             auth: this.auth(),
             viewPath: this.viewPath,
+            ...this.getObjectVariables(),
         };
     };
 
@@ -24,4 +27,10 @@ module.exports = class Helpers {
     viewPath(dir) {
         return path.join(__dirname + '/' + dir)
     };
+
+    getObjectVariables() {
+        return {
+            massage: this.req.flash('massage')
+        }
+    }
 };

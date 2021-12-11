@@ -9,7 +9,6 @@ module.exports = new class LoginController extends Controller {
         const title = 'ورود'
         res.render('home/login', {
             captcha: this.recaptcha.render(),           // Show view Recaptcha.
-            massage: req.flash('massage'),           // Send validation errors.
             title,
         });
     };
