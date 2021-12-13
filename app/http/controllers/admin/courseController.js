@@ -8,11 +8,11 @@ const Course = require('app/models/courses');
 
 module.exports = new class CourseController extends Controller {
     index(req, res) {
-        res.render('admin/courses/index', { title: 'دوره ها' })
+        res.render('admin/courses/index', { title: 'دوره ها' });
     };
 
     create(req, res) {
-        res.render('admin/courses/create', { title: 'افزودن دوره' })
+        res.render('admin/courses/create', { title: 'افزودن دوره' });
     };
 
     async store(req, res, next) {
@@ -21,12 +21,12 @@ module.exports = new class CourseController extends Controller {
         if (result) {
 
             let images = req.body.images;
-            let { title, type, body, tags, price } = req.body;
+            let { title, type, body, tags, price, slug } = req.body;
 
             let newCourse = new Course({
                 user: req.user._id,
                 title,
-                slug: 'amirhosisne',
+                slug: this.slug(title),
                 type,
                 images,
                 body,
@@ -50,5 +50,9 @@ module.exports = new class CourseController extends Controller {
 
     };
 
-  
+    slug(title) {
+        return title.replace(/([^۰-۹آ-یa-z0-9]|-)+/g, "-")
+    }
+
+
 };
