@@ -4,6 +4,7 @@ const Controller = require('./../controller')
 
 // Models
 const Course = require('app/models/courses');
+const fs = require('fs');
 
 
 // Helper Upload Image
@@ -13,13 +14,12 @@ module.exports = new class CourseController extends Controller {
         res.render('admin/courses/index', { title: 'دوره ها' });
     };
 
-    create(req, res) {
+    create(req, res, next) {
         res.render('admin/courses/create', { title: 'افزودن دوره' });
     };
 
     async store(req, res, next) {
         let result = await this.validationData(req);
-
         if (result) {
 
             let images = req.body.images;
@@ -47,7 +47,10 @@ module.exports = new class CourseController extends Controller {
 
         };
 
-
+        // Delete upload file with error.
+        if(req.file) {
+            fs.unlink(req.file.path, (err) => {})
+        }
         return this.back(req, res);
 
     };
