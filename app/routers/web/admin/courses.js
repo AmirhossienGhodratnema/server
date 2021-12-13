@@ -2,6 +2,14 @@ const express = require('express');
 const router = express.Router();
 
 
+
+
+
+
+const uploadimage = require('app/hellper/uploadimage');
+
+
+
 // Controller
 const CourseController = require('app/http/controllers/admin/courseController');
 
@@ -13,7 +21,8 @@ const CourseCreateValidation = require('app/validation/CourseCreateValidation');
 router.get('/', CourseController.index);
 
 router.get('/create', CourseController.create);
-router.post('/create', CourseCreateValidation.handel(), CourseController.store);
+
+router.post('/create', uploadimage.single('images'), CourseCreateValidation.handel(), CourseController.store);
 
 
 

@@ -6,6 +6,8 @@ const Controller = require('./../controller')
 const Course = require('app/models/courses');
 
 
+// Helper Upload Image
+
 module.exports = new class CourseController extends Controller {
     index(req, res) {
         res.render('admin/courses/index', { title: 'دوره ها' });

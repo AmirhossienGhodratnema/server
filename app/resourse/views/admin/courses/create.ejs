@@ -9,7 +9,7 @@
     <%- include(viewPath('resourse/views/home/layout/errorMassage.ejs')); -%>
 
     <div>
-      <form action="/admin/courses/create" method="post">
+      <form action="/admin/courses/create" method="post" enctype="multipart/form-data">
         <div class="form-group">
           <label for="title">عنوان دوره</label>
           <input
