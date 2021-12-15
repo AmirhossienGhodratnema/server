@@ -25,11 +25,13 @@ module.exports = new class CourseController extends Controller {
         let result = await this.validationData(req);
 
         if (req.file && req.flash('massage').length > 0) {
-            fs.unlink(req.file.path, (err) => {})
+            fs.unlink(req.file.path, (err) => { })
         };
 
+
+
         if (result) {
-            let images = req.body.images;
+            let images = this.imageResize(req.file);
             let { title, type, body, tags, price } = req.body;
 
 
@@ -38,7 +40,7 @@ module.exports = new class CourseController extends Controller {
                 title,
                 slug: this.slug(title),
                 type,
-                images,
+                images: JSON.stringify(images),
                 body,
                 tags,
                 price
@@ -55,14 +57,35 @@ module.exports = new class CourseController extends Controller {
 
     };
 
+    imageResize(image) {
+        let imageInfo = path.parse(image.path)
+
+        let addresImage = {}
+        addresImage['orginal'] = this.getUrlImage(image.destination, image.originalname);
 
 
-    getUrlImage(dir, name) {
-        return dir.substring(12) + '/' + name
+        const resize = size => {
+            let imageName = `${imageInfo.name}-${size}-${imageInfo.ext}`
+            console.log(imageName)
+
+            addresImage[size] = this.getUrlImage(image.destination, image.originalname);
+
+            sharp(image.path)
+                .resize(size, null)
+                .toFile(`${image.destination}/${imageName}`)
+        };
+
+        [1080, 720, 480].map(resize)
+
+        console.log(addresImage)
+        return addresImage
     }
 
 
 
+    getUrlImage(dir, name) {
+        return dir + '/' + name
+    }
 
     slug(title) {
         return title.replace(/([^۰-۹آ-یa-z0-9]|-)+/g, "-")

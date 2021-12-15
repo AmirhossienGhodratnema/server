@@ -16,18 +16,18 @@ const ImageStorage = multer.diskStorage({
 
         mkdirp(dir)
             .then(made => {
-                cb(null, dir)
-            })
+                cb(null, dir);
+            });
     },
     filename: function (req, file, cb) {
         const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
         cb(null, uniqueSuffix + '-' + file.originalname)
     }
-})
+});
 
 const uploadImage = multer({
     storage: ImageStorage
-})
+});
 
 
 module.exports = uploadImage;
