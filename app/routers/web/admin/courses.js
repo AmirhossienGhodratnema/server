@@ -6,8 +6,7 @@ const router = express.Router();
 
 
 // Upload file
-const uploadimage = require('app/hellper/uploadimage');
-
+const upload = require('app/hellper/uploadimage');
 
 
 // Controller
@@ -24,7 +23,7 @@ router.get('/', CourseController.index);
 
 router.get('/create', CourseController.create);
 
-router.post('/create', uploadimage.single('images'), convertFileToField.handel, CourseCreateValidation.handel(), CourseController.store);
+router.post('/create', upload.single('images'), convertFileToField.handel, CourseCreateValidation.handel(), CourseController.store);
 
 
 module.exports = router; 

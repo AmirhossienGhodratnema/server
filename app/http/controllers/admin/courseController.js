@@ -24,17 +24,14 @@ module.exports = new class CourseController extends Controller {
     async store(req, res, next) {
         let result = await this.validationData(req);
 
-        console.log(req.body)
 
-
-        if (req.file) {
+        if (!req.file) {
             fs.unlink(req.file.path, (err) => { })
         };
 
         if (result) {
-
             let images = req.body.images;
-            let { title, type, body, tags, price, slug } = req.body;
+            let { title, type, body, tags, price } = req.body;
 
 
             let newCourse = new Course({
@@ -59,17 +56,7 @@ module.exports = new class CourseController extends Controller {
 
     };
 
-    imageResize(image) {
-        let imageInfo = path.parse(image.path);
 
-        let addresImage = {}
-        addresImage['original'] = this.getUrlImage(image.destination, image.originalname);
-
-
-
-        return addresImage;
-
-    }
 
     getUrlImage(dir, name) {
         return dir.substring(12) + '/' + name
