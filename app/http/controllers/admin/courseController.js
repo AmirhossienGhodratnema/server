@@ -24,9 +24,8 @@ module.exports = new class CourseController extends Controller {
     async store(req, res, next) {
         let result = await this.validationData(req);
 
-
-        if (!req.file) {
-            fs.unlink(req.file.path, (err) => { })
+        if (req.file && req.flash('massage').length > 0) {
+            fs.unlink(req.file.path, (err) => {})
         };
 
         if (result) {
