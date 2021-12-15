@@ -1,69 +1,60 @@
 <div class="col-10">
-    <div class="main-style-div">
+  <div class="main-style-div">
+    <div>
+      <div class="d-flex justify-content-between mt-5">
+        <h3>دوره ها</h3>
         <div>
-            <div class="d-flex justify-content-between mt-5">
-              <h3>دوره ها</h3>
-              <div>
-                <div
-                  class="btn-group btn-group-sm"
-                  role="group"
-                  aria-label="Basic example"
-                >
-                <!--  -->
-                  <a href="/admin/courses/create" class="btn btn-primary">ایجاد دوره</a>
-                  <a href="" class="btn btn-danger">بخش ویدیوها</a>
-                </div>
-              </div>
-            </div>
+          <div
+            class="btn-group btn-group-sm"
+            role="group"
+            aria-label="Basic example"
+          >
+            <!--  -->
+            <a href="/admin/courses/create" class="btn btn-primary"
+              >ایجاد دوره</a
+            >
+            <a href="" class="btn btn-danger">بخش ویدیوها</a>
           </div>
-        
-          <div class="border mt-4">
-            <table class="table table-striped">
-              <thead>
-                <tr class="text-center">
-                  <th scope="col">عنوان مقاله</th>
-                  <th scope="col">تعداد نظرات</th>
-                  <th scope="col">مقدار بازدید</th>
-                  <th scope="col">تعداد شرکت کننده ها</th>
-                  <th scope="col">وضعیت دوره</th>
-                  <th scope="col">تنظیمات</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="text-center">
-                  <th scope="row">دوره بوت استرپ</th>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>نقدی</td>
-                  <td>
-                    <div
-                      class="btn-group btn-group-sm"
-                      role="group"
-                      aria-label="Basic example"
-                    >
-                      <button type="button" class="btn btn-primary">ویرایش</button>
-                      <button type="button" class="btn btn-danger">حذف</button>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        
-          <div class="d-flex justify-content-center mt-3">
-            <div class="btn-group" role="group" aria-label="First group">
-              <button type="button" class="btn btn-outline-secondary">
-                <i class="bi bi-chevron-double-right"></i>
-              </button>
-              <button type="button" class="btn btn-outline-secondary">1</button>
-              <button type="button" class="btn btn-outline-secondary">2</button>
-              <button type="button" class="btn btn-outline-secondary">3</button>
-              <button type="button" class="btn btn-outline-secondary">4</button>
-              <button type="button" class="btn btn-outline-secondary">
-                <i class="bi bi-chevron-double-left"></i>
-              </button>
-            </div>
-          </div>
+        </div>
+      </div>
     </div>
+
+    <div class="border mt-4">
+      <table class="table table-striped">
+        <thead>
+          <tr class="text-center">
+            <th scope="col">عنوان مقاله</th>
+            <th scope="col">تعداد نظرات</th>
+            <th scope="col">مقدار بازدید</th>
+            <th scope="col">تعداد شرکت کننده ها</th>
+            <th scope="col">وضعیت دوره</th>
+            <th scope="col">تنظیمات</th>
+          </tr>
+        </thead>
+        <% course.docs.forEach(course => { %>
+
+        <tbody>
+          <tr class="text-center">
+            <th scope="row"><%=course.title%></th>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td><%= course.typeToPersion() %></td>
+            <td>
+              <div
+                class="btn-group btn-group-sm"
+                role="group"
+                aria-label="Basic example"
+              >
+                <button type="button" class="btn btn-primary">ویرایش</button>
+                <button type="button" class="btn btn-danger">حذف</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+        <%}) %>
+      </table>
+    </div>
+    <%- include('./../../home/layout/pagination.ejs' , {pagination: course})  %>
+  </div>
 </div>

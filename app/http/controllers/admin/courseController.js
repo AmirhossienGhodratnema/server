@@ -13,8 +13,15 @@ const Course = require('app/models/courses');
 // Helper Upload Image
 
 module.exports = new class CourseController extends Controller {
-    index(req, res) {
-        res.render('admin/courses/index', { title: 'دوره ها' });
+    async index(req, res) {
+        let page = req.query.page || 1
+        let course = await Course.paginate({}, { page, limit: 5 })
+        // return res.json(course)
+
+
+
+
+        res.render('admin/courses/index', { title: 'دوره ها', course });
     };
 
     create(req, res, next) {
