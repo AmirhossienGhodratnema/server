@@ -25,6 +25,7 @@
     "express-recaptcha": "^4.1.1",
     "express-session": "^1.17.2",
     "express-validator": "^5.3.1",
+    "method-override": "^3.0.0",
     "mkdirp": "^1.0.4",
     "mongoose": "^6.0.13",
     "mongoose-paginate": "^5.0.3",

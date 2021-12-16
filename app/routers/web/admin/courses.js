@@ -10,7 +10,7 @@ const upload = require('app/hellper/uploadimage');
 
 
 // Controller
-const CourseController = require('app/http/controllers/admin/courseController');
+const courseController = require('app/http/controllers/admin/courseController');
 
 
 // Validation
@@ -19,11 +19,12 @@ const CourseCreateValidation = require('app/validation/CourseCreateValidation');
 
 const convertFileToField = require('app/middleware/convertFileToField')
 
-router.get('/', CourseController.index);
+router.get('/', courseController.index);
 
-router.get('/create', CourseController.create);
+router.get('/create', courseController.create);
 
-router.post('/create', upload.single('images'), convertFileToField.handel, CourseCreateValidation.handel(), CourseController.store);
+router.post('/create', upload.single('images'), convertFileToField.handel, CourseCreateValidation.handel(), courseController.store);
 
+router.delete('/:id', courseController.distroy);
 
 module.exports = router; 

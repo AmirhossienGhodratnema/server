@@ -32,21 +32,14 @@ module.exports = new class CourseController extends Controller {
         let result = await this.validationData(req);
 
 
-
-
-
         if (req.file && req.flash('massage').length > 0) {
             fs.unlink(req.file.path, (err) => { })
         };
 
-        // console.log('fingerImage', fingerImage)
 
         if (result) {
             let images = this.imageResize(req.file);
-            console.log('images' , images)
             let { title, type, body, tags, price, fingerImage } = req.body;
-
-            // console.log('image' ,images['480'])
 
             let newCourse = new Course({
                 user: req.user._id,
@@ -91,6 +84,26 @@ module.exports = new class CourseController extends Controller {
         [1080, 720, 480].map(resize)
 
         return addresImage
+    }
+
+    async distroy(req, res, next) {
+        let course = await Course.findOne({ id: req.params.id })
+        if (!course) {
+            req.flash('massage', 'چنین دوره ای وجود ندارد');
+            console.log('Not Course')
+        }
+
+
+        Object.values(course.images).forEach(image => {
+
+            fs.unlink(image, (err) => { })
+
+        });
+
+
+        course.remove()
+        res.redirect('/admin/courses');
+
     }
 
 

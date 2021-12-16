@@ -11,7 +11,7 @@ const session = require('express-session');
 const passport = require('passport');
 const rememberLogin = require('app/middleware/rememberlogin');
 const expressLayouts = require('express-ejs-layouts')
-
+const methodOverride = require('method-override')
 
 
 // Require Files
@@ -40,16 +40,20 @@ module.exports = class Aplication {
     configuration() {
         require('app/passport/passport-local');
         require('app/passport/passport-google');
-        
+
         app.set('view engine', 'ejs');
         app.set('views', path.join(__dirname, '/resourse/views'));
+
+
 
         app.use(bodyParser.json());
         app.use(bodyParser.urlencoded({ extended: true }));
 
         app.use(express.static(path.join(__dirname, 'public')));
 
-        app.use(expressLayouts)
+        app.use(methodOverride('_method'));
+
+        app.use(expressLayouts);
         app.set('layout', 'home/master');
         app.set('layout extractScripts', true);
         app.set('layout extractStyle', true);

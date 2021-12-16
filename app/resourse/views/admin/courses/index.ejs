@@ -47,8 +47,13 @@
                 role="group"
                 aria-label="Basic example"
               >
-                <button type="button" class="btn btn-primary">ویرایش</button>
-                <button type="button" class="btn btn-danger">حذف</button>
+                <form
+                  action="/admin/courses/<%= course.id %>?_method=DELETE"
+                  method="post"
+                >
+                  <button type="submit" class="btn btn-primary">ویرایش</button>
+                  <button type="submit" class="btn btn-danger">حذف</button>
+                </form>
               </div>
             </td>
           </tr>
