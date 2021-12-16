@@ -15,7 +15,7 @@ const Course = require('app/models/courses');
 module.exports = new class CourseController extends Controller {
     async index(req, res) {
         let page = req.query.page || 1
-        let course = await Course.paginate({}, { page, limit: 5 })
+        let course = await Course.paginate({}, { page, sort: { createdAt: -1 }, limit: 10 })
         // return res.json(course)
 
 
@@ -31,23 +31,30 @@ module.exports = new class CourseController extends Controller {
     async store(req, res, next) {
         let result = await this.validationData(req);
 
+
+
+
+
         if (req.file && req.flash('massage').length > 0) {
             fs.unlink(req.file.path, (err) => { })
         };
 
-
+        // console.log('fingerImage', fingerImage)
 
         if (result) {
             let images = this.imageResize(req.file);
-            let { title, type, body, tags, price } = req.body;
+            console.log('images' , images)
+            let { title, type, body, tags, price, fingerImage } = req.body;
 
+            // console.log('image' ,images['480'])
 
             let newCourse = new Course({
                 user: req.user._id,
                 title,
                 slug: this.slug(title),
                 type,
-                images: JSON.stringify(images),
+                fingerImage: images['480'],
+                images,
                 body,
                 tags,
                 price
@@ -72,10 +79,9 @@ module.exports = new class CourseController extends Controller {
 
 
         const resize = size => {
-            let imageName = `${imageInfo.name}-${size}-${imageInfo.ext}`
-            console.log(imageName)
+            let imageName = `${imageInfo.name}-${size}-${imageInfo.ext}`;
 
-            addresImage[size] = this.getUrlImage(image.destination, image.originalname);
+            addresImage[size] = this.getUrlImage(image.destination, imageName);
 
             sharp(image.path)
                 .resize(size, null)
@@ -84,7 +90,6 @@ module.exports = new class CourseController extends Controller {
 
         [1080, 720, 480].map(resize)
 
-        console.log(addresImage)
         return addresImage
     }
 

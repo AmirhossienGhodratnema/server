@@ -31,9 +31,10 @@
             <th scope="col">تنظیمات</th>
           </tr>
         </thead>
-        <% course.docs.forEach(course => { %>
 
         <tbody>
+          <% course.docs.forEach(course => { %>
+
           <tr class="text-center">
             <th scope="row"><%=course.title%></th>
             <td>0</td>
@@ -51,10 +52,11 @@
               </div>
             </td>
           </tr>
+
+          <%}) %>
         </tbody>
-        <%}) %>
       </table>
     </div>
-    <%- include('./../../home/layout/pagination.ejs' , {pagination: course})  %>
+    <%- include('./../../home/layout/pagination.ejs' , {pagination: course}) %>
   </div>
 </div>
