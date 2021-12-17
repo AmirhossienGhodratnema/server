@@ -20,11 +20,14 @@ const CourseCreateValidation = require('app/validation/CourseCreateValidation');
 const convertFileToField = require('app/middleware/convertFileToField')
 
 router.get('/', courseController.index);
-
 router.get('/create', courseController.create);
-
 router.post('/create', upload.single('images'), convertFileToField.handel, CourseCreateValidation.handel(), courseController.store);
-
 router.delete('/:id', courseController.distroy);
+router.put('/:id', courseController.distroy);
+router.get('/:id/edit', courseController.edit);
+
+
+
+// edit
 
 module.exports = router; 

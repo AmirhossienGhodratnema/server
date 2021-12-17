@@ -53,6 +53,8 @@ module.exports = new class CourseController extends Controller {
                 price
             });
 
+
+
             await newCourse.save(err => {
                 if (err) throw err;
             });
@@ -60,15 +62,17 @@ module.exports = new class CourseController extends Controller {
             return res.redirect('/admin/courses');
         };
 
+
         return this.back(req, res);
 
     };
+
 
     imageResize(image) {
         let imageInfo = path.parse(image.path)
 
         let addresImage = {}
-        addresImage['orginal'] = this.getUrlImage(image.destination, image.originalname);
+        addresImage['orginal'] = this.getUrlImage(image.destination, image.filename);
 
 
         const resize = size => {
@@ -87,29 +91,41 @@ module.exports = new class CourseController extends Controller {
     }
 
     async distroy(req, res, next) {
-        let course = await Course.findOne({ id: req.params.id })
+        let course = await Course.findOne({ _id: req.params.id })
         if (!course) {
             req.flash('massage', 'چنین دوره ای وجود ندارد');
             console.log('Not Course')
         }
 
 
-        Object.values(course.images).forEach(image => {
-
+        Object.values(course.images).map(image => {
             fs.unlink(image, (err) => { })
-
         });
 
+        // fs.unlink(course['orginal'], (err) => { })
 
         course.remove()
         res.redirect('/admin/courses');
+    }
+
+
+    async edit(req, res) {
+        let course = await Course.findOne({ _id: req.params.id })
+
+        if (!course) {
+            req.flash('massage', 'چنین دوره ای وجود ندارد');
+            console.log('Not Course');
+        } else {
+            res.render('admin/courses/edit', { title: 'ویرایش دوره ', course })
+
+        }
 
     }
 
 
-
     getUrlImage(dir, name) {
-        return dir + '/' + name
+
+        return dir.substring(10) + '/' + name
     }
 
     slug(title) {

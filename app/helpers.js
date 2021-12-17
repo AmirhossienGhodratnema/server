@@ -46,4 +46,5 @@ module.exports = class Helpers {
     old(field, defultValue = '') {
         return this.formData && this.formData.hasOwnProperty(field) ? this.formData[field] : defultValue;
     };
+
 };
