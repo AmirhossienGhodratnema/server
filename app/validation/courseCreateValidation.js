@@ -11,7 +11,9 @@ module.exports = new class ValidationLogin extends validation {
                 .isLength({ min: 5 })
                 .withMessage('عنوان نمیتواند کم تر از 5 کاراکتر باشد')
                 .custom(async value => {
-                    let course = Course.findOne({ slug: this.slug(value) })
+                    let course = Course.findOne({ slug: this.slug(value) });
+                    console.log('value', value)
+
                     if (!course) {
                         throw new Error('این اسلاگ وجود دارد')
                     }

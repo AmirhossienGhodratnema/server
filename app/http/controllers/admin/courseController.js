@@ -18,9 +18,6 @@ module.exports = new class CourseController extends Controller {
         let course = await Course.paginate({}, { page, sort: { createdAt: -1 }, limit: 10 })
         // return res.json(course)
 
-
-
-
         res.render('admin/courses/index', { title: 'دوره ها', course });
     };
 
@@ -117,20 +114,37 @@ module.exports = new class CourseController extends Controller {
             console.log('Not Course');
         } else {
             res.render('admin/courses/edit', { title: 'ویرایش دوره ', course })
+        };
+    };
 
-        }
 
-    }
+    async update(req, res, next) {
+        console.log(req.body)
+        res.json(req.body)
+
+        // let status = await this.validationData(req);
+
+        // console.log('status', status)
+        // if (req.file && req.flash('massage').length > 0) {
+        //     fs.unlink(req.file.path, (err) => { })
+        // };
+
+        // if (!status) {
+        //     this.back(req, res)
+        // };
+
+
+    };
 
 
     getUrlImage(dir, name) {
-
         return dir.substring(10) + '/' + name
-    }
+    };
+
 
     slug(title) {
         return title.replace(/([^۰-۹آ-یa-z0-9]|-)+/g, "-")
-    }
+    };
 
 
 };

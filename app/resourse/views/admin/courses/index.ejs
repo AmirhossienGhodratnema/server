@@ -51,7 +51,11 @@
                   action="/admin/courses/<%= course.id %>?_method=DELETE"
                   method="post"
                 >
-                  <a href="/admin/courses/<%= course.id %>/edit" class="btn btn-primary">ویرایش</a>
+                  <a
+                    href="/admin/courses/<%= course._id %>/edit"
+                    class="btn btn-primary"
+                    >ویرایش</a
+                  >
                   <button type="submit" class="btn btn-danger">حذف</button>
                 </form>
               </div>
