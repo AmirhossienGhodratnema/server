@@ -42,15 +42,24 @@
           >
         </div>
 
-        <div class="form-group">
-          <label for="images">افزودن تصویر</label>
-          <input
-            type="file"
-            class="form-control-file mt-2"
-            id="images"
-            name="images"
-          />
+        <div class="form-group row">
+          <div class="col">
+              <label for="images" class="control-label font-weight-bold">تصویر دوره</label>
+              <input type="file" class="form-control" name="images" id="images" placeholder="تصویر مقاله را وارد کنید" >
+          </div>
+      </div>
+
+        <div class="d-flex mb-3">
+          <% Object.entries(course.images).forEach(([size , image]) => { %>
+            <div class="col-sm-2">
+                <label class="control-label">
+                    <input type="radio" name="fingerImage" value="<%= image %>" checked="">
+                    <%= size %><a href="<%= image %>" target="_blank"><img src="<%= image %>" width="100%"></a>
+                </label>
+            </div>
+        <% }) %>
         </div>
+
 
         <div class="row">
           <div class="col">

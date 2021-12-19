@@ -28,13 +28,14 @@ module.exports = new class CourseController extends Controller {
     async store(req, res, next) {
         let result = await this.validationData(req);
 
-
         if (req.file && req.flash('massage').length > 0) {
             fs.unlink(req.file.path, (err) => { })
         };
 
 
+
         if (result) {
+
             let images = this.imageResize(req.file);
             let { title, type, body, tags, price, fingerImage } = req.body;
 
@@ -51,13 +52,14 @@ module.exports = new class CourseController extends Controller {
             });
 
 
-
             await newCourse.save(err => {
                 if (err) throw err;
             });
 
             return res.redirect('/admin/courses');
         };
+
+
 
 
         return this.back(req, res);
@@ -119,20 +121,31 @@ module.exports = new class CourseController extends Controller {
 
 
     async update(req, res, next) {
-        console.log(req.body)
-        res.json(req.body)
+        let status = await this.validationData(req);
 
-        // let status = await this.validationData(req);
+        let objUpdateData = {}
 
-        // console.log('status', status)
-        // if (req.file && req.flash('massage').length > 0) {
-        //     fs.unlink(req.file.path, (err) => { })
-        // };
 
-        // if (!status) {
-        //     this.back(req, res)
-        // };
+        
+        if (!status) {
+            if (req.file && req.flash('massage').length > 0) {
+                return fs.unlink(req.file.path, (err) => { })
+            };
+        };
 
+        if (!status) {
+            return this.back(req, res)
+        };
+
+
+        if (req.file) {
+            objUpdateData.images = this.imageResize(req.file);
+            objUpdateData.fingerImage = objUpdateData.images['480']
+        }
+
+
+        await Course.findByIdAndUpdate(req.params.id, { $set: { ...req.body, ...objUpdateData } })
+        return res.redirect('/admin/courses')
 
     };
 

@@ -32,7 +32,7 @@
 
         <div class="form-group">
           <label for="body">متن</label>
-          <textarea class="form-control mt-2" id="body" rows="3" name="body"></textarea
+          <textarea class="form-control mt-2" id="body" rows="3" name="body"><%= old('body') %></textarea
           >
         </div>
 
@@ -53,7 +53,7 @@
               type="price"
               class="form-control mt-2"
               name="price"
-              value="<%= old('title') %>"
+              value="<%= old('price') %>"
             />
           </div>
           <div class="col">
@@ -62,7 +62,7 @@
               type="tags"
               class="form-control mt-2"
               name="tags"
-              value="<%= old('title') %>"
+              value="<%= old('tags') %>"
             />
           </div>
         </div>

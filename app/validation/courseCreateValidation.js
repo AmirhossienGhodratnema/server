@@ -10,17 +10,30 @@ module.exports = new class ValidationLogin extends validation {
             check('title')
                 .isLength({ min: 5 })
                 .withMessage('عنوان نمیتواند کم تر از 5 کاراکتر باشد')
-                .custom(async value => {
-                    let course = Course.findOne({ slug: this.slug(value) });
-                    console.log('value', value)
+                .custom(async (value, { req }) => {
+                    let course = await Course.findOne({ slug: this.slug(value) });
+                    let getCourse = await Course.findOne({ _id: req.params.id })
 
-                    if (!course) {
+
+                    if (req.query._method === 'put') {
+                        if (getCourse.title == value) return
+                    };
+
+                    if (course) {
                         throw new Error('این اسلاگ وجود دارد')
                     }
                 }),
 
             check('images')
-                .custom(async value => {
+                .custom(async (value, { req }) => {
+
+                    let getCourse = await Course.findOne({ _id: req.params.id })
+
+                    if (req.query._method == 'put' && req.body.images == undefined) {
+                        req.body.images = getCourse.images['480'];
+                        return
+                    }
+
                     if (!value) throw new Error('وارد کردن عکس الزامی است');
 
                     let fileExt = ['.png', '.jpg', '.jpeg', '.svg'];

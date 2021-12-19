@@ -12,7 +12,6 @@ const HomeRouter = require('./web/home');
 const AdminRouter = require('./web/admin/admin');
 
 
-
 // Admin Router
 router.use('/admin', redirectIfNotAdmin.handel, AdminRouter);
 
