@@ -23,7 +23,7 @@ router.use((err, req, res, next) => {
         extractStyle: false,
     };
 
-    if (config.debuge) res.render('error/stack', { ...layouts, errorMasaage, stack });
+    if (config.debuge) return res.render('error/stack', { ...layouts, errorMasaage, stack });
 
     res.render(`error/${statusCode}`, { ...layouts, errorMasaage, stack });
 });

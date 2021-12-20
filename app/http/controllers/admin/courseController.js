@@ -14,56 +14,60 @@ const Course = require('app/models/courses');
 
 module.exports = new class CourseController extends Controller {
     async index(req, res) {
-        let page = req.query.page || 1
-        let course = await Course.paginate({}, { page, sort: { createdAt: -1 }, limit: 10 })
-        // return res.json(course)
-
-        res.render('admin/courses/index', { title: 'دوره ها', course });
+        try {
+            let page = req.query.page || 1
+            let course = await Course.paginate({}, { page, sort: { createdAt: -1 }, limit: 10 })
+            res.render('admin/courses/index', { title: 'دوره ها', course });
+        } catch (err) {
+            next(err)
+        }
     };
 
     create(req, res, next) {
-        res.render('admin/courses/create', { title: 'افزودن دوره' });
+        try {
+            res.render('admin/courses/create', { title: 'افزودن دوره' });
+        } catch (err) {
+            next(err)
+        }
     };
 
     async store(req, res, next) {
-        let result = await this.validationData(req);
+        try {
+            let result = await this.validationData(req);
 
-        if (req.file && req.flash('massage').length > 0) {
-            fs.unlink(req.file.path, (err) => { })
-        };
+            if (req.file && req.flash('massage').length > 0) {
+                fs.unlink(req.file.path, (err) => { })
+            };
 
+            if (result) {
 
+                let images = this.imageResize(req.file);
+                let { title, type, body, tags, price, fingerImage } = req.body;
 
-        if (result) {
+                let newCourse = new Course({
+                    user: req.user._id,
+                    title,
+                    slug: this.slug(title),
+                    type,
+                    fingerImage: images['480'],
+                    images,
+                    body,
+                    tags,
+                    price
+                });
 
-            let images = this.imageResize(req.file);
-            let { title, type, body, tags, price, fingerImage } = req.body;
+                await newCourse.save(err => {
+                    if (err) throw err;
+                });
 
-            let newCourse = new Course({
-                user: req.user._id,
-                title,
-                slug: this.slug(title),
-                type,
-                fingerImage: images['480'],
-                images,
-                body,
-                tags,
-                price
-            });
+                return res.redirect('/admin/courses');
+            };
 
+            return this.back(req, res);
 
-            await newCourse.save(err => {
-                if (err) throw err;
-            });
-
-            return res.redirect('/admin/courses');
-        };
-
-
-
-
-        return this.back(req, res);
-
+        } catch (err) {
+            next(err)
+        }
     };
 
 
@@ -90,21 +94,23 @@ module.exports = new class CourseController extends Controller {
     }
 
     async distroy(req, res, next) {
-        let course = await Course.findOne({ _id: req.params.id })
-        if (!course) {
-            req.flash('massage', 'چنین دوره ای وجود ندارد');
-            console.log('Not Course')
+        try {
+            let course = await Course.findOne({ _id: req.params.id })
+            if (!course) {
+                req.flash('massage', 'چنین دوره ای وجود ندارد');
+                console.log('Not Course')
+            }
+
+            Object.values(course.images).map(image => {
+                fs.unlink(image, (err) => { })
+            });
+
+            course.remove()
+            res.redirect('/admin/courses');
+        } catch (err) {
+            next(err)
+
         }
-
-
-        Object.values(course.images).map(image => {
-            fs.unlink(image, (err) => { })
-        });
-
-        // fs.unlink(course['orginal'], (err) => { })
-
-        course.remove()
-        res.redirect('/admin/courses');
     }
 
 
@@ -121,32 +127,35 @@ module.exports = new class CourseController extends Controller {
 
 
     async update(req, res, next) {
-        let status = await this.validationData(req);
+        try {
+            let status = await this.validationData(req);
 
-        let objUpdateData = {}
+            let objUpdateData = {}
 
-
-        
-        if (!status) {
-            if (req.file && req.flash('massage').length > 0) {
-                return fs.unlink(req.file.path, (err) => { })
+            if (!status) {
+                if (req.file && req.flash('massage').length > 0) {
+                    return fs.unlink(req.file.path, (err) => { })
+                };
             };
-        };
 
-        if (!status) {
-            return this.back(req, res)
-        };
+            if (!status) {
+                return this.back(req, res)
+            };
 
 
-        if (req.file) {
-            objUpdateData.images = this.imageResize(req.file);
-            objUpdateData.fingerImage = objUpdateData.images['480']
+            if (req.file) {
+                objUpdateData.images = this.imageResize(req.file);
+                objUpdateData.fingerImage = objUpdateData.images['480']
+            }
+
+
+            await Course.findByIdAndUpdate(req.params.id, { $set: { ...req.body, ...objUpdateData } })
+            return res.redirect('/admin/courses')
+
+
+        } catch (err) {
+            next(err)
         }
-
-
-        await Course.findByIdAndUpdate(req.params.id, { $set: { ...req.body, ...objUpdateData } })
-        return res.redirect('/admin/courses')
-
     };
 
 
