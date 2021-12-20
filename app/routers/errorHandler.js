@@ -19,9 +19,9 @@ router.use((err, req, res, next) => {
         layout: 'error/master',
         extractScripts: false,
         extractStyle: false,
-    };s
+    };
 
-    res.render('error/stack', { ...layouts });
+    res.render('error/stack', { ...layouts, errorMasaage, stack });
 });
 
 

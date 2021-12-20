@@ -80,5 +80,6 @@ module.exports = class Aplication {
 
     setRouters() {
         app.use(require('./routers'));
-    }
-}
+        app.use(require('app/routers/errorHandler'));
+    };
+};
