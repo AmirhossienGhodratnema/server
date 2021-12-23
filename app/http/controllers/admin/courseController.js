@@ -114,15 +114,20 @@ module.exports = new class CourseController extends Controller {
     }
 
 
-    async edit(req, res) {
-        let course = await Course.findOne({ _id: req.params.id })
+    async edit(req, res, next) {
+        try {
+            this.isMongoId(req.params.id)
 
-        if (!course) {
-            req.flash('massage', 'چنین دوره ای وجود ندارد');
-            console.log('Not Course');
-        } else {
-            res.render('admin/courses/edit', { title: 'ویرایش دوره ', course })
-        };
+            let course = await Course.findOne({ _id: req.params.id })
+
+            if (!course) {
+                throw new Error('چنین دوره ای وجود ندارد')
+            } else {
+                res.render('admin/courses/edit', { title: 'ویرایش دوره ', course })
+            };
+        } catch (err) {
+            next(err)
+        }
     };
 
 

@@ -8,20 +8,24 @@
     <link rel="stylesheet" href="/css/bootstrap.min.css" />
     <!-- <link rel="stylesheet" href="/css/bootstrap-rtl.min.css" /> -->
     <link rel="stylesheet" href="/css/home.css" />
-    <link rel="stylesheet"
-      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css"
+    />
     <title>Document</title>
   </head>
   <body>
-    <div class="container">
-        <h1><%=errorMasaage%></h1>
-        <pre>
+    <div class="container mt-5">
+      <h1><%=errorMasaage%></h1>
+      <pre>
             <code>
                 <%=stack%>
             </code>
         </pre>
     </div>
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
-    <script>hljs.highlightAll();</script>
+    <script>
+      hljs.highlightAll();
+    </script>
   </body>
 </html>

@@ -2,7 +2,7 @@
 const autoBind = require('auto-bind');
 const Recaptcha = require('express-recaptcha').Recaptcha;
 const { validationResult } = require('express-validator/check')
-
+const isMongoId = require('validator/lib/isMongoId')
 
 module.exports = class Controller {
     constructor() {
@@ -51,5 +51,17 @@ module.exports = class Controller {
     back(req, res) {
         req.flash('formData', req.body)
         return res.redirect(req.headers.referer || '/')
+    }
+
+    isMongoId(paramsId) {
+        if (!isMongoId(paramsId)) {
+            throw new Error('چنین آیدی وجود ندارد')
+        }
+    }
+
+    error(message, status = 500) {
+        let err = new Error(message);
+        err.status = status;
+        throw err
     }
 };
