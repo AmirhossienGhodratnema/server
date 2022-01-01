@@ -1,0 +1,2 @@
+client = 442190128566-bjja7o0arr5uj56eri9jrr3inr4615qb.apps.googleusercontent.com
+secret = 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

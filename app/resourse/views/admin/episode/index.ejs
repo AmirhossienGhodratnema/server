@@ -1,0 +1,72 @@
+<div class="col-10">
+  <div class="main-style-div">
+    <div>
+      <div class="d-flex justify-content-between mt-5">
+        <h3>جلسات دوره</h3>
+        <div>
+          <div
+            class="btn-group btn-group-sm"
+            role="group"
+            aria-label="Basic example"
+          >
+            <!--  -->
+            <a href="/admin/episode/create" class="btn btn-primary"
+              >افزودن جلسه جدید</a
+            >
+            <a href="/admin/courses/" class="btn btn-danger">بخش دوره ها</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="border mt-4">
+      <table class="table table-striped">
+        <thead>
+          <tr class="text-center">
+            <th scope="col">عنوان مقاله</th>
+            <th scope="col">تعداد نظرات</th>
+            <th scope="col">مقدار دانلود</th>
+            <th scope="col">تعداد شرکت کننده ها</th>
+            <th scope="col">وضعیت دوره</th>
+            <th scope="col">تنظیمات</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% episodes.docs.forEach(episode => { %>
+
+          <tr class="text-center">
+            <th scope="row"><%=episode.title%></th>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td><%= episode.typeToPersion() %></td>
+            <td>
+              <div
+                class="btn-group btn-group-sm"
+                role="group"
+                aria-label="Basic example"
+              >
+                <form
+                  action="/admin/episode/<%= episode.id %>?_method=DELETE"
+                  method="post"
+                >
+                  <a
+                    href="/admin/episode/<%= episode._id %>/edit"
+                    class="btn btn-primary"
+                    >ویرایش</a
+                  >
+                  <button type="submit" class="btn btn-danger">حذف</button>
+                </form>
+              </div>
+            </td>
+          </tr>
+
+          <%}) %>
+        </tbody>
+      </table>
+    </div>
+    <%- include('./../../home/layout/pagination.ejs' , {pagination: episodes})
+    %>
+  </div>
+</div>

@@ -1,0 +1,81 @@
+<div class="col-10">
+  <div class="main-style-div">
+    <div>
+      <div class="d-flex justify-content-between mt-5">
+        <h3>افزودن دوره</h3>
+      </div>
+    </div>
+    <hr />
+    <%- include(viewPath('resourse/views/home/layout/errorMassage.ejs')); -%>
+
+
+    
+
+    
+    <div>
+      <form action="/admin/courses/<%= episode._id %>?_method=put" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+          <label for="title">عنوان دوره</label>
+          <input
+            type="text"
+            class="form-control mt-2"
+            id="title"
+            name="title"
+            value="<%= episode.title %>"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="episodetype">نوع دوره</label>
+          <select class="form-control mt-2" name="type" id="type">
+            <option value="<%= episode.type %>" <%= episode.tags === 'vip' ? 'selected' : '' %>>نقدی</option>
+            <option value="<%= episode.type %>" <%=  episode.tags === 'cash' ? 'selected' : '' %>>ویژه</option>
+            <option value="<%= episode.type %>" <%=  episode.tags === 'free' ? 'selected' : '' %>>رایگان</option>
+          </select>
+        </div>
+
+        
+
+        <div class="form-group">
+          <label for="body">متن</label>
+          <textarea class="form-control mt-2" id="body" rows="3" name="body"><%= episode.body%></textarea
+          >
+        </div>
+
+        <div class="form-group row">
+          <div class="col">
+              <label for="images" class="control-label font-weight-bold">تصویر دوره</label>
+              <input type="file" class="form-control" name="images" id="images" placeholder="تصویر مقاله را وارد کنید" >
+          </div>
+      </div>
+
+
+
+
+        <div class="row">
+          <div class="col">
+            <label for="price">قیمت</label>
+            <input
+              type="price"
+              class="form-control mt-2"
+              name="price"
+              value="<%= episode.price %>"
+            />
+          </div>
+          <div class="col">
+            <label for="tags">تگ ها</label>
+            <input
+              type="tags"
+              class="form-control mt-2"
+              name="tags"
+              value="<%= episode.tags %>"
+            />
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-4">ویرایش</button>
+      </form>
+    </div>
+    <!--  -->
+  </div>
+</div>

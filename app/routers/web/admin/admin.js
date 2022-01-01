@@ -14,11 +14,14 @@ const AdminController = require('app/http/controllers/admin/adminController');
 
 
 // Require Routers
-const courses = require('./courses')
+const courses = require('./courses');
+const episodes = require('./episodes');
+
 
 
 // Middleware
-router.use('/courses' , courses)
+router.use('/courses', courses)
+router.use('/episode', episodes)
 
 
 // Route

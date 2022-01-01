@@ -6,7 +6,6 @@ module.exports = new class HomeController extends Controller {
     index(req, res) {
         try {
             res.render('home/index');         // Render home.ejs file
-
         } catch (err) {
             next(err);
         }

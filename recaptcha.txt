@@ -1,0 +1,5 @@
+site-key = 6LeQE2QdAAAAAB7JT9Ys6f3aj-OcLrgPUn0BsJDa
+secret-key = 6LeQE2QdAAAAABMcNv-lUFOqjBnQKNPniuHEv-p6
+https://www.noisli.com/playlists
+
+https://roocket.ir/series/ux-and-ui/episode/9
