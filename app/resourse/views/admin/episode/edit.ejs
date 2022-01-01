@@ -8,12 +8,11 @@
     <hr />
     <%- include(viewPath('resourse/views/home/layout/errorMassage.ejs')); -%>
 
-
-    
-
-    
     <div>
-      <form action="/admin/courses/<%= episode._id %>?_method=put" method="post" enctype="multipart/form-data">
+      <form
+        action="/admin/episode/<%= episode._id %>?_method=put"
+        method="post"
+      >
         <div class="form-group">
           <label for="title">عنوان دوره</label>
           <input
@@ -21,10 +20,34 @@
             class="form-control mt-2"
             id="title"
             name="title"
-            value="<%= episode.title %>"
+            value="<%= episode.title%>"
           />
         </div>
 
+        <div class="form-group">
+          <label for="videoUrl">لینک ویدو</label>
+          <input
+            style="direction:  ltr;"
+            type="videoUrl"
+            class="form-control mt-2"
+            id="videoUrl"
+            name="videoUrl"
+            value="<%= episode.videoUrl%>"
+          />
+        </div>
+        
+        <div class="form-group">
+          <label for="time">زمان ویدو را قرار دهید</label>
+          <input
+            type="text"
+            class="form-control mt-2"
+            id="time"
+            name="time"
+            value="<%= episode.time%>"
+          />
+        </div>
+
+        
         <div class="form-group">
           <label for="episodetype">نوع دوره</label>
           <select class="form-control mt-2" name="type" id="type">
@@ -42,38 +65,25 @@
           >
         </div>
 
-        <div class="form-group row">
-          <div class="col">
-              <label for="images" class="control-label font-weight-bold">تصویر دوره</label>
-              <input type="file" class="form-control" name="images" id="images" placeholder="تصویر مقاله را وارد کنید" >
-          </div>
+
+
+      <div class="form-group">
+        <label for="number">شماره جلسه</label>
+        <input
+          type="text"
+          class="form-control mt-2"
+          id="number"
+          name="number"
+          value="<%= episode.number%>"
+        />
       </div>
 
 
 
 
-        <div class="row">
-          <div class="col">
-            <label for="price">قیمت</label>
-            <input
-              type="price"
-              class="form-control mt-2"
-              name="price"
-              value="<%= episode.price %>"
-            />
-          </div>
-          <div class="col">
-            <label for="tags">تگ ها</label>
-            <input
-              type="tags"
-              class="form-control mt-2"
-              name="tags"
-              value="<%= episode.tags %>"
-            />
-          </div>
-        </div>
+      
 
-        <button type="submit" class="btn btn-primary mt-4">ویرایش</button>
+        <button type="submit" class="btn btn-primary mt-4">ثبت تغیرات</button>
       </form>
     </div>
     <!--  -->

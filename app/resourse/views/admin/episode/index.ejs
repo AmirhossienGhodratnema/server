@@ -23,6 +23,8 @@
       <table class="table table-striped">
         <thead>
           <tr class="text-center">
+            <th scope="col">شماره</th>
+
             <th scope="col">عنوان مقاله</th>
             <th scope="col">تعداد نظرات</th>
             <th scope="col">مقدار دانلود</th>
@@ -36,6 +38,8 @@
           <% episodes.docs.forEach(episode => { %>
 
           <tr class="text-center">
+            <th scope="row"><%=episode.number%></th>
+
             <th scope="row"><%=episode.title%></th>
             <td>0</td>
             <td>0</td>
