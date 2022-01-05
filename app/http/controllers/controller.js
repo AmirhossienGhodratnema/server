@@ -3,6 +3,7 @@ const autoBind = require('auto-bind');
 const Recaptcha = require('express-recaptcha').Recaptcha;
 const { validationResult } = require('express-validator/check')
 const isMongoId = require('validator/lib/isMongoId')
+const sprintf = require('sprintf-js').sprintf;
 
 module.exports = class Controller {
     constructor() {
@@ -63,5 +64,26 @@ module.exports = class Controller {
         let err = new Error(message);
         err.status = status;
         throw err
+    }
+
+    async getTime(episode) {
+        let second = 0;
+        await episode.forEach(item => {
+            let splitList = item.time.split(':')
+            if (splitList.length == 2) {
+                second += parseInt(splitList[0]) * 60;
+                second += parseInt(splitList[1]);
+            } else if (splitList.length == 3) {
+                second += parseInt(splitList[0]) * 3600;
+                second += parseInt(splitList[1]) * 60;
+                second += parseInt(splitList[2]);
+            }
+        })
+        let hours = Math.floor(second / 60 / 60);
+        let minuts = Math.floor((second / 60 / 60) % 1 * 60)
+        let secend = Math.floor(((second / 60 / 60) % 1 * 60) % 1 * 60)
+
+        return sprintf('%02d:%02d:%02d', hours, minuts, secend)
+
     }
 };

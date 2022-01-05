@@ -20,7 +20,7 @@
             class="form-control mt-2"
             id="title"
             name="title"
-            value="<%= episode.title%>"
+            value="<%=old('title' , episode.title)%>"
           />
         </div>
 
@@ -32,7 +32,7 @@
             class="form-control mt-2"
             id="videoUrl"
             name="videoUrl"
-            value="<%= episode.videoUrl%>"
+            value="<%=old('videoUrl' , episode.videoUrl)%>"
           />
         </div>
         
@@ -43,11 +43,19 @@
             class="form-control mt-2"
             id="time"
             name="time"
-            value="<%= episode.time%>"
+            value="<%=old('time' , episode.time)%>"
           />
         </div>
 
-        
+        <div class="form-group">
+          <label for="course">دوره مربوطه</label>
+          <select class="form-control mt-2" name="course" id="course">
+            <% courses.forEach(course => { %>
+              <option value="<%= course._id%>" <%= String(old('type')) == String(course._id ) ? 'selected' : '' %>><%= course.title %></option>
+            <%}) %>
+          </select>
+        </div>
+
         <div class="form-group">
           <label for="episodetype">نوع دوره</label>
           <select class="form-control mt-2" name="type" id="type">
@@ -57,11 +65,9 @@
           </select>
         </div>
 
-        
-
         <div class="form-group">
           <label for="body">متن</label>
-          <textarea class="form-control mt-2" id="body" rows="3" name="body"><%= episode.body%></textarea
+          <textarea class="form-control mt-2" id="body" rows="3" name="body"><%=old('body' , episode.body)%></textarea
           >
         </div>
 
@@ -74,7 +80,7 @@
           class="form-control mt-2"
           id="number"
           name="number"
-          value="<%= episode.number%>"
+          value="<%=old('number' , episode.number)%>"
         />
       </div>
 

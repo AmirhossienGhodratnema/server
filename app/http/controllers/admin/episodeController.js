@@ -44,6 +44,7 @@ module.exports = new class EpisodesController extends Controller {
                 await newEpisode.save(err => {
                     if (err) throw err;
                 });
+                await this.updateCourseTime(req.body.course)
                 return res.redirect('/admin/episode');
             };
             return this.back(req, res);
@@ -60,7 +61,13 @@ module.exports = new class EpisodesController extends Controller {
                 req.flash('massage', 'چنین دوره ای وجود ندارد');
                 console.log('Not Course')
             }
+
+            let courseId = episode.course;
+
             episode.remove()
+
+            await this.updateCourseTime(courseId)
+
             res.redirect('/admin/episode');
         } catch (err) {
             next(err)
@@ -73,10 +80,11 @@ module.exports = new class EpisodesController extends Controller {
         try {
             this.isMongoId(req.params.id);
             let episode = await Episodes.findOne({ _id: req.params.id })
+            let courses = await Course.find({})
             if (!episode) {
                 throw new Error('چنین دوره ای وجود ندارد')
             } else {
-                res.render('admin/episode/edit', { title: 'ویرایش دوره ', episode })
+                res.render('admin/episode/edit', { title: 'ویرایش دوره ', episode , courses })
             };
         } catch (err) {
             next(err)
@@ -90,12 +98,32 @@ module.exports = new class EpisodesController extends Controller {
             if (!status) {
                 return this.back(req, res)
             };
-            await Episodes.findByIdAndUpdate(req.params.id, { $set: { ...req.body } })
+
+            let episode = await Episodes.findByIdAndUpdate(req.params.id, { $set: { ...req.body } })
+
+            // Prevent course Update
+            this.updateCourseTime(episode.course);
+            // Now course update
+            this.updateCourseTime(req.body.course)
+
             return res.redirect('/admin/episode')
         } catch (err) {
             next(err)
         }
     };
+
+
+
+    async updateCourseTime(courseId) {
+        let course = await Course.findById(courseId);
+        let episode = await Episodes.find({ course: courseId })
+
+
+        course.$set({ time: await this.getTime(episode) })
+        course.save();
+    }
+
+
 
 
 };
