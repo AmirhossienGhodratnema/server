@@ -8,9 +8,10 @@ const User = require('app/models/user');
 module.exports = new class HomeController extends Controller {
     // Get home page view
     async index(req, res) {
-
         try {
-            res.render('home/index');         // Render home.ejs file
+            let courses = await Course.find({})
+            console.log('course', courses)
+            res.render('home/index', { courses });         // Render home.ejs file
         } catch (err) {
             next(err);
         }

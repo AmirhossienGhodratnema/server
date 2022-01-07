@@ -1,6 +1,21 @@
 <h1>صفحه اصلی</h1>
 
-<%- contentFor('footer') %>
-<div>
-  <h1>footer</h1>
+<% courses.forEach(course => { %>
+<div class="col-3">
+  <div class="card p-0 mb-3" style="width: 18rem">
+    <img
+      class="card-img-top"
+      src="<%= course.fingerImage %>"
+      alt="Card image cap"
+    />
+    <div class="card-body">
+      <h5 class="card-title"><%= course.title %></h5>
+      <p class="card-text text-truncate"><%= course.body %></p>
+      <a href="#" class="btn btn-primary">اطلاعات بیشتر</a>
+    </div>
+  </div>
 </div>
+
+<%}) %>
+<%- contentFor('footer') %>
+<h1>footer</h1>
