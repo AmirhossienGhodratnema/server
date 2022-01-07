@@ -5,17 +5,10 @@ const router = express.Router();
 
 // Require routres
 const HomeController = require('app/http/controllers/homeController');
+const CourseController = require('app/http/controllers/courseController');
+
 // const LoginRoute = require('app/routers/web/auth/login');
 const auth = require('app/routers/web/auth');
-
-
-// Route
-router.get('/', HomeController.index);
-
-
-// Roots in other files.
-router.use('/auth', auth);
-// router.use('/register', RegisterRoute)
 
 
 // User logout root settings
@@ -24,6 +17,19 @@ router.get('/logout', (req, res) => {
     res.clearCookie('remember_token');
     res.redirect('/');
 });
+
+
+// Route
+router.get('/', HomeController.index);
+router.get('/courses', CourseController.courses);
+router.get('/about-me', CourseController.about);
+
+
+// Roots in other files.
+router.use('/auth', auth);
+// router.use('/register', RegisterRoute)
+
+
 
 
 

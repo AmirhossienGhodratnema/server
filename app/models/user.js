@@ -9,7 +9,7 @@ const UserSchema = mongoose.Schema({
     email: { type: String, require: true },
     password: { type: String, require: true },
     rememberToken: { type: String, default: null }
-}, { timestamps: true });
+}, { timestamps: true, toJSON: { virtuals: true } });
 
 
 // Password hashing create user.
@@ -45,6 +45,8 @@ UserSchema.methods.comparePassword = function (password) {
 };
 
 
+
+
 // Set toket To remind login 
 UserSchema.methods.setrememberToken = function (res) {
     const token = uniqueString()
@@ -53,6 +55,9 @@ UserSchema.methods.setrememberToken = function (res) {
         console.log('err in remember token', err)
     });
 };
+
+// UserSchema.virtual('courses', { ref: 'Course', localField: '_id', foreignField: 'user' });
+
 
 module.exports = mongoose.model("User", UserSchema);
 

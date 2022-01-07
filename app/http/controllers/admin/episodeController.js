@@ -16,6 +16,7 @@ const Episodes = require('app/models/episodes');
 // Helper Upload Image
 module.exports = new class EpisodesController extends Controller {
     async index(req, res) {
+
         try {
             let page = req.query.page || 1
             let courses = await Course.find({})
@@ -35,6 +36,7 @@ module.exports = new class EpisodesController extends Controller {
             next(err)
         }
     };
+
 
     async store(req, res, next) {
         try {
@@ -61,13 +63,9 @@ module.exports = new class EpisodesController extends Controller {
                 req.flash('massage', 'چنین دوره ای وجود ندارد');
                 console.log('Not Course')
             }
-
             let courseId = episode.course;
-
             episode.remove()
-
             await this.updateCourseTime(courseId)
-
             res.redirect('/admin/episode');
         } catch (err) {
             next(err)
@@ -84,7 +82,7 @@ module.exports = new class EpisodesController extends Controller {
             if (!episode) {
                 throw new Error('چنین دوره ای وجود ندارد')
             } else {
-                res.render('admin/episode/edit', { title: 'ویرایش دوره ', episode , courses })
+                res.render('admin/episode/edit', { title: 'ویرایش دوره ', episode, courses })
             };
         } catch (err) {
             next(err)
@@ -113,17 +111,9 @@ module.exports = new class EpisodesController extends Controller {
     };
 
 
-
     async updateCourseTime(courseId) {
-        let course = await Course.findById(courseId);
-        let episode = await Episodes.find({ course: courseId })
-
-
-        course.$set({ time: await this.getTime(episode) })
+        let course = await Course.findById(courseId).populate('episode').exec()
+        course.$set({ time: await this.getTime(course.episode) })
         course.save();
     }
-
-
-
-
 };

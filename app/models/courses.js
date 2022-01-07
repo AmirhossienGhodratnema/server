@@ -17,7 +17,7 @@ const CourseSchema = schema({
     viewCount: { type: Number, default: 0 },
     commentCount: { type: String, default: 0 },
 
-}, { timestamps: true });
+}, { timestamps: true, toJSON: { virtuals: true } });
 
 CourseSchema.plugin(mongoosePaginate);
 
@@ -32,6 +32,9 @@ CourseSchema.methods.typeToPersion = function () {
     }
 }
 
+CourseSchema.virtual('episode', { ref: 'Episodes', localField: '_id', foreignField: 'course' });
 
 
-module.exports = mongoose.model('Course', CourseSchema)
+
+
+module.exports = mongoose.model('Course', CourseSchema);
