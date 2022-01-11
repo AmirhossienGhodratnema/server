@@ -4,125 +4,29 @@
   <div class="col col-lg-2">3 of 3</div>
 </div> -->
 <div class="row">
-  <div class="col-9">
-    <h2>آموزش پروژه محور بوت استرپ</h2>
-    <small>توسط حسام موسوی ارسال شده در 21 خرداد 1397</small>
-    <hr />
-    <p class="text-justify">
-      لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از
-      طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان
-      که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با
-      هدف بهبود ابزارهای کاربردی می باشد، کتابهای زیادی در شصت و سه درصد گذشته
-      حال و آینده، شناخت فراوان جامعه و متخصصان را می طلبد، تا با نرم افزارها
-      شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی، و فرهنگ
-      پیشرو در زبان فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام و
-      دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و زمان مورد
-      نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات پیوسته اهل دنیای
-      موجود طراحی اساسا مورد استفاده قرار گیرد.
-    </p>
-    <hr />
-    <div class="alert alert-danger" role="alert">
-      برای مشاهده دوره باید دوره را خریداری کنید
-    </div>
-    <div>
-      <h3>قسمت های دوره</h3>
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th scope="col">شماره قسمت</th>
-            <th scope="col">عنوان قسمت</th>
-            <th scope="col">زمان قسمت</th>
-            <th scope="col">دانلود</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>معرفی دوره</td>
-            <td>20:50</td>
-            <td><a class="decorationNon" href="#">دانلود</a></td>
-          </tr>
-
-          <tr>
-            <th scope="row">1</th>
-            <td>آموزش دیتا تایپ Lists</td>
-            <td>30:05</td>
-            <td><a class="decorationNon" href="#">دانلود</a></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="card mb-5">
-      <h5 class="card-header">ثبت نظر</h5>
-      <div class="card-body">
-        <form>
-          <div class="form-group">
-            <textarea
-              class="form-control mb-2"
-              id="exampleFormControlTextarea1"
-              rows="3"
-            ></textarea>
-            <button type="button" class="btn btn-primary">ارسال</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
+  <% courses.forEach(course => { %>
   <div class="col-3">
-    <div class="border rounded-1 p-3 d-flex flex-column mb-3">
-      <small class="mb-3"
-        >برای استفاده از ای ن دوره نیاز است این دوره را با مبلغ 60000 تومان
-        خریداری کنید</small
-      >
-      <button type="button" class="btn btn-success btn-sm">خرید</button>
-    </div>
-
-    <div class="card mb-3">
-      <div class="card-header">جست و جو</div>
+    <div class="card p-0 mb-3" style="width: 18rem">
+      <img
+        class="card-img-top"
+        src="<%= course.fingerImage %>"
+        alt="Card image cap"
+      />
       <div class="card-body">
-        <div class="input-group input-group-sm mb-3">
-          <div class="input-group-prepend">
-            <button
-              class="input-group-text btn btn-dark"
-              id="inputGroup-sizing-sm"
-            >
-              جستجو
-            </button>
-          </div>
-          <input
-            type="text"
-            class="form-control"
-            aria-label="Small"
-            aria-describedby="inputGroup-sizing-sm"
-          />
-        </div>
-      </div>
-    </div>
-
-    <div class="card">
-      <h5 class="card-header">دسته بندی</h5>
-      <div class="card-body">
-        <div class="container">
-          <div class="row">
-            <div class="col-sm">
-              <a href="#" class="decorationNon">طراحی وب</a>
-              <a href="#" class="decorationNon">HTML</a>
-              <a href="#" class="decorationNon">جاوا اسکریپت</a>
-            </div>
-            <div class="col-sm">
-              <a href="#" class="decorationNon">بوت استرپ</a>
-              <a href="#" class="decorationNon">css</a>
-              <a href="#" class="decorationNon">آموزش تخصصی</a>
-            </div>
-          </div>
-        </div>
+        <h5 class="card-title"><%= course.title %></h5>
+        <p class="card-text text-truncate"><%= course.body %></p>
+        <a href="/courses/<%= course._id%>" class="btn btn-primary"
+          >اطلاعات بیشتر</a
+        >
       </div>
     </div>
   </div>
-</div>
 
-<%- contentFor('footer') %>
-<div>
-  <h1>footer</h1>
+  <%}) %>
+ 
+
+  <%- contentFor('footer') %>
+  <div>
+    <h1>footer</h1>
+  </div>
 </div>

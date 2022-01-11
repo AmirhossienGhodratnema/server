@@ -24,6 +24,8 @@ router.get('/', HomeController.index);
 router.get('/courses', CourseController.courses);
 router.get('/about-me', CourseController.about);
 
+router.get('/courses/:id', CourseController.single);
+
 
 // Roots in other files.
 router.use('/auth', auth);

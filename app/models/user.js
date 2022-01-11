@@ -56,7 +56,17 @@ UserSchema.methods.setrememberToken = function (res) {
     });
 };
 
-// UserSchema.virtual('courses', { ref: 'Course', localField: '_id', foreignField: 'user' });
+
+UserSchema.methods.isVip = function () {
+    return false
+}
+
+UserSchema.methods.checkLearning = function () {
+    return true
+}
+
+
+UserSchema.virtual('courses', { ref: 'Course', localField: '_id', foreignField: 'user' });
 
 
 module.exports = mongoose.model("User", UserSchema);
