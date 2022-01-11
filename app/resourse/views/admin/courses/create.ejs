@@ -11,6 +11,7 @@
     <div>
       <form action="/admin/courses/create" method="post" enctype="multipart/form-data">
         <div class="form-group">
+
           <label for="title">عنوان دوره</label>
           <input
             type="text"
@@ -20,13 +21,13 @@
             value="<%= old('title') %>"
           />
         </div>
-
         <div class="form-group">
           <label for="coursetype">نوع دوره</label>
           <select class="form-control mt-2" name="type" id="type">
-            <option value="vip" <%= old('type') === 'vip' ? 'selected' : '' %>>نقدی</option>
-            <option value="cash" <%= old('type') === 'cash' ? 'selected' : '' %>>ویژه</option>
-            <option value="free" <%= old('type') === 'free' ? 'selected' : '' %>>رایگان</option>
+
+            <option value="vip" <%= old('type') == 'vip' ? 'selected' : '' %>>نقدی</option>
+            <option value="cash" <%= old('type') == 'cash' ? 'selected' : '' %>>ویژه</option>
+            <option value="free" <%= old('type') == 'free' ? 'selected' : '' %>>رایگان</option>
           </select>
         </div>
 

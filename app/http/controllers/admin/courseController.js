@@ -25,6 +25,7 @@ module.exports = new class CourseController extends Controller {
 
     create(req, res, next) {
         try {
+
             res.render('admin/courses/create', { title: 'افزودن دوره' });
         } catch (err) {
             next(err)
@@ -33,6 +34,7 @@ module.exports = new class CourseController extends Controller {
 
     async store(req, res, next) {
         try {
+
             let result = await this.validationData(req);
 
             if (req.file && req.flash('massage').length > 0) {
@@ -115,6 +117,7 @@ module.exports = new class CourseController extends Controller {
 
 
     async edit(req, res, next) {
+
         try {
             this.isMongoId(req.params.id)
 
