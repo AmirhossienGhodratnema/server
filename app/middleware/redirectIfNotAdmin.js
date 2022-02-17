@@ -1,11 +1,12 @@
-const middleware = require('./middleware')
-const user = require('app/models/user');
+const middleware = require("./middleware");
+const user = require("app/models/user");
 
+module.exports = new (class RedirectIfNotAdmin extends middleware {
+  handel(req, res, next) {
+    console.log("req.isAuthenticated()", req.isAuthenticated());
+    console.log("req.user.admin", req.user.admin);
 
-module.exports = new class RedirectIfNotAdmin extends middleware {
-    handel(req, res, next) {
-        if (req.isAuthenticated() && req.user.admin) return next();
-        res.redirect('/');
-    };
-
-};
+    if (req.isAuthenticated() && req.user.admin) return next();
+    res.redirect("/");
+  }
+})();
