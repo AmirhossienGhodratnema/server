@@ -7,7 +7,7 @@ const sprintf = require('sprintf-js').sprintf;
 
 module.exports = class Controller {
 
-    
+
     constructor() {
         autoBind(this);         // Automatic binding for inherited classes.
         this.recaptcha();           // Start-up recaptcha.
