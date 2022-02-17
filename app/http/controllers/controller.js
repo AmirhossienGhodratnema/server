@@ -6,6 +6,8 @@ const isMongoId = require('validator/lib/isMongoId')
 const sprintf = require('sprintf-js').sprintf;
 
 module.exports = class Controller {
+
+    
     constructor() {
         autoBind(this);         // Automatic binding for inherited classes.
         this.recaptcha();           // Start-up recaptcha.
@@ -14,6 +16,7 @@ module.exports = class Controller {
 
     // Recaptcha sampling  
     recaptcha() {
+        // test
         this.recaptcha = new Recaptcha(config.recaptcha.site_key, config.recaptcha.secret_key, config.recaptcha.options);
     };
 
