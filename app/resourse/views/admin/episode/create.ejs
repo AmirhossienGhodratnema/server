@@ -1,91 +1,66 @@
 <div class="col-10">
-    <div class="main-style-div">
-      <div>
-        <div class="d-flex justify-content-between mt-5">
-          <h3>ایجاد ویدو</h3>
-        </div>
+  <div class="main-style-div">
+    <div>
+      <div class="d-flex justify-content-between mt-5">
+        <h3>ایجاد ویدو</h3>
       </div>
-      <hr />
-      <%- include(viewPath('resourse/views/home/layout/errorMassage.ejs')); -%>
-  
-      <div>
-        <form action="/admin/episode/create" method="post">
-          <div class="form-group">
-            <label for="title">عنوان ویدیو</label>
-            <input
-              type="text"
-              class="form-control mt-2"
-              id="title"
-              name="title"
-              value="<%= old('title') %>"
-            />
-          </div>
-  
-          <div class="form-group">
-            <label for="course">دوره مربوطه</label>
-            <select class="form-control mt-2" name="course" id="course">
-              <% courses.forEach(course => { %>
-                <option value="<%= course._id%>" <%= String(old('type')) == String(course._id ) ? 'selected' : '' %>><%= course.title %></option>
-              <%}) %>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="videoUrl">لینک ویدو</label>
-            <input
-              style="direction:  ltr;"
-              type="videoUrl"
-              class="form-control mt-2"
-              id="videoUrl"
-              name="videoUrl"
-              value="<%= old('videoUrl') %>"
-            />
-          </div>
-
-          <div class="form-group">
-            <label for="time">زمان ویدو را قرار دهید</label>
-            <input
-              type="text"
-              class="form-control mt-2"
-              id="time"
-              name="time"
-              value="<%= old('time') %>"
-            />
-          </div>
-  
-         
-          <div class="form-group">
-            <label for="body">متن</label>
-            <textarea class="form-control mt-2" id="body" rows="3" name="body"><%= old('body') %></textarea
-            >
-          </div>
-
-
-          <div class="form-group">
-            <label for="coursetype">نوع دوره</label>
-            <select class="form-control mt-2" name="type" id="type">
-              <option value="vip" <%= old('type') === 'vip' ? 'selected' : '' %> >نقدی</option>
-              <option value="vip" <%= old('type') === 'cash' ? 'selected' : '' %> >ویژه</option>
-              <option value="vip" <%= old('type') === 'free' ? 'selected' : '' %> >رایگان</option>
-            </select>
-          </div>
-  
-
-          <div class="form-group">
-            <label for="number">شماره جلسه</label>
-            <input
-              type="text"
-              class="form-control mt-2"
-              id="number"
-              name="number"
-              value="<%= old('number') %>"
-            />
-          </div>
-  
-          <button type="submit" class="btn btn-primary mt-4">افزودن</button>
-        </form>
-      </div>
-      <!--  -->
     </div>
+    <hr />
+    <%- include(viewPath('resourse/views/home/layout/errorMassage.ejs')); -%>
+
+    <div>
+      <form action="/admin/episode/create" method="post">
+        <div class="form-group">
+          <label for="title">عنوان ویدیو</label>
+          <input type="text" class="form-control mt-2" id="title" name="title" value="<%= old('title') %>" />
+        </div>
+
+        <div class="form-group">
+          <label for="course">دوره مربوطه</label>
+          <select class="form-control mt-2" name="course" id="course">
+            <% courses.forEach(course => { %>
+            <option value="<%= course._id%>" <%= String(old('type')) == String(course._id ) ? 'selected' : '' %>>
+              <%= course.title %></option>
+            <%}) %>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="videoUrl">لینک ویدو</label>
+          <input style="direction:  ltr;" type="videoUrl" class="form-control mt-2" id="videoUrl" name="videoUrl"
+            value="<%= old('videoUrl') %>" />
+        </div>
+
+        <div class="form-group">
+          <label for="time">زمان ویدو را قرار دهید</label>
+          <input type="text" class="form-control mt-2" id="time" name="time" value="<%= old('time') %>" />
+        </div>
+
+
+        <div class="form-group">
+          <label for="body">متن</label>
+          <textarea class="form-control mt-2" id="body" rows="3" name="body"><%= old('body') %></textarea>
+        </div>
+
+
+        <div class="form-group">
+          <label for="coursetype">نوع دوره</label>
+          <select class="form-control mt-2" name="type" id="type">
+            <option value="vip" <%= old('type') === 'vip' ? 'selected' : '' %>>نقدی</option>
+            <option value="vip" <%= old('type') === 'cash' ? 'selected' : '' %>>ویژه</option>
+            <option value="vip" <%= old('type') === 'free' ? 'selected' : '' %>>رایگان</option>
+          </select>
+        </div>
+
+
+        <div class="form-group">
+          <label for="number">شماره جلسه</label>
+          <input type="text" class="form-control mt-2" id="number" name="number" value="<%= old('number') %>" />
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-4">افزودن</button>
+      </form>
+    </div>
+    <!--  -->
   </div>
-  
+</div>

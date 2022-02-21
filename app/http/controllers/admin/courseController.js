@@ -58,9 +58,9 @@ module.exports = new class CourseController extends Controller {
                     price
                 });
 
-                await newCourse.save(err => {
-                    if (err) throw err;
-                });
+            await newCourse.save(err => {
+                if (err) throw err;
+            });
 
                 return res.redirect('/admin/courses');
             };

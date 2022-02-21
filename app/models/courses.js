@@ -33,8 +33,6 @@ CourseSchema.methods.typeToPersion = function () {
 }
 
 CourseSchema.virtual('episode', { ref: 'Episodes', localField: '_id', foreignField: 'course' });
-
-
-
+CourseSchema.virtual('comments', { ref: 'Comments', localField: '_id', foreignField: 'course' });
 
 module.exports = mongoose.model('Course', CourseSchema);

@@ -11,8 +11,8 @@ module.exports = class Controller {
     constructor() {
         autoBind(this);         // Automatic binding for inherited classes.
         this.recaptcha();           // Start-up recaptcha.
-    };
 
+    };
 
     // Recaptcha sampling  
     recaptcha() {

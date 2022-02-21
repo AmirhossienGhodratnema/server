@@ -101,6 +101,7 @@ module.exports = new class EpisodesController extends Controller {
 
             // Prevent course Update
             this.updateCourseTime(episode.course);
+
             // Now course update
             this.updateCourseTime(req.body.course)
 

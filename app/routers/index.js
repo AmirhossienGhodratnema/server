@@ -7,7 +7,6 @@ const router = express.Router();
 const redirectIfNotAdmin = require('app/middleware/redirectIfNotAdmin');
 const errorHandler = require('app/middleware/errorHandler');
 
-
 // Require routers
 const HomeRouter = require('./web/home');
 const AdminRouter = require('./web/admin/admin');

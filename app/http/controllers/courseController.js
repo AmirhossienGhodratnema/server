@@ -3,24 +3,23 @@ const Controller = require('./controller');
 
 const Course = require('app/models/courses');
 const Episodes = require('app/models/episodes');
+const Comments = require('app/models/comments');
 const User = require('app/models/user');
 
 module.exports = new class HomeController extends Controller {
     // Get home page view
     async courses(req, res) {
-
         try {
             let courses = await Course.find({})
-            res.render('home/courses', { courses });         // Render home.ejs file
+            res.render('home/courses', { courses });
         } catch (err) {
             next(err);
         }
     };
 
     async about(req, res) {
-
         try {
-            res.render('home/about-me');         // Render home.ejs file
+            res.render('home/about-me');
         } catch (err) {
             next(err);
         }
@@ -31,14 +30,22 @@ module.exports = new class HomeController extends Controller {
             let course = await Course.findById(req.params.id).populate([
                 {
                     path: 'user',
+                    select: ['name'],
                 },
                 {
-                    path: 'episode'
-                }
+                    path: 'episode',
+                },
+                {
+                    path: 'comments',
+                },
             ]).exec()
-            // return res.json(course)
+
             let canUse = await this.canUse(req, course)
-            res.render('home/single', { course, canUse });         // Render home.ejs file
+
+            // return res.json(course);
+
+
+            res.render('home/single', { course, canUse });
         } catch (err) {
             next(err);
         }
@@ -50,12 +57,9 @@ module.exports = new class HomeController extends Controller {
             switch (course.type) {
                 case 'vip':
                     canUse = req.user.isVip()
-                    console.log("vip")
                     break;
                 case 'cash':
                     canUse = true
-                    console.log("cash")
-
                     break;
                 default:
                     break;

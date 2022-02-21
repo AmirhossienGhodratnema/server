@@ -1,0 +1,64 @@
+<section class="gradient-custom mb-5">
+    <div class="container-fluid p-0">
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-12  w-100 col-lg-10 col-xl-8">
+                <div class="card">
+                    <div class="card-body ">
+                        <h4 class="text-center mb-4 pb-2">نظرات</h4>
+                        <div class="row ">
+                            <div class="col">
+                                <% course.comments.forEach(massage => { %>
+
+                                <div class="d-flex flex-start mb-3 align-items-center">
+                                    <img class="rounded-circle shadow-1-strong me-3"
+                                        src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(10).webp" alt="avatar"
+                                        width="65" height="65" />
+                                    <div class="flex-grow-1 flex-shrink-1">
+                                        <div class="px-3">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <p class="mb-1 textCommetn">
+                                                    Maria Smantha <span class="small">- 2 hours ago</span>
+                                                </p>
+                                                <a href="#!"><i class="fas fa-reply fa-xs"></i><span class="small">
+                                                        reply</span></a>
+                                            </div>
+                                            <p class="small mb-0">
+                                                <%= massage.body %>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <% }) %>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+<!-- <div class="d-flex flex-start mt-4">
+                                            <a class="me-3" href="#">
+                                                <img class="rounded-circle shadow-1-strong"
+                                                    src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(11).webp"
+                                                    alt="avatar" width="65" height="65" />
+                                            </a>
+                                            <div class="flex-grow-1 flex-shrink-1">
+                                                <div>
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                        <p class="mb-1">
+                                                            Simona Disa <span class="small">- 3 hours ago</span>
+                                                        </p>
+                                                    </div>
+                                                    <p class="small mb-0">
+                                                        letters, as opposed to using 'Content here, content here',
+                                                        making it look like readable English.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div> -->

@@ -6,6 +6,12 @@ const router = express.Router();
 // Require routres
 const HomeController = require('app/http/controllers/homeController');
 const CourseController = require('app/http/controllers/courseController');
+const CommentController = require('app/http/controllers/commentController');
+
+// Validation
+const CommentValidation = require('./../../../app/validation/commentValidation');
+
+
 
 // const LoginRoute = require('app/routers/web/auth/login');
 const auth = require('app/routers/web/auth');
@@ -21,15 +27,12 @@ router.get('/logout', (req, res) => {
 
 // Route
 router.get('/', HomeController.index);
+
 router.get('/courses', CourseController.courses);
+router.post('/comments', CommentValidation.handel(), CommentController.index);
 router.get('/about-me', CourseController.about);
-
 router.get('/courses/:id', CourseController.single);
-
-
-// Roots in other files.
 router.use('/auth', auth);
-// router.use('/register', RegisterRoute)
 
 
 
