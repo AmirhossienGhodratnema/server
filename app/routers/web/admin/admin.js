@@ -21,6 +21,6 @@ router.use('/episode', episodes);
 
 // Route
 router.get("/", AdminController.index);
-router.get('/commetn', CommentControllerAdmin.index);
+router.get('/comments', CommentControllerAdmin.index);
 
 module.exports = router;

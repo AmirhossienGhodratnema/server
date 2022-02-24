@@ -12,7 +12,6 @@ module.exports = new class HomeController extends Controller {
     async index(req, res, next) {
         try {
             let validation = await this.validationData(req);
-
             console.log(req.body)
             if (validation) {
                 let newCommetn = Comments({
@@ -32,5 +31,5 @@ module.exports = new class HomeController extends Controller {
     }
 
 
-    
+
 };

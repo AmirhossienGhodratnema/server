@@ -30,9 +30,4 @@ EpisodesSchema.methods.typeToPersion = function () {
     }
 }
 
-
-
-
-
-
 module.exports = mongoose.model('Episodes', EpisodesSchema)

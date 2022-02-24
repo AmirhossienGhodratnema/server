@@ -17,32 +17,50 @@
             <table class="table table-striped">
                 <thead>
                     <tr class="text-center">
-                        <th scope="col-2">نام ارسال کننده</th>
-                        <th scope="col-3">مطب</th>
-                        <th scope="col-5">متن نظر</th>
-                        <th scope="col-2
-                        ">تنظیمات</th>
+                        <th class="col-2">نام ارسال کننده</th>
+                        <th class="col-2">مطب</th>
+                        <th class="col-7">متن نظر</th>
+                        <th class="col-1">تنظیمات</th>
                     </tr>
                 </thead>
 
                 <tbody>
 
-                    <tr class="text-center">
-                        <th scope="row">asdfasdfasd</th>
-                        <td>asdfasdf</td>
-                        <td>asdasfd</td>
-                        <td>
-                            <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                                <form action="#" method="post">
-                                    <a href="#" class="btn btn-primary">ویرایش</a>
-                                    <button type="submit" class="btn btn-danger">حذف</button>
-                                </form>
-                            </div>
-                        </td>
-                    </tr>
+                    <!-- comments -->
+                    <% comments.docs.forEach(comment=> { %>
+                        <tr class=" text-center">
+                            <th scope="row">
+                                <%= comment.user.name%>
+                            </th>
+
+
+                            <% if(comment.course){ %>
+                                <td>
+                                    <%= comment.course.title%>
+                                </td>
+                              <% } else{ %>  
+                                <td>
+                                    ندارد
+                                </td>
+                             <% } %>
+
+                            
+                            <td><%= comment.body%></td>
+                            <td>
+                                <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                                    <form action="#" method="post">
+                                        <!-- <a href="#" class="btn btn-sm btn-primary">ویرایش</a> -->
+                                        <button type="submit" class="btn btn-sm btn-danger">حذف</button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                        <%}) %>
 
                 </tbody>
             </table>
         </div>
     </div>
 </div>
+
+<%- include('./../home/layout/pagination.ejs' , {pagination: comments}) %>
