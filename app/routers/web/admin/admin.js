@@ -9,6 +9,7 @@ router.use((req, res, next) => {
 
 // Require controller
 const AdminController = require("app/http/controllers/admin/adminController");
+const CommentControllerAdmin = require("../../../http/controllers/admin/commentControllerAdmin");
 
 // Require Routers
 const courses = require("./courses");
@@ -16,9 +17,10 @@ const episodes = require("./episodes");
 
 // Middleware
 router.use('/courses', courses);
-router.use("/episode", episodes);
+router.use('/episode', episodes);
 
 // Route
 router.get("/", AdminController.index);
+router.get('/commetn', CommentControllerAdmin.index);
 
 module.exports = router;

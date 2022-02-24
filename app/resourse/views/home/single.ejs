@@ -1,125 +1,300 @@
- <div class="col-9">
-     <h2><%= course.title %></h2>
-     <small>توسط <%=  course.user.name %> ارسال شده در 21 خرداد 1397</small>
-     <hr />
-     <p class="text-justify">
-         <%= course.body%>
-     </p>
-     <hr />
+<div class="col-9">
+    <h2>
+        <%= course.title %>
+    </h2>
+    <small>توسط <%= course.user.name %> ارسال شده در 21 خرداد 1397</small>
+    <hr />
+    <p class="text-justify">
+        <%= course.body%>
+    </p>
+    <hr />
 
 
-     <% if(auth.check) { %>
-     <% if(!canUse) { %>
-     <% if(course.type == 'vip') { %>
-     <div class="alert alert-danger" role="alert">
-         این دوره به صورت خریدنی است
+    <% if(auth.check) { %>
+        <% if(!canUse) { %>
+            <% if(course.type=='vip' ) { %>
+                <div class="alert alert-danger" role="alert">
+                    این دوره به صورت خریدنی است
 
-     </div>
-     <% } else if(course.type == 'cash') { %>
-     <div class="alert alert-danger" role="alert">
-         برای مشاهده این دوره باید اکانت شما ویژه باشد
+                </div>
+                <% } else if(course.type=='cash' ) { %>
+                    <div class="alert alert-danger" role="alert">
+                        برای مشاهده این دوره باید اکانت شما ویژه باشد
 
-     </div>
-     <% } %>
-     <% } else { %>
-     <div class="alert alert-success" role="alert">
-         شما یه این دوره دسترسی دارید
-     </div>
-     <% } %>
-     <% } else { %>
-     <div class="alert alert-danger" role="alert">
-         برای مشاهده ویدیو ها با ید ابتدا وارد اکانت خود شوید
-     </div>
-     <% } %>
+                    </div>
+                    <% } %>
+                        <% } else { %>
+                            <div class="alert alert-success" role="alert">
+                                شما یه این دوره دسترسی دارید
+                            </div>
+                            <% } %>
+                                <% } else { %>
+                                    <div class="alert alert-danger" role="alert">
+                                        برای مشاهده ویدیو ها با ید ابتدا وارد اکانت خود شوید
+                                    </div>
+                                    <% } %>
 
-     <div>
-         <h3>قسمت های دوره</h3>
-         <table class="table table-striped">
-             <thead>
-                 <tr>
-                     <th scope="col">شماره قسمت</th>
-                     <th scope="col">عنوان قسمت</th>
-                     <th scope="col">زمان قسمت</th>
-                     <th scope="col">دانلود</th>
-                 </tr>
-             </thead>
-             <tbody>
+                                        <div>
+                                            <h3>قسمت های دوره</h3>
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">شماره قسمت</th>
+                                                        <th scope="col">عنوان قسمت</th>
+                                                        <th scope="col">زمان قسمت</th>
+                                                        <th scope="col">دانلود</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
 
-                 <% course.episode.forEach(episode => { %>
-                 <tr>
-                     <th scope="row">1</th>
-                     <td><%= episode.title %></td>
-                     <td><%= episode.time %></td>
-                     <td><a class="decorationNon" href="#">دانلود</a></td>
-                 </tr>
-                 <%}) %>
+                                                    <% course.episode.forEach(episode=> { %>
+                                                        <tr>
+                                                            <th scope="row">1</th>
+                                                            <td>
+                                                                <%= episode.title %>
+                                                            </td>
+                                                            <td>
+                                                                <%= episode.time %>
+                                                            </td>
+                                                            <td><a class="decorationNon" href="#">دانلود</a></td>
+                                                        </tr>
+                                                        <%}) %>
 
-             </tbody>
-         </table>
-     </div>
-     <%- include(viewPath('resourse/views/home/layout/comments.ejs') , {subject : course})-%>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <section class="gradient-custom mb-5">
+                                            <div class="container-fluid p-0">
+                                                <div class="row d-flex justify-content-center">
+                                                    <div class="col-md-12  w-100 col-lg-10 col-xl-8">
+                                                        <div class="card">
+                                                            <div class="card-body ">
+                                                                <h4 class="text-center mb-4 pb-2">نظرات</h4>
+                                                                <div class="row ">
+                                                                    <div class="col">
+                                                                        <% course.comments.forEach(massage=> { %>
 
-     <% if(auth.check) {%>
-     <%- include(viewPath('resourse/views/home/layout/errorMassage.ejs'));
-          -%>
-     <div class="card mb-5">
-         <h5 class="card-header">ثبت نظر</h5>
-         <div class="card-body">
-             <form action="/comments" method="post">
-                 <div class="form-group">
-                     <input type="hidden" name="<%= course.constructor.modelName.toLowerCase() %>"
-                         value="<%= course.id %>">
-                     <textarea name="body" class="form-control mb-2" id="exampleFormControlTextarea1"
-                         rows="3"></textarea>
-                     <button type="submit" class="btn btn-primary">ارسال</button>
-                 </div>
-             </form>
-         </div>
-     </div>
-     <%} %>
+                                                                            <div
+                                                                                class="d-flex flex-start mb-3 align-items-center">
+                                                                                <img class="rounded-circle shadow-1-strong me-3"
+                                                                                    src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(10).webp"
+                                                                                    alt="avatar" width="65"
+                                                                                    height="65" />
+                                                                                <div class="flex-grow-1 flex-shrink-1">
+                                                                                    <div class="px-3">
+                                                                                        <div
+                                                                                            class="d-flex justify-content-between align-items-center">
+                                                                                            <p class="mb-1 textCommetn">
+                                                                                                <%= massage.user.name %>
+                                                                                                    <span
+                                                                                                        class="small">-
+                                                                                                        2 hours
+                                                                                                        ago</span>
+                                                                                            </p>
+                                                                                            <!-- <button class="btn btn-info">پاسخ</button> -->
+                                                                                            <button
+                                                                                                data-parent="<%= massage.id %>"
+                                                                                                type="button"
+                                                                                                class="btn btn-primary"
+                                                                                                data-toggle="modal"
+                                                                                                data-target="#exampleModalCenter"
+                                                                                                id="btnAnwer">
 
- </div>
- <div class="col-3">
-     <div class="border rounded-1 p-3 d-flex flex-column mb-3">
-         <small class="mb-3">برای استفاده از ای ن دوره نیاز است این دوره را با مبلغ 60000 تومان
-             خریداری کنید</small>
-         <button type="button" class="btn btn-success btn-sm">خرید</button>
-     </div>
+                                                                                                پاسخ
+                                                                                            </button>
+                                                                                        </div>
+                                                                                        <p class="small mb-0">
+                                                                                            <%= massage.body %>
+                                                                                        </p>
 
-     <div class="card mb-3">
-         <div class="card-header">جست و جو</div>
-         <div class="card-body">
-             <div class="input-group input-group-sm mb-3">
-                 <div class="input-group-prepend">
-                     <button class="input-group-text btn btn-dark" id="inputGroup-sizing-sm">
-                         جستجو
-                     </button>
-                 </div>
-                 <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" />
-             </div>
-         </div>
-     </div>
 
-     <div class="card">
-         <h5 class="card-header">دسته بندی</h5>
-         <div class="card-body">
-             <div class="container">
-                 <div class="row">
-                     <div class="col-sm">
-                         <a href="#" class="decorationNon">طراحی وب</a>
-                         <a href="#" class="decorationNon">HTML</a>
-                         <a href="#" class="decorationNon">جاوا اسکریپت</a>
-                     </div>
-                     <div class="col-sm">
-                         <a href="#" class="decorationNon">بوت استرپ</a>
-                         <a href="#" class="decorationNon">css</a>
-                         <a href="#" class="decorationNon">آموزش تخصصی</a>
-                     </div>
-                 </div>
-             </div>
-         </div>
+                                                                                        <%
+                                                                                            massage.comments.forEach(ChildComment=>
+                                                                                            { %>
+                                                                                            <div
+                                                                                                class="d-flex flex-start mt-4">
+                                                                                                <a class="me-3"
+                                                                                                    href="#">
+                                                                                                    <img class="rounded-circle shadow-1-strong"
+                                                                                                        src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(11).webp"
+                                                                                                        alt="avatar"
+                                                                                                        width="65"
+                                                                                                        height="65" />
+                                                                                                </a>
+                                                                                                <div
+                                                                                                    class="flex-grow-1 flex-shrink-1">
+                                                                                                    <div>
+                                                                                                        <div
+                                                                                                            class="d-flex justify-content-between align-items-center">
+                                                                                                            <p
+                                                                                                                class="mb-1">
+                                                                                                                <%= ChildComment.user.name
+                                                                                                                    %>
+                                                                                                                    <span
+                                                                                                                        class="small">-
+                                                                                                                        3
+                                                                                                                        hours
+                                                                                                                        ago</span>
+                                                                                                            </p>
+                                                                                                        </div>
+                                                                                                        <p
+                                                                                                            class="small mb-0">
+                                                                                                            <%= ChildComment.body
+                                                                                                                %>
+                                                                                                        </p>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
 
-     </div>
- </div>
+                                                                                            <% }) %>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <% }) %>
 
- </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </section>
+
+
+
+
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                                            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header d-flex ">
+                                                        <h5 class="modal-title" id="exampleModalLongTitle">پاسخ به کامتن
+                                                        </h5>
+                                                        <button type="button" class="close btn btn-sm btn-danger"
+                                                            data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form action="/comments" method="post">
+                                                            <div class="form-group">
+                                                                <input type="hidden" name="parent" value="">
+                                                                <input type="hidden"
+                                                                    name="<%= course.constructor.modelName.toLowerCase() %>"
+                                                                    value="<%= course.id %>">
+                                                                <label for="TextAnswers" class="mb-2">پاسخ</label>
+                                                                <input type="text" name="body" class="form-control"
+                                                                    id="TextAnswers" aria-describedby="emailHelp"
+                                                                    placeholder="متن خود را وارد کنید">
+
+                                                            </div>
+
+                                                            <button type="submit"
+                                                                class="btn btn-primary mt-3">ارسال</button>
+                                                        </form>
+                                                    </div>
+                                                    -->
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <% if(auth.check) {%>
+                                            <%- include(viewPath('resourse/views/home/layout/errorMassage.ejs')); -%>
+                                                <div class="card mb-5">
+                                                    <h5 class="card-header">ثبت نظر</h5>
+                                                    <div class="card-body">
+                                                        <form action="/comments" method="post">
+                                                            <div class="form-group">
+                                                                <input type="hidden"
+                                                                    name="<%= course.constructor.modelName.toLowerCase() %>"
+                                                                    value="<%= course.id %>">
+
+                                                                <textarea name="body" class="form-control mb-2"
+                                                                    id="exampleFormControlTextarea1"
+                                                                    rows="3"></textarea>
+                                                                <button type="submit"
+                                                                    class="btn btn-primary">ارسال</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                                <%} %>
+
+</div>
+<div class="col-3">
+    <div class="border rounded-1 p-3 d-flex flex-column mb-3">
+        <small class="mb-3">برای استفاده از ای ن دوره نیاز است این دوره را با مبلغ 60000 تومان
+            خریداری کنید</small>
+        <button type="button" class="btn btn-success btn-sm">خرید</button>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-header">جست و جو</div>
+        <div class="card-body">
+            <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                    <button class="input-group-text btn btn-dark" id="inputGroup-sizing-sm">
+                        جستجو
+                    </button>
+                </div>
+                <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" />
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h5 class="card-header">دسته بندی</h5>
+        <div class="card-body">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm">
+                        <a href="#" class="decorationNon">طراحی وب</a>
+                        <a href="#" class="decorationNon">HTML</a>
+                        <a href="#" class="decorationNon">جاوا اسکریپت</a>
+                    </div>
+                    <div class="col-sm">
+                        <a href="#" class="decorationNon">بوت استرپ</a>
+                        <a href="#" class="decorationNon">css</a>
+                        <a href="#" class="decorationNon">آموزش تخصصی</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</div>
+
+
+<script>
+
+    // let getId = document.querySelector('#btnAnwer');
+
+
+    // for (const i of getId) {
+    //     console.log('getId' , i)
+    // }
+
+    // getId.addEventListener('click' , (e) => {
+
+    //     let id = getId.getAttribute('data-parent');
+    //     console.log('id : ' , id)
+    // })
+
+    // $('#btnAnwer').on('show.bs.modal', function (e) {
+    //     console.log('eeeeeeee', e)
+    // })
+
+
+    $('#exampleModalCenter').on('shown.bs.modal', function (e) {
+        let button = $(e.relatedTarget)
+        let parentId = button.data('parent');
+        let modal = $(this);
+        modal.find('[name="parent"]').val(parentId)
+
+    })
+</script>

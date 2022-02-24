@@ -44,6 +44,7 @@ module.exports = class Controller {
             const errors = result.array();
             const msg = [];
 
+
             errors.forEach(item => msg.push(item.msg));
 
             req.flash('massage', msg);

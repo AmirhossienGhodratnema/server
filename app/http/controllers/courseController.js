@@ -25,7 +25,7 @@ module.exports = new class HomeController extends Controller {
         }
     };
 
-    async single(req, res) {
+    async single(req, res , next) {
         try {
             let course = await Course.findById(req.params.id).populate([
                 {
@@ -35,10 +35,30 @@ module.exports = new class HomeController extends Controller {
                 {
                     path: 'episode',
                 },
-                {
-                    path: 'comments',
-                },
-            ]).exec()
+
+            ])
+                .populate([
+                    {
+                        path: 'comments',
+                        match: {
+                            parent: null,
+                            approved: true,
+                        },
+                        populate: [
+                            {
+                                path: 'user',
+                                select: 'name'
+                            },
+                            {
+                                path: 'comments',
+                                match: {
+                                    approved: true,
+                                },
+                                populate : [{path: 'user' , select : 'name'}]
+                            }
+                        ]
+                    },
+                ])
 
             let canUse = await this.canUse(req, course)
 
