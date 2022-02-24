@@ -13,8 +13,10 @@ module.exports = new class HomeController extends Controller {
         try {
             let validation = await this.validationData(req);
 
+            console.log(req.body)
             if (validation) {
                 let newCommetn = Comments({
+                    user: req.user.id,
                     ...req.body
                 })
                 await newCommetn.save(err => {
@@ -28,4 +30,7 @@ module.exports = new class HomeController extends Controller {
             next(err);
         }
     }
+
+
+    
 };
