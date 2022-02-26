@@ -9,5 +9,5 @@ module.exports = {
     session,
     cookie_secret: process.env.SECRETKEY_COOKIE,
     recaptcha,
-    debuge: false,
+    debuge: true,
 }

@@ -271,25 +271,6 @@
 
 
 <script>
-
-    // let getId = document.querySelector('#btnAnwer');
-
-
-    // for (const i of getId) {
-    //     console.log('getId' , i)
-    // }
-
-    // getId.addEventListener('click' , (e) => {
-
-    //     let id = getId.getAttribute('data-parent');
-    //     console.log('id : ' , id)
-    // })
-
-    // $('#btnAnwer').on('show.bs.modal', function (e) {
-    //     console.log('eeeeeeee', e)
-    // })
-
-
     $('#exampleModalCenter').on('shown.bs.modal', function (e) {
         let button = $(e.relatedTarget)
         let parentId = button.data('parent');

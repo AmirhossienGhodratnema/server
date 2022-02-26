@@ -21,6 +21,10 @@ router.use('/episode', episodes);
 
 // Route
 router.get("/", AdminController.index);
+
 router.get('/comments', CommentControllerAdmin.index);
+router.get('/comments/approved', CommentControllerAdmin.approved);
+router.delete('/comments/:id', CommentControllerAdmin.distroy);
+router.put('/comments/:id', CommentControllerAdmin.update);
 
 module.exports = router;

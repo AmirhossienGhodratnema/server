@@ -2,11 +2,11 @@
     <div class="main-style-div">
         <div>
             <div class="d-flex justify-content-between mt-5">
-                <h3>کامنت های تایید نشده</h3>
+                <h3>کامنت  ها</h3>
                 <div>
                     <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
                         <!--  -->
-                        <!-- <a href="/admin/comments/approved" class="btn btn-sm btn-primary">کامنت های تایید نشده</a> -->
+                        <a href="/admin/comments/approved" class="btn btn-sm btn-primary">کامنت های تایید نشده</a>
                     </div>
                 </div>
             </div>
@@ -57,18 +57,11 @@
                                                 <div class="btn-group btn-group-sm" role="group"
                                                     aria-label="Basic example">
 
-                                                    <!-- /<%= comment.id %>?_method=put/approved -->
-                                                    <form action="/admin/comments/<%= comment.id %>?_method=PUT"
-                                                        method="post">
-                                                        <button type="submit"
-                                                            class="btn btn-sm btn-success">تایید</button>
-                                                    </form>
 
                                                     <form action="/admin/comments/<%= comment.id %>?_method=DELETE"
                                                         method="post">
-                                                        <button type="submit"
-                                                            class="btn btn-sm  btn-danger">حذف</button>
 
+                                                        <button type="submit" class="btn btn-sm  btn-danger">حذف</button>
                                                     </form>
                                                 </div>
                                             </td>
