@@ -1,6 +1,7 @@
-
 const autoBind = require('auto-bind')
 const path = require('path');
+var moment = require('moment-jalaali');
+// const { realpathSync } = require('fs');
 module.exports = class Helpers {
     constructor(req, res) {
         autoBind(this);
@@ -18,6 +19,8 @@ module.exports = class Helpers {
             viewPath: this.viewPath,
             ...this.getObjectVariables(),
             old: this.old,
+            date: this.date,
+            req: this.req,
         };
     };
 
@@ -46,5 +49,10 @@ module.exports = class Helpers {
     old(field, defultValue = '') {
         return this.formData && this.formData.hasOwnProperty(field) ? this.formData[field] : defultValue;
     };
+
+
+    date() {
+        return moment();
+    }
 
 };

@@ -1,0 +1,72 @@
+<h2>Search</h2>
+
+
+
+
+<% let {search}=req.query; %>
+
+
+
+
+
+    <form action="" method="get" class="w-25 my-3">
+        <div class="d-flex justify-content-start  align-items-center">
+            <p>عبارت جست وجو شده :
+                <%= search %>
+            </p>
+            <a class="btn btn-dark mx-2 my-3">حذف</a>
+
+
+
+        </div>
+
+
+        <select class="form-select" aria-label="Default select example" name="type">
+            <option value="all">همه موارد</option>
+            <option value="free">رایگان</option>
+            <option value="vip">ویژه</option>
+            <option value="cash">خریدنی</option>
+        </select>
+
+        <input class="form-check-input" name="order" type="checkbox" value="1" id="flexCheckDefault">
+        <label for="flexCheckDefault">اول به آخر</label>
+
+
+
+        <button class="btn btn-info" type="submit">فیلتر</button>
+
+
+    </form>
+
+
+
+
+
+    <div class="row">
+        <% courses.forEach(course=> { %>
+            <div class="col-3">
+                <div class="card p-0 mb-3" style="width: 18rem">
+                    <img class="card-img-top" src="<%= course.fingerImage %>" alt="Card image cap" />
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <%= course.title %>
+                        </h5>
+                        <p class="card-text text-truncate">
+                            <%= course.body %>
+                        </p>
+                        <a href="/courses/<%= course._id%>" class="btn btn-primary">اطلاعات بیشتر</a>
+                    </div>
+                    <div class="card-footer">
+                        <p class="card-title"> بازدید :
+                            <%= course.viewCount %>
+                        </p>
+                        <span>
+                            <%= date(course.createdAt).format('jYYYY/jM/jD')%>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <%}) %>

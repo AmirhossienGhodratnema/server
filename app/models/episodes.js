@@ -13,7 +13,7 @@ const EpisodesSchema = schema({
     videoUrl: { type: String, require: true },
     downloadCount: { type: Number, default: 0 },
     viewCount: { type: Number, default: 0 },
-    commentCount: { type: String, default: 0 },
+    commentCount: { type: Number, default: 0 },
 
 }, { timestamps: true });
 

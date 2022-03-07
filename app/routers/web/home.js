@@ -37,6 +37,17 @@ router.use('/auth', auth);
 
 
 
+// search
+router.get('/search', CourseController.search);
+
+
+
+
+
+
+
+
+
 
 
 module.exports = router;

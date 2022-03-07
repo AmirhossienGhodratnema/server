@@ -3,32 +3,41 @@
   <div class="col-md-auto">Variable width content</div>
   <div class="col col-lg-2">3 of 3</div>
 </div> -->
+
+
+
 <div class="row">
-  <% courses.forEach(course => { %>
-  <div class="col-3">
-    <div class="card p-0 mb-3" style="width: 18rem">
-      <img
-        class="card-img-top"
-        src="<%= course.fingerImage %>"
-        alt="Card image cap"
-      />
-      <div class="card-body">
-        <h5 class="card-title"><%= course.title %></h5>
-        <p class="card-text text-truncate"><%= course.body %></p>
-        <a href="/courses/<%= course._id%>" class="btn btn-primary"
-          >اطلاعات بیشتر</a
-        >
-      </div>
-    </div>
-  </div>
+    <% courses.forEach(course=> { %>
+        <div class="col-3">
+            <div class="card p-0 mb-3" style="width: 18rem">
+                <img class="card-img-top" src="<%= course.fingerImage %>" alt="Card image cap" />
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <%= course.title %>
+                    </h5>
+                    <p class="card-text text-truncate">
+                        <%= course.body %>
+                    </p>
+                    <a href="/courses/<%= course._id%>" class="btn btn-primary">اطلاعات بیشتر</a>
+                </div>
+                <div class="card-footer">
+                    <p class="card-title"> بازدید :
+                        <%= course.viewCount %>
+                    </p>
+                    <span>
+            <%= date(course.createdAt).format('jYYYY/jM/jD')%>
+          </span>
+                </div>
+            </div>
+        </div>
 
 
 
-  <%}) %>
- 
+        <%}) %>
 
-  <%- contentFor('footer') %>
-  <div>
-    <h1>footer</h1>
-  </div>
+
+            <%- contentFor('footer') %>
+                <div>
+                    <h1>footer</h1>
+                </div>
 </div>

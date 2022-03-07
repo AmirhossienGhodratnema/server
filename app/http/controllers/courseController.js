@@ -25,42 +25,47 @@ module.exports = new class HomeController extends Controller {
         }
     };
 
-    async single(req, res , next) {
+    async single(req, res, next) {
         try {
-            let course = await Course.findById(req.params.id).populate([
-                {
-                    path: 'user',
-                    select: ['name'],
-                },
-                {
-                    path: 'episode',
-                },
-
-            ])
-                .populate([
-                    {
-                        path: 'comments',
-                        match: {
-                            parent: null,
-                            approved: true,
-                        },
-                        populate: [
-                            {
-                                path: 'user',
-                                select: 'name'
-                            },
-                            {
-                                path: 'comments',
-                                match: {
-                                    approved: true,
-                                },
-                                populate : [{path: 'user' , select : 'name'}]
-                            }
-                        ]
+            let course = await Course.findById(req.params.id).populate([{
+                        path: 'user',
+                        select: ['name'],
                     },
-                ])
+                    {
+                        path: 'episode',
+                    },
 
-            let canUse = await this.canUse(req, course)
+                ])
+                .populate([{
+                    path: 'comments',
+                    match: {
+                        parent: null,
+                        approved: true,
+                    },
+                    populate: [{
+                            path: 'user',
+                            select: 'name'
+                        },
+                        {
+                            path: 'comments',
+                            match: {
+                                approved: true,
+                            },
+                            populate: [{ path: 'user', select: 'name' }]
+                        }
+                    ]
+                }, ])
+
+            let canUse = await this.canUse(req, course);
+
+
+
+
+
+            course.viewCount += 1;
+            course.save();
+
+            console.log('course.viewCount', course.viewCount)
 
             // return res.json(course);
 
@@ -70,6 +75,42 @@ module.exports = new class HomeController extends Controller {
             next(err);
         }
     };
+
+
+
+    async search(req, res, next) {
+
+        try {
+
+            let query = {};
+
+
+            if (req.query.search) {
+                query.title = new RegExp(req.query.search, 'gi');
+            }
+
+            if (req.query.type && req.query.type !== 'all') {
+                query.type = req.query.type
+            }
+
+            console.log('query', query)
+
+
+
+
+
+            let courses = await Course.find({...query })
+
+
+            // return res.json(courses);
+
+
+            return res.render('home/search', { courses });
+
+        } catch (err) {
+            next(err);
+        }
+    }
 
     async canUse(req, course) {
         let canUse = false;
@@ -88,7 +129,3 @@ module.exports = new class HomeController extends Controller {
         return canUse
     }
 };
-
-
-
-

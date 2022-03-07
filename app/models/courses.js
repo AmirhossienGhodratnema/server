@@ -15,7 +15,7 @@ const CourseSchema = schema({
     tags: { type: String, require: true },
     time: { type: String, default: '00:00:00' },
     viewCount: { type: Number, default: 0 },
-    commentCount: { type: String, default: 0 },
+    commentCount: { type: Number, default: 0 },
 
 }, { timestamps: true, toJSON: { virtuals: true } });
 
@@ -31,6 +31,15 @@ CourseSchema.methods.typeToPersion = function () {
             return 'رایگان'
     }
 }
+
+CourseSchema.methods.inc = async function () {
+    console.log('inc inc inc inc inc inc inc inc inc inc ')
+}
+
+
+
+
+
 
 CourseSchema.virtual('episode', { ref: 'Episodes', localField: '_id', foreignField: 'course' });
 CourseSchema.virtual('comments', { ref: 'Comments', localField: '_id', foreignField: 'course' });
