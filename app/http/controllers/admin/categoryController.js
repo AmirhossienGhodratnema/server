@@ -12,7 +12,7 @@ module.exports = new class AdminController extends Controller {
 
 
             let page = req.query.page || 1
-            let categories = await Category.paginate({}, { page, sort: { createdAt: -1 }, limit: 10 , populate : 'parent' })
+            let categories = await Category.paginate({}, { page, sort: { createdAt: -1 }, limit: 10, populate: 'parent' })
 
 
             // return res.json(categories)
@@ -26,9 +26,9 @@ module.exports = new class AdminController extends Controller {
     async create(req, res, next) {
         try {
 
-            let categories = await Category.find({parent : null})
- 
-            return res.render('admin/category/create' , {categories});
+            let categories = await Category.find({ parent: null })
+
+            return res.render('admin/category/create', { categories });
         } catch (err) {
             next(err)
         }
@@ -68,11 +68,18 @@ module.exports = new class AdminController extends Controller {
     async distroy(req, res, next) {
         try {
 
-            let category = await Category.findById(req.params.id);
+            let category = await Category.findById(req.params.id).populate('child');
 
             if (!category) {
                 req.flash('massage', 'چنین دسته ای وجود ندارد');
             }
+
+            
+
+            category.child.forEach(item => {
+                item.remove()
+            });
+
 
             category.remove();
 
@@ -90,11 +97,7 @@ module.exports = new class AdminController extends Controller {
             let category = await Category.findById(req.params.id);
             let categories = await Category.find({ parent: null })
 
-
-            console.log(category)
-        // return res.json(categories)
-
-            return res.render('admin/category/edit', { category , categories})
+            return res.render('admin/category/edit', { category, categories })
         } catch (err) {
             next(err);
         }
