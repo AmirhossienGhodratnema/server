@@ -39,6 +39,7 @@ router.get('/categories/create', CategoryController.create);
 router.post('/categories/create', CategoriesValidation.handel(), CategoryController.store);
 router.delete('/categories/:id', CategoryController.distroy);
 router.get('/categories/:id/edit', CategoryController.edit);
+router.put('/categories/:id/update' , CategoriesValidation.handel(), CategoryController.update);
 
 
 

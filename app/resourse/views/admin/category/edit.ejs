@@ -14,12 +14,16 @@
 
       <%- include(viewPath('resourse/views/home/layout/errorMassage.ejs')); -%>
         <div class="p-3">
-          <form action="/admin/categories/create" method="POST">
+          <form action="/admin/categories/<%= category.id %>/update?_method=put" method="POST">
             <div>
+
+
+
+
 
               <div class="my-3">
                 <label for="category" class="my-2">نام دسته</label>
-                <input type="text" name="name" value="<%= old('name',  category.name) %> " class="form-control"
+                <input type="text" name="name" value="<%= old('name',category.name) %>" class="form-control"
                   id="category" placeholder="نام دسته را وارد کنید">
               </div>
 
@@ -28,12 +32,13 @@
 
                   <option value="none">دسته اصلی</option>
                   <% categories.forEach(cat=> { %>
-                    <option <%=  String(old('name', category.parent)) == String(cat.id) ? 'selected' : '' %> value="<%= cat.id %>">
-                      <%= cat.name %>
+                    <option <%=String(old('name', category.parent))==String(cat.id) ? 'selected' : '' %> value="<%=
+                        cat.id %>">
+                        <%= cat.name %>
                     </option>
                     <% }) %>
 
-                    
+
 
 
                 </select>

@@ -29,7 +29,7 @@ module.exports = new class AdminController extends Controller {
             let categories = await Category.find({ parent: null })
 
             return res.render('admin/category/create', { categories });
-        } catch (err) {
+        } catch (err) {name
             next(err)
         }
     }
@@ -74,7 +74,7 @@ module.exports = new class AdminController extends Controller {
                 req.flash('massage', 'چنین دسته ای وجود ندارد');
             }
 
-            
+
 
             category.child.forEach(item => {
                 item.remove()
@@ -101,6 +101,30 @@ module.exports = new class AdminController extends Controller {
         } catch (err) {
             next(err);
         }
+    }
+
+    async update(req, res, next) {
+
+        try {
+            let status = await this.validationData(req);
+            if (!status) {
+                return this.back(req, res)
+            }
+
+            let { name, parent } = req.body;
+            let category = await Category.findByIdAndUpdate(req.params.id, {
+                name,
+                parent: parent == 'none' ? null : parent,
+            })
+            // return res.json('category' ,category)
+
+            category.save()
+            
+            return res.redirect('/admin/categories');
+        } catch (err) {
+            next(err)
+        }
+
     }
 
 
