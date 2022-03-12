@@ -1,0 +1,38 @@
+<div class="col-10">
+    <div>
+        <div class="d-flex justify-content-between mt-5">
+            <h3>افزودن دسته جدید</h3>
+        </div>
+    </div>
+    <hr />
+
+    <%- include(viewPath('resourse/views/home/layout/errorMassage.ejs')); -%>
+        <div class="p-3">
+            <form action="/admin/categories/create" method="POST">
+                <div>
+
+                    <div class="my-3">
+                        <label for="category" class="my-2">نام دسته</label>
+                        <input type="text" name="name" class="form-control" id="category"
+                            placeholder="نام دسته را وارد کنید">
+                    </div>
+
+                    <div class="my-3 ">
+                        <select class="form-select" name="parent" aria-label="Default select example">
+                            <option value="none">دسته اصلی</option>
+
+                            <% categories.forEach(cat=> { %>
+                                <option value="<%= cat.id %>">
+                                    <%= cat.name %>
+                                </option>
+                                <% }) %>
+
+
+                        </select>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary mt-3">افزودن</button>
+            </form>
+        </div>
+</div>

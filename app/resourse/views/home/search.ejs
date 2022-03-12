@@ -3,40 +3,42 @@
 
 
 
-<% let {search}=req.query; %>
+<% let {search , type , order}=req.query; %>
+
+    <form action="/search" method="get" class="w-25 my-3">
+
+
+        <% if(search) { %>
+            <input type="hidden" name="search" value="<%= search %>">
+            <div class="d-flex justify-content-start  align-items-center">
+                <p>عبارت جست وجو شده :
+                    <%= search %>
+                </p>
+                <a class="btn btn-dark mx-2 my-3" href="/search">حذف</a>
+            </div>
+            <%}%>
+
+
+                <select class="form-select" aria-label="Default select example" name="type">
+
+                            <option value="all" <%- type==='all' ? 'selected' : '' %> >همه موارد</option>
+                            <option value="free" <%- type==='free' ? 'selected' : '' %> >رایگان</option>
+                            <option value="vip" <%- type==='vip' ? 'selected' : '' %> >ویژه</option>
+                            <option value="cash" <%- type==='cash' ? 'selected' : '' %> >خریدنی</option>
+                        </select>
+
+                <input class="form-check-input" name="order" type="checkbox" value="1" id="flexCheckDefault" <%- order=='1' ? 'checked' : '' %>>
+                <label for="flexCheckDefault">اول به آخر</label>
 
 
 
-
-
-    <form action="" method="get" class="w-25 my-3">
-        <div class="d-flex justify-content-start  align-items-center">
-            <p>عبارت جست وجو شده :
-                <%= search %>
-            </p>
-            <a class="btn btn-dark mx-2 my-3">حذف</a>
-
-
-
-        </div>
-
-
-        <select class="form-select" aria-label="Default select example" name="type">
-            <option value="all">همه موارد</option>
-            <option value="free">رایگان</option>
-            <option value="vip">ویژه</option>
-            <option value="cash">خریدنی</option>
-        </select>
-
-        <input class="form-check-input" name="order" type="checkbox" value="1" id="flexCheckDefault">
-        <label for="flexCheckDefault">اول به آخر</label>
-
-
-
-        <button class="btn btn-info" type="submit">فیلتر</button>
+                <button class="btn btn-info" type="submit">فیلتر</button>
 
 
     </form>
+
+
+
 
 
 
@@ -61,8 +63,8 @@
                             <%= course.viewCount %>
                         </p>
                         <span>
-                            <%= date(course.createdAt).format('jYYYY/jM/jD')%>
-                        </span>
+                                    <%= date(course.createdAt).format('jYYYY/jM/jD')%>
+                                </span>
                     </div>
                 </div>
             </div>

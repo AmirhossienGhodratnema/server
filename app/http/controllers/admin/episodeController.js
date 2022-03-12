@@ -42,7 +42,7 @@ module.exports = new class EpisodesController extends Controller {
         try {
             let result = await this.validationData(req);
             if (result) {
-                let newEpisode = new Episodes({ ...req.body });
+                let newEpisode = new Episodes({...req.body });
                 await newEpisode.save(err => {
                     if (err) throw err;
                 });
@@ -61,7 +61,6 @@ module.exports = new class EpisodesController extends Controller {
             let episode = await Episodes.findOne({ _id: req.params.id })
             if (!episode) {
                 req.flash('massage', 'چنین دوره ای وجود ندارد');
-                console.log('Not Course')
             }
             let courseId = episode.course;
             episode.remove()
@@ -97,7 +96,7 @@ module.exports = new class EpisodesController extends Controller {
                 return this.back(req, res)
             };
 
-            let episode = await Episodes.findByIdAndUpdate(req.params.id, { $set: { ...req.body } })
+            let episode = await Episodes.findByIdAndUpdate(req.params.id, { $set: {...req.body } })
 
             // Prevent course Update
             this.updateCourseTime(episode.course);

@@ -65,11 +65,6 @@ module.exports = new class HomeController extends Controller {
             course.viewCount += 1;
             course.save();
 
-            console.log('course.viewCount', course.viewCount)
-
-            // return res.json(course);
-
-
             res.render('home/single', { course, canUse });
         } catch (err) {
             next(err);
@@ -84,7 +79,6 @@ module.exports = new class HomeController extends Controller {
 
             let query = {};
 
-
             if (req.query.search) {
                 query.title = new RegExp(req.query.search, 'gi');
             }
@@ -93,17 +87,13 @@ module.exports = new class HomeController extends Controller {
                 query.type = req.query.type
             }
 
-            console.log('query', query)
+            let courses = Course.find({...query });
 
+            if (req.query.order) {
+                courses.sort({ createdAt: -1 })
+            }
 
-
-
-
-            let courses = await Course.find({...query })
-
-
-            // return res.json(courses);
-
+            courses = await courses.exec();
 
             return res.render('home/search', { courses });
 
