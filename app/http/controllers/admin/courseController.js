@@ -7,6 +7,7 @@ const sharp = require('sharp');
 
 // Models
 const Course = require('app/models/courses');
+const Category = require('./../../../models/category');
 
 
 
@@ -121,12 +122,14 @@ module.exports = new class CourseController extends Controller {
         try {
             this.isMongoId(req.params.id)
 
-            let course = await Course.findOne({ _id: req.params.id })
+            let course = await Course.findOne({ _id: req.params.id });
+            let category = await Category.find({});
 
+            
             if (!course) {
                 throw new Error('چنین دوره ای وجود ندارد')
             } else {
-                res.render('admin/courses/edit', { title: 'ویرایش دوره ', course })
+                res.render('admin/courses/edit', { title: 'ویرایش دوره ', course , category})
             };
         } catch (err) {
             next(err)
@@ -137,6 +140,7 @@ module.exports = new class CourseController extends Controller {
     async update(req, res, next) {
         try {
             let status = await this.validationData(req);
+
 
             let objUpdateData = {}
 

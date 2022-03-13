@@ -5,6 +5,7 @@ const Course = require('app/models/courses');
 const Episodes = require('app/models/episodes');
 const Comments = require('app/models/comments');
 const User = require('app/models/user');
+const Category = require('app/models/category');
 
 module.exports = new class HomeController extends Controller {
     // Get home page view
@@ -27,13 +28,15 @@ module.exports = new class HomeController extends Controller {
 
     async single(req, res, next) {
         try {
-            let course = await Course.findById(req.params.id).populate([{
+            let course = await Course.findById(req.params.id)
+                .populate([
+                    {
                         path: 'user',
                         select: ['name'],
                     },
                     {
                         path: 'episode',
-                    },
+                    }
 
                 ])
                 .populate([{
@@ -43,20 +46,25 @@ module.exports = new class HomeController extends Controller {
                         approved: true,
                     },
                     populate: [{
-                            path: 'user',
-                            select: 'name'
+                        path: 'user',
+                        select: 'name'
+                    },
+                    {
+                        path: 'comments',
+                        match: {
+                            approved: true,
                         },
-                        {
-                            path: 'comments',
-                            match: {
-                                approved: true,
-                            },
-                            populate: [{ path: 'user', select: 'name' }]
-                        }
+                        populate: [{ path: 'user', select: 'name' }]
+                    }
                     ]
-                }, ])
+                },])
+
+            let category = await Category.find({ parent: null }).populate('child')
 
             let canUse = await this.canUse(req, course);
+
+
+            // return res.json(category)
 
 
 
@@ -65,7 +73,7 @@ module.exports = new class HomeController extends Controller {
             course.viewCount += 1;
             course.save();
 
-            res.render('home/single', { course, canUse });
+            return res.render('home/single', { course, canUse, category });
         } catch (err) {
             next(err);
         }
@@ -87,7 +95,7 @@ module.exports = new class HomeController extends Controller {
                 query.type = req.query.type
             }
 
-            let courses = Course.find({...query });
+            let courses = Course.find({ ...query });
 
             if (req.query.order) {
                 courses.sort({ createdAt: -1 })

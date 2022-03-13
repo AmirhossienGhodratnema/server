@@ -74,19 +74,31 @@
                                                                     <div class="col">
                                                                         <% course.comments.forEach(massage=> { %>
 
-                                                                            <div class="d-flex flex-start mb-3 align-items-center">
-                                                                                <img class="rounded-circle shadow-1-strong me-3" src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(10).webp" alt="avatar" width="65" height="65" />
+                                                                            <div
+                                                                                class="d-flex flex-start mb-3 align-items-center">
+                                                                                <img class="rounded-circle shadow-1-strong me-3"
+                                                                                    src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(10).webp"
+                                                                                    alt="avatar" width="65"
+                                                                                    height="65" />
                                                                                 <div class="flex-grow-1 flex-shrink-1">
                                                                                     <div class="px-3">
-                                                                                        <div class="d-flex justify-content-between align-items-center">
+                                                                                        <div
+                                                                                            class="d-flex justify-content-between align-items-center">
                                                                                             <p class="mb-1 textCommetn">
                                                                                                 <%= massage.user.name %>
-                                                                                                    <span class="small">-
+                                                                                                    <span
+                                                                                                        class="small">-
                                                                                                         2 hours
                                                                                                         ago</span>
                                                                                             </p>
                                                                                             <!-- <button class="btn btn-info">پاسخ</button> -->
-                                                                                            <button data-parent="<%= massage.id %>" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" id="btnAnwer">
+                                                                                            <button
+                                                                                                data-parent="<%= massage.id %>"
+                                                                                                type="button"
+                                                                                                class="btn btn-primary"
+                                                                                                data-toggle="modal"
+                                                                                                data-target="#exampleModalCenter"
+                                                                                                id="btnAnwer">
 
                                                                                                 پاسخ
                                                                                             </button>
@@ -99,23 +111,34 @@
                                                                                         <%
                                                                                             massage.comments.forEach(ChildComment=>
                                                                                             { %>
-                                                                                            <div class="d-flex flex-start mt-4">
-                                                                                                <a class="me-3" href="#">
-                                                                                                    <img class="rounded-circle shadow-1-strong" src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(11).webp" alt="avatar" width="65" height="65" />
+                                                                                            <div
+                                                                                                class="d-flex flex-start mt-4">
+                                                                                                <a class="me-3"
+                                                                                                    href="#">
+                                                                                                    <img class="rounded-circle shadow-1-strong"
+                                                                                                        src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(11).webp"
+                                                                                                        alt="avatar"
+                                                                                                        width="65"
+                                                                                                        height="65" />
                                                                                                 </a>
-                                                                                                <div class="flex-grow-1 flex-shrink-1">
+                                                                                                <div
+                                                                                                    class="flex-grow-1 flex-shrink-1">
                                                                                                     <div>
-                                                                                                        <div class="d-flex justify-content-between align-items-center">
-                                                                                                            <p class="mb-1">
+                                                                                                        <div
+                                                                                                            class="d-flex justify-content-between align-items-center">
+                                                                                                            <p
+                                                                                                                class="mb-1">
                                                                                                                 <%= ChildComment.user.name
                                                                                                                     %>
-                                                                                                                    <span class="small">-
+                                                                                                                    <span
+                                                                                                                        class="small">-
                                                                                                                         3
                                                                                                                         hours
                                                                                                                         ago</span>
                                                                                                             </p>
                                                                                                         </div>
-                                                                                                        <p class="small mb-0">
+                                                                                                        <p
+                                                                                                            class="small mb-0">
                                                                                                             <%= ChildComment.body
                                                                                                                 %>
                                                                                                         </p>
@@ -142,13 +165,15 @@
 
 
                                         <!-- Modal -->
-                                        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                                            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header d-flex ">
                                                         <h5 class="modal-title" id="exampleModalLongTitle">پاسخ به کامتن
                                                         </h5>
-                                                        <button type="button" class="close btn btn-sm btn-danger" data-dismiss="modal" aria-label="Close">
+                                                        <button type="button" class="close btn btn-sm btn-danger"
+                                                            data-dismiss="modal" aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
                                                     </div>
@@ -156,13 +181,18 @@
                                                         <form action="/comments" method="post">
                                                             <div class="form-group">
                                                                 <input type="hidden" name="parent" value="">
-                                                                <input type="hidden" name="<%= course.constructor.modelName.toLowerCase() %>" value="<%= course.id %>">
+                                                                <input type="hidden"
+                                                                    name="<%= course.constructor.modelName.toLowerCase() %>"
+                                                                    value="<%= course.id %>">
                                                                 <label for="TextAnswers" class="mb-2">پاسخ</label>
-                                                                <input type="text" name="body" class="form-control" id="TextAnswers" aria-describedby="emailHelp" placeholder="متن خود را وارد کنید">
+                                                                <input type="text" name="body" class="form-control"
+                                                                    id="TextAnswers" aria-describedby="emailHelp"
+                                                                    placeholder="متن خود را وارد کنید">
 
                                                             </div>
 
-                                                            <button type="submit" class="btn btn-primary mt-3">ارسال</button>
+                                                            <button type="submit"
+                                                                class="btn btn-primary mt-3">ارسال</button>
                                                         </form>
                                                     </div>
                                                     -->
@@ -178,10 +208,15 @@
                                                     <div class="card-body">
                                                         <form action="/comments" method="post">
                                                             <div class="form-group">
-                                                                <input type="hidden" name="<%= course.constructor.modelName.toLowerCase() %>" value="<%= course.id %>">
+                                                                <input type="hidden"
+                                                                    name="<%= course.constructor.modelName.toLowerCase() %>"
+                                                                    value="<%= course.id %>">
 
-                                                                <textarea name="body" class="form-control mb-2" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                                                <button type="submit" class="btn btn-primary">ارسال</button>
+                                                                <textarea name="body" class="form-control mb-2"
+                                                                    id="exampleFormControlTextarea1"
+                                                                    rows="3"></textarea>
+                                                                <button type="submit"
+                                                                    class="btn btn-primary">ارسال</button>
                                                             </div>
                                                         </form>
                                                     </div>
@@ -209,7 +244,8 @@
                             جستجو
                         </button>
                     </div>
-                    <input type="text" name='search' class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" />
+                    <input type="text" name='search' class="form-control" aria-label="Small"
+                        aria-describedby="inputGroup-sizing-sm" />
                 </div>
 
             </form>
@@ -225,16 +261,30 @@
         <h5 class="card-header">دسته بندی</h5>
         <div class="card-body">
             <div class="container">
-                <div class="row">
-                    <div class="col-sm">
-                        <a href="#" class="decorationNon">طراحی وب</a>
-                        <a href="#" class="decorationNon">HTML</a>
-                        <a href="#" class="decorationNon">جاوا اسکریپت</a>
-                    </div>
-                    <div class="col-sm">
-                        <a href="#" class="decorationNon">بوت استرپ</a>
-                        <a href="#" class="decorationNon">css</a>
-                        <a href="#" class="decorationNon">آموزش تخصصی</a>
+                <div class="">
+
+                    <div class="col-sm d-flex flex-column">
+                            <ui class="list-unstyled">
+                                <% category.forEach(cat => {  %>
+
+                                    <div class="py-1">
+                                        <li class=""><%= cat.name%></li>
+                                        <% if(cat.child.length !== 0) { %>
+                                            <li>
+                                                <ul class="mb-0 d-flex flex-column">
+                                                    <% cat.child.forEach(catChild => {  %>
+                                                        <il style="padding-right: 1rem;">
+                                                            <%= catChild.name%>
+                                                        </il>
+                                                    <% }) %>
+                                                </ul>
+                                            </li>
+                                        <% } %>   
+                                    </div>
+                                    
+                                <% }) %>
+                            </ui>
+                       
                     </div>
                 </div>
             </div>
@@ -247,7 +297,7 @@
 
 
 <script>
-    $('#exampleModalCenter').on('shown.bs.modal', function(e) {
+    $('#exampleModalCenter').on('shown.bs.modal', function (e) {
         let button = $(e.relatedTarget)
         let parentId = button.data('parent');
         let modal = $(this);

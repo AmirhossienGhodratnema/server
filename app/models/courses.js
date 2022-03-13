@@ -5,6 +5,7 @@ var mongoosePaginate = require('mongoose-paginate');
 
 const CourseSchema = schema({
     user: { type: schema.Types.ObjectId, ref: 'User' },
+    categories: [{ type: schema.Types.ObjectId, ref: 'Category' }],
     title: { type: String, require: true },
     slug: { type: String, require: true },
     type: { type: String, require: true },
