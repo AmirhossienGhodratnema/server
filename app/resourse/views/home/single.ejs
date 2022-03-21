@@ -5,34 +5,38 @@
     <small>توسط <%= course.user.name %> ارسال شده در 21 خرداد 1397</small>
     <hr />
     <p class="text-justify">
-        <%= course.body%>
+        <%- course.body%>
     </p>
     <hr />
 
 
+     
+
+
     <% if(auth.check) { %>
-        <% if(!canUse) { %>
-            <% if(course.type=='vip' ) { %>
+        
+            <% if(course.type=='vip') { %>
                 <div class="alert alert-danger" role="alert">
-                    این دوره به صورت خریدنی است
-
+                    این دوره به صورت عضویت ویژه است
                 </div>
-                <% } else if(course.type=='cash' ) { %>
-                    <div class="alert alert-danger" role="alert">
-                        برای مشاهده این دوره باید اکانت شما ویژه باشد
-
+            <% } else if(course.type=='cash') { %>
+                <% if(req.user.checkLearning(course)) { %> 
+                    <div class="alert alert-success" role="alert">
+                        شما این دوره را خریداری کرده اید
                     </div>
-                    <% } %>
-                        <% } else { %>
-                            <div class="alert alert-success" role="alert">
-                                شما یه این دوره دسترسی دارید
-                            </div>
-                            <% } %>
-                                <% } else { %>
-                                    <div class="alert alert-danger" role="alert">
-                                        برای مشاهده ویدیو ها با ید ابتدا وارد اکانت خود شوید
-                                    </div>
-                                    <% } %>
+                <% } else {%> 
+                    <div class="alert alert-danger" role="alert">
+                        برای مشاهده این دوره باید خریداری کنید باشد
+                    </div>
+                <%}%>
+            <% } %>
+    <% } else { %>
+        <div class="alert alert-danger" role="alert">
+            برای مشاهده ویدیو ها با ید ابتدا وارد اکانت خود شوید
+        </div>
+    <% } %>
+
+            
 
                                         <div>
                                             <h3>قسمت های دوره</h3>
@@ -104,7 +108,7 @@
                                                                                             </button>
                                                                                         </div>
                                                                                         <p class="small mb-0">
-                                                                                            <%= massage.body %>
+                                                                                            <%- massage.body %>
                                                                                         </p>
 
 
@@ -223,74 +227,83 @@
                                                 </div>
                                                 <%} %>
 
+
 </div>
 <div class="col-3">
-    <div class="border rounded-1 p-3 d-flex flex-column mb-3">
-        <small class="mb-3">برای استفاده از ای ن دوره نیاز است این دوره را با مبلغ 60000 تومان
-            خریداری کنید</small>
-        <button type="button" class="btn btn-success btn-sm">خرید</button>
-    </div>
-
-    <div class="card mb-3">
-        <div class="card-header">جست و جو</div>
-        <div class="card-body">
-
-            <form action="/search" method="get">
-
-                <div class="input-group input-group-sm mb-3">
-                    <div class="input-group-prepend">
-
-                        <button type="submit" class="input-group-text btn btn-dark">
-                            جستجو
-                        </button>
-                    </div>
-                    <input type="text" name='search' class="form-control" aria-label="Small"
-                        aria-describedby="inputGroup-sizing-sm" />
-                </div>
-
-            </form>
 
 
+    <% if(auth.check) { %>
+        <form class="border rounded-1 p-3 d-flex flex-column mb-3" action="/course/payment" method="POST">
+            <input type="hidden" name="course" value='<%= course.id %>'>
+            <small class="mb-3"> برای استفاده از این دوره نیاز است مبلغ <%= course.price %> تومان خریداری کنید</small>
+            <button type="submit" class="btn btn-success btn-sm">خرید</button>
+        </form>
+        <%} else { %>
+            else
+            <%}%>
+
+                <div class="card mb-3">
+                    <div class="card-header">جست و جو</div>
+                    <div class="card-body">
+
+                        <form action="/search" method="get">
+
+                            <div class="input-group input-group-sm mb-3">
+                                <div class="input-group-prepend">
+
+                                    <button type="submit" class="input-group-text btn btn-dark">
+                                        جستجو
+                                    </button>
+                                </div>
+                                <input type="text" name='search' class="form-control" aria-label="Small"
+                                    aria-describedby="inputGroup-sizing-sm" />
+                            </div>
+
+                        </form>
 
 
 
-        </div>
-    </div>
 
-    <div class="card">
-        <h5 class="card-header">دسته بندی</h5>
-        <div class="card-body">
-            <div class="container">
-                <div class="">
 
-                    <div class="col-sm d-flex flex-column">
-                            <ui class="list-unstyled">
-                                <% category.forEach(cat => {  %>
-
-                                    <div class="py-1">
-                                        <li class=""><%= cat.name%></li>
-                                        <% if(cat.child.length !== 0) { %>
-                                            <li>
-                                                <ul class="mb-0 d-flex flex-column">
-                                                    <% cat.child.forEach(catChild => {  %>
-                                                        <il style="padding-right: 1rem;">
-                                                            <%= catChild.name%>
-                                                        </il>
-                                                    <% }) %>
-                                                </ul>
-                                            </li>
-                                        <% } %>   
-                                    </div>
-                                    
-                                <% }) %>
-                            </ui>
-                       
                     </div>
                 </div>
-            </div>
-        </div>
 
-    </div>
+                <div class="card">
+                    <h5 class="card-header">دسته بندی</h5>
+                    <div class="card-body">
+                        <div class="container">
+                            <div class="">
+
+                                <div class="col-sm d-flex flex-column">
+                                    <ui class="list-unstyled">
+                                        <% category.forEach(cat=> { %>
+
+                                            <div class="py-1">
+                                                <li class="">
+                                                    <%= cat.name%>
+                                                </li>
+                                                <% if(cat.child.length !==0) { %>
+                                                    <li>
+                                                        <ul class="mb-0 d-flex flex-column">
+                                                            <% cat.child.forEach(catChild=> { %>
+                                                                <il style="padding-right: 1rem;">
+                                                                    <%= catChild.name%>
+                                                                </il>
+                                                                <% }) %>
+                                                        </ul>
+                                                    </li>
+                                                    <% } %>
+                                            </div>
+
+                                            <% }) %>
+                                    </ui>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
 </div>
 
 </div>
