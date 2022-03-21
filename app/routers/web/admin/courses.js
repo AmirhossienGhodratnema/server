@@ -34,6 +34,9 @@ router.put(
   courseController.update
 );
 
+
+
+
 // edit
 
 module.exports = router;

@@ -35,12 +35,12 @@ router.get('/courses/:id', CourseController.single);
 router.use('/auth', auth);
 
 
-
-
 // search
 router.get('/search', CourseController.search);
 
 
+// Payment Cach
+router.post('/course/payment' , CourseController.payment)
 
 
 

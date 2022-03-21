@@ -22,7 +22,7 @@ module.exports = new class LoginController extends Controller {
     // Send information login.
     loginPagePost(req, res, next) {
         try {
-            this.validationRecaptcha(req, res)          // Recaptcha validation.
+            this.validationRecaptcha(req, res)
                 .then(result => this.validationData(req))
                 .then(result => {
                     if (result) this.login(req, res, next)
@@ -31,6 +31,7 @@ module.exports = new class LoginController extends Controller {
                         res.redirect('/auth/login');
                     }
                 })
+            this.login(req, res ,next)
         } catch (err) {
             next(err)
         }

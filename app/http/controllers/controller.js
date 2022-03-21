@@ -87,6 +87,7 @@ module.exports = class Controller {
         let minuts = Math.floor((second / 60 / 60) % 1 * 60)
         let secend = Math.floor(((second / 60 / 60) % 1 * 60) % 1 * 60)
 
+
         return sprintf('%02d:%02d:%02d', hours, minuts, secend)
 
     }

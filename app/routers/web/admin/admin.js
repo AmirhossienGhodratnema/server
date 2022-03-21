@@ -16,6 +16,7 @@ const CategoryController = require("../../../http/controllers/admin/categoryCont
 // Require validations
 const CategoriesValidation = require('./../../../validation/categoriesCreateValidation')
 
+const upload = require("app/hellper/uploadimage");
 
 // Require Routers
 const courses = require("./courses");
@@ -39,7 +40,10 @@ router.get('/categories/create', CategoryController.create);
 router.post('/categories/create', CategoriesValidation.handel(), CategoryController.store);
 router.delete('/categories/:id', CategoryController.distroy);
 router.get('/categories/:id/edit', CategoryController.edit);
-router.put('/categories/:id/update' , CategoriesValidation.handel(), CategoryController.update);
+router.put('/categories/:id/update', CategoriesValidation.handel(), CategoryController.update);
+
+
+router.post('/upload-image', upload.single("upload"), AdminController.uploadImage)
 
 
 

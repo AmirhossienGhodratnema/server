@@ -1,14 +1,16 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const schema = mongoose.Schema
 const uniqueString = require('unique-string');
 
 // Register of user information.
-const UserSchema = mongoose.Schema({
+const UserSchema = schema({
     name: { type: String, require: true },
     admin: { type: Boolean, default: 0 },
     email: { type: String, require: true },
     password: { type: String, require: true },
-    rememberToken: { type: String, default: null }
+    rememberToken: { type: String, default: null },
+    learning: [{ type: schema.Types.ObjectId, ref: 'Course' }]
 }, { timestamps: true, toJSON: { virtuals: true } });
 
 
@@ -61,8 +63,8 @@ UserSchema.methods.isVip = function () {
     return false
 }
 
-UserSchema.methods.checkLearning = function () {
-    return true
+UserSchema.methods.checkLearning = function (course) {
+    return this.learning.indexOf(course.id) !== -1;
 }
 
 

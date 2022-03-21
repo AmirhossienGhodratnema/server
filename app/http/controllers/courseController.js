@@ -60,25 +60,44 @@ module.exports = new class HomeController extends Controller {
                 },])
 
             let category = await Category.find({ parent: null }).populate('child')
-
             let canUse = await this.canUse(req, course);
-
-
-            // return res.json(category)
-
-
-
-
-
             course.viewCount += 1;
             course.save();
-
             return res.render('home/single', { course, canUse, category });
         } catch (err) {
             next(err);
         }
     };
 
+
+    async payment(req, res, next) {
+        try {
+            let { course } = req.body;
+            this.isMongoId(course);
+
+            let courses = await Course.findById(course);
+            if(!courses) {
+                console.log('not found');
+            }
+
+
+            if(await req.user.checkLearning(courses)){
+                console.log('Shoma in dorera kharidari kardeed');
+            }
+
+            if(courses.price == 0 && (courses.type !== 'vip' || courses.type !== 'free')) {
+                console.log('In dore ghable kharidan nist')
+            }
+
+
+            // buy proccess
+
+
+            return res.json(req.body)
+        } catch (err) {
+            next(err)
+        }
+    }
 
 
     async search(req, res, next) {
