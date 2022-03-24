@@ -20,18 +20,19 @@ module.exports = new class LoginController extends Controller {
 
 
     // Send information login.
-    loginPagePost(req, res, next) {
+    async loginPagePost(req, res, next) {
         try {
+            // await this.validationRecaptcha(req, res)  
             this.validationRecaptcha(req, res)
                 .then(result => this.validationData(req))
                 .then(result => {
-                    if (result) this.login(req, res, next)
+                    if (result) return this.login(req, res, next)
                     else {
                         req.flash('formData', req.body);
                         res.redirect('/auth/login');
                     }
                 })
-            this.login(req, res ,next)
+            // this.login(req, res, next)
         } catch (err) {
             next(err)
         }
@@ -42,13 +43,13 @@ module.exports = new class LoginController extends Controller {
     login(req, res, next) {
         try {
             passport.authenticate('local.login', (err, user) => {
-                if (!user) return res.redirect('/login');
-                req.login(user, err => {
+                if (!user) return res.redirect('/auth/login');
+                return req.login(user, err => {
                     if (req.body.remember) {
                         user.setrememberToken(res);         // Register token for user.
                         res.redirect('/')
                     } else {
-                        return res.redirect('/')
+                        res.redirect('/')
                     }
                 })
 

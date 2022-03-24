@@ -1,78 +1,78 @@
 <!DOCTYPE html>
 <html lang="fa">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/css/reset.css" />
-    <link rel="stylesheet" href="/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="/css/bootstrap-rtl.min.css" />
-    <link rel="stylesheet" href="/css/home.css" />
-    <title><%- defineContent('title' || 'خانه') %></title>
-  </head>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/css/reset.css" />
+  <link rel="stylesheet" href="/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/css/bootstrap-rtl.min.css" />
+  <link rel="stylesheet" href="/css/home.css" />
+  <title>
+    <%- defineContent('title' || 'خانه' ) %>
+  </title>
+</head>
 
 
-    <header class="p-3 bg-dark text-white">
-      <div class="container d-flex justify-content-between">
-        <div class="d-flex align-items-center justify-content-between w-100">
-          <a
-            href="/"
-            class="
+<header class="p-3 bg-dark text-white">
+  <div class="container d-flex justify-content-between">
+    <div class="d-flex align-items-center justify-content-between w-100">
+      <a href="/" class="
               d-flex
               align-items-center
               mb-2 mb-lg-0
               text-white text-decoration-none
-            "
-          >
-            امیر
-          </a>
+            ">
+        امیر
+      </a>
 
-          <ul
-            class="nav col-12 col-lg-auto mb-2 justify-content-center mb-md-0"
-          >
-            <li><a href="/" class="nav-link px-2 text-white">خانه</a></li>
-            <li><a href="/courses" class="nav-link px-2 text-white">دوره ها</a></li>
-            <li><a href="/about-me" class="nav-link px-2 text-white">درباره</a></li>
-          </ul>
+      <ul class="nav col-12 col-lg-auto mb-2 justify-content-center mb-md-0">
+        <li><a href="/" class="nav-link px-2 text-white">خانه</a></li>
+        <li><a href="/courses" class="nav-link px-2 text-white">دوره ها</a></li>
+        <li><a href="/about-me" class="nav-link px-2 text-white">درباره</a></li>
+      </ul>
 
-          <div class="text-end d-flex justify-content-between">
-            <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-              <input
-                type="search"
-                class="form-control form-control-dark"
-                placeholder="جست و جو ..."
-                aria-label="Search"
-              />
-            </form>
+      <div class="text-end d-flex justify-content-between">
+        <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+          <input type="search" class="form-control form-control-dark" placeholder="جست و جو ..." aria-label="Search" />
+        </form>
 
-            <% if (auth.check) { %>
+        <% if (auth.check) { %>
 
-              <a href="/" class="btn btn-success me-2">پنل کاربری</a>
-              <a href="/logout" class="btn btn-danger me-2">خروج</a>
+          <a href="/" class="btn btn-success me-2">پنل کاربری</a>
+          <a href="/logout" class="btn btn-danger me-2">خروج</a>
 
-            <% } else { %>
+          <% } else { %>
 
-              <a href="/auth/login" class="btn btn-outline-light me-2">ورود</a>
-              <a href="/auth/register" class="btn btn-info me-2">ثبت نام</a>
+            <a href="/auth/login" class="btn btn-outline-light me-2">ورود</a>
+            <a href="/auth/register" class="btn btn-info me-2">ثبت نام</a>
 
             <% } %>
-          </div>
-        </div>
-      </div>
-    </header>
-
-    <div class="container mt-5">
-      <div class="row  align-items-start">
-        <%- body %>
       </div>
     </div>
+  </div>
+</header>
 
-    <!-- <%- defineContent('footer') %> -->
+<div class="container mt-5">
+  <div class="row  align-items-start">
+    <%- body %>
+  </div>
+</div>
+
+<!-- <%- defineContent('footer') %> -->
 
 <script src="/js/jquery-3.5.1.slim.min.js"></script>
 <script src="/js/popper.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+
+
+
 <%- script %>
 
 </body>
+
 </html>

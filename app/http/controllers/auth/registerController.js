@@ -18,8 +18,9 @@ module.exports = new class RegisterController extends Controller {
     };
 
     // Send information register.
-    registerDataPost(req, res, next) {
+    async registerDataPost(req, res, next) {
         try {
+            // await this.validationRecaptcha(req, res)
             this.validationRecaptcha(req, res)          // Recaptcha validation.
                 .then(result => this.validationData(req))
                 .then(result => {

@@ -87,8 +87,16 @@ module.exports = class Controller {
         let minuts = Math.floor((second / 60 / 60) % 1 * 60)
         let secend = Math.floor(((second / 60 / 60) % 1 * 60) % 1 * 60)
 
-
         return sprintf('%02d:%02d:%02d', hours, minuts, secend)
+    }
 
+    alert(req, data) {
+        let title = data.title || '',
+            massage = data.massage || '',
+            type = data.type || '',
+            button = data.button || 'info',
+            timer = data.timer || 2000
+
+        req.flash('sweetAlert',{title , massage , type, button , timer})
     }
 };

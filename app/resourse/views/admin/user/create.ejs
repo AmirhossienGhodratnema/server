@@ -1,0 +1,89 @@
+<div class="col-10">
+  <div class="main-style-div">
+    <div>
+      <div class="d-flex justify-content-between mt-5">
+        <h3>افزودن دوره</h3>
+      </div>
+    </div>
+    <hr />
+    <%- include(viewPath('resourse/views/home/layout/errorMassage.ejs')); -%>
+
+    <div>
+      <form action="/admin/courses/create" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+
+          <label for="title">عنوان دوره</label>
+          <input
+            type="text"
+            class="form-control mt-2"
+            id="title"
+            name="title"
+            value="<%= old('title') %>"
+          />
+        </div>
+        <div class="form-group">
+          <label for="coursetype">نوع دوره</label>
+          <select class="form-control mt-2" name="type" id="type">
+
+            <option value="vip" <%= old('type') == 'vip' ? 'selected' : '' %>>نقدی</option>
+            <option value="cash" <%= old('type') == 'cash' ? 'selected' : '' %>>ویژه</option>
+            <option value="free" <%= old('type') == 'free' ? 'selected' : '' %>>رایگان</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="categories">دسته</label>
+
+          <select class="form-control form-control-chosen" name="categories" id="categories" multiple>
+            <% category.forEach(cat=> { %>
+              <option value="<%= cat.id %>">
+                <%= cat.name %>
+              </option>
+
+              <% }) %>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="body">متن</label>
+          <textarea class="form-control mt-2" id="body" rows="3" name="body"><%= old('body') %></textarea
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="images">افزودن تصویر</label>
+          <input
+            type="file"
+            class="form-control-file mt-2"
+            id="images"
+            name="images"
+          />
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <label for="price">قیمت</label>
+            <input
+              type="price"
+              class="form-control mt-2"
+              name="price"
+              value="<%= old('price') %>"
+            />
+          </div>
+          <div class="col">
+            <label for="tags">تگ ها</label>
+            <input
+              type="tags"
+              class="form-control mt-2"
+              name="tags"
+              value="<%= old('tags') %>"
+            />
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-4">افزودن</button>
+      </form>
+    </div>
+    <!--  -->
+  </div>
+</div>

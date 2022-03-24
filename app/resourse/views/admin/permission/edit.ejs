@@ -1,0 +1,35 @@
+<div class="col-10">
+  <div class="main-style-div">
+    <div>
+      <div class="d-flex justify-content-between mt-5">
+        <h3>ویرایش اجازه دسترسی</h3>
+      </div>
+    </div>
+    <hr />
+    <%- include(viewPath('resourse/views/home/layout/errorMassage.ejs')); -%>
+    <div>
+      <form action="/admin/user/permissions/<%= permission.id %>/update?_method=put" method="POST">
+        <div class="form-group">
+          <label for="name">عنوان اجازه</label>
+          <input type="text" class="form-control mt-2" id="name" name="name" value="<%= permission.name %>" />
+        </div>
+
+        <div class="form-group">
+          <label for="lable">توضیح</label>
+          <input type="text" class="form-control mt-2" id="lable" name="lable" <%= permission.lable %> />
+        </div>
+
+        <button type="submit" class="btn btn-info m2-4">افز ودن</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+<link rel="stylesheet" href="/css/chosen.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.6/chosen.jquery.min.js"></script>
+<script src="/ckeditor/ckeditor.js"></script>
+<script>
+  $('.form-control-chosen').chosen({});
+</script>

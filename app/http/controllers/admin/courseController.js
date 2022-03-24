@@ -24,10 +24,11 @@ module.exports = new class CourseController extends Controller {
         }
     };
 
-    create(req, res, next) {
+    async create(req, res, next) {
         try {
+            let category = await Category.find({parent : null})
 
-            res.render('admin/courses/create', { title: 'افزودن دوره' });
+            res.render('admin/courses/create', { title: 'افزودن دوره' , category });
         } catch (err) {
             next(err)
         }

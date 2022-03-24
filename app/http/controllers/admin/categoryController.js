@@ -40,8 +40,6 @@ module.exports = new class AdminController extends Controller {
         try {
             let result = await this.validationData(req);
 
-            console.log('result', result);
-            console.log('req.body', req.body);
 
             if (result) {
 

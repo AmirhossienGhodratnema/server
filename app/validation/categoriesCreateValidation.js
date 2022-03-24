@@ -6,7 +6,6 @@ const path = require('path');
 module.exports = new class ValidationLogin extends validation {
     handel() {
         return [
-
             check('name')
             .isLength({ min: 3 })
             .withMessage('نام دسته نمیتواند کم تر از 3 کاراکتر باشد')

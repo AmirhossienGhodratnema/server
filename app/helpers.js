@@ -51,8 +51,8 @@ module.exports = class Helpers {
     };
 
 
-    date() {
-        return moment();
+    date(DT) {
+        return moment(DT);
     }
 
 };

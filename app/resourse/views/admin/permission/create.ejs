@@ -1,0 +1,42 @@
+<div class="col-10">
+  <div class="main-style-div">
+    <div>
+      <div class="d-flex justify-content-between mt-5">
+        <h3>افزودن اجازه دسترسی جدید</h3>
+      </div>
+    </div>
+    <hr />
+    <%- include(viewPath('resourse/views/home/layout/errorMassage.ejs')); -%>
+      <div>
+        <form action="/admin/user/permissions/create" method="POST" >
+          <div class="form-group">
+            <label for="name">عنوان اجازه</label>
+            <input type="text" class="form-control mt-2" id="name" name="name" />
+          </div>
+
+          <div class="form-group">
+            <label for="lable">توضیح</label>
+            <input type="text" class="form-control mt-2" id="lable" name="lable" />
+          </div>
+
+          <button type="submit" class="btn btn-info m2-4">افزودن</button>
+        </form>
+      </div>
+  </div>
+</div>
+
+
+<link rel="stylesheet" href="/css/chosen.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.6/chosen.jquery.min.js"></script>
+
+
+
+
+<script src="/ckeditor/ckeditor.js"></script>
+
+<script>
+  CKEDITOR.replace('body', {
+    filebrowserUploadUrl: '/admin/upload-image',
+  });
+  $('.form-control-chosen').chosen({});
+</script>

@@ -1,0 +1,52 @@
+<div class="col-10">
+    <div class="main-style-div">
+        <div>
+            <div class="d-flex justify-content-between mt-5">
+                <h3>جلسات دوره</h3>
+                <div>
+                    <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                        <!--  -->
+                        <a href="/admin/episode/create" class="btn btn-primary">افزودن جلسه جدید</a>
+                        <a href="/admin/courses/" class="btn btn-danger">بخش دوره ها</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="border mt-4">
+            <table class="table table-striped">
+                <thead>
+                    <tr class="text-center">
+                        <th scope="col">نام کاربر</th>
+                        <th scope="col">ایمیل</th>
+                        <th scope="col">تاریخ ثبت نام</th>
+                        <th scope="col">نوع حساب کاربری</th>
+                        <th scope="col">تنظیمات</th>
+                    </tr>
+                </thead>
+
+
+                <tbody>
+                    <% users.forEach(user=> { %>
+                        <tr class="text-center">
+                            <th scope="row"><%= user.name %> </th>
+                            <th scope="row"><%= user.email %></th>
+                            <td><%= date(user.createdAt).format('jYYYY/jM/jD') %> </td>
+                            <td><%= user.admin ? 'ادمین' : 'کاربر' %> </td>
+                            <td>
+                               
+                                <form class="btn-group btn-group-sm" action="/admin/users/<%= user.id %>?_method=DELETE" method="POST">
+                                    <a href="/admin/users/<%= user.id %>/toAdmin" class="<%= user.admin ? 'btn btn-secondary' : 'btn btn-success' %>" ><%= user.admin ? 'تغیر به کاربر' : 'مدریت'%></a>
+                                    <a href="#" class='btn btn-info'>سطح دسترسی</a>
+                                    <button type="submit" class="btn btn-danger" >حذف</button>
+                                </form>
+                            </td>                                                                                                    
+                        </tr>
+                    <% }) %>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

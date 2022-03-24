@@ -11,10 +11,13 @@ router.use((req, res, next) => {
 const AdminController = require("app/http/controllers/admin/adminController");
 const CommentControllerAdmin = require("../../../http/controllers/admin/commentControllerAdmin");
 const CategoryController = require("../../../http/controllers/admin/categoryController");
+const UserController = require("../../../http/controllers/admin/userController");
+const PermissionsController = require("../../../http/controllers/admin/permissionsController");
 
 
 // Require validations
 const CategoriesValidation = require('./../../../validation/categoriesCreateValidation')
+const PermissionValidation = require('./../../../validation/permissionValidation')
 
 const upload = require("app/hellper/uploadimage");
 
@@ -43,7 +46,20 @@ router.get('/categories/:id/edit', CategoryController.edit);
 router.put('/categories/:id/update', CategoriesValidation.handel(), CategoryController.update);
 
 
-router.post('/upload-image', upload.single("upload"), AdminController.uploadImage)
+router.get('/user/permissions', PermissionsController.index);
+router.get('/user/permissions/create', PermissionsController.create);
+router.post('/user/permissions/create', PermissionValidation.handel(), PermissionsController.store);
+router.delete('/user/permissions/:id', PermissionsController.distroy);
+router.get('/user/permissions/:id/edit', PermissionsController.edit);
+router.put('/user/permissions/:id/update', PermissionValidation.handel(), PermissionsController.update);
+
+
+router.post('/upload-image', upload.single("upload"), AdminController.uploadImage);
+
+
+router.get('/users' , UserController.index);
+router.delete('/users/:id' , UserController.distroy);
+router.get('/users/:id/toAdmin' , UserController.ToAdmin);
 
 
 

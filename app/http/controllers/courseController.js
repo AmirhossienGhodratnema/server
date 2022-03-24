@@ -9,18 +9,18 @@ const Category = require('app/models/category');
 
 module.exports = new class HomeController extends Controller {
     // Get home page view
-    async courses(req, res) {
+    async courses(req, res, next) {
         try {
-            let courses = await Course.find({})
-            res.render('home/courses', { courses });
+            let courses = await Course.find({}).sort({createdAt : -1})
+            return res.render('home/courses', { courses });
         } catch (err) {
             next(err);
         }
     };
 
-    async about(req, res) {
+    async about(req, res, next) {
         try {
-            res.render('home/about-me');
+            return res.render('home/about-me');
         } catch (err) {
             next(err);
         }
@@ -75,23 +75,31 @@ module.exports = new class HomeController extends Controller {
             let { course } = req.body;
             this.isMongoId(course);
 
+
             let courses = await Course.findById(course);
-            if(!courses) {
+            if (!courses) {
                 console.log('not found');
             }
 
 
-            if(await req.user.checkLearning(courses)){
+            if (await req.user.checkLearning(courses)) {
                 console.log('Shoma in dorera kharidari kardeed');
+                this.alert(req, {
+                    title : 'اطلاعیه',
+                    massage : 'شما این دوره را خریداری کرده اید',
+                    button : 'success',
+                    type : 'warning', 
+                    timer : 3000,
+                })
+                return this.back(req, res);
+
             }
 
-            if(courses.price == 0 && (courses.type !== 'vip' || courses.type !== 'free')) {
+            if (courses.price == 0 && (courses.type !== 'vip' || courses.type !== 'free')) {
                 console.log('In dore ghable kharidan nist')
             }
 
-
             // buy proccess
-
 
             return res.json(req.body)
         } catch (err) {
