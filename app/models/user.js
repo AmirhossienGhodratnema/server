@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const schema = mongoose.Schema
 const uniqueString = require('unique-string');
+const { relativeTimeThreshold } = require('moment-jalaali');
 
 // Register of user information.
 const UserSchema = schema({
@@ -10,21 +11,16 @@ const UserSchema = schema({
     email: { type: String, require: true },
     password: { type: String, require: true },
     rememberToken: { type: String, default: null },
-    learning: [{ type: schema.Types.ObjectId, ref: 'Course' }]
+    learning: [{ type: schema.Types.ObjectId, ref: 'Course' }],
+    roles: [{ type: schema.Types.ObjectId, ref: 'Role' }]
 }, { timestamps: true, toJSON: { virtuals: true } });
 
 
 // Password hashing create user.
 UserSchema.pre('save', function (next) {
-
     let salt = bcrypt.genSaltSync(15);
     let hash = bcrypt.hashSync(this.password, salt);
-
-
     this.password = hash;
-
-
-
     next()
 });
 
@@ -32,18 +28,15 @@ UserSchema.pre('save', function (next) {
 // Password hashing change password user.
 UserSchema.pre('findOneAndUpdate', function (next) {
     let password = this.getUpdate().$set.password
-
     let salt = bcrypt.genSaltSync(15);
     let hash = bcrypt.hashSync(this.getUpdate().$set.password, salt);
-
     this.getUpdate().$set.password = hash;
-
     next()
 });
 
 // Hashed password validation.
-UserSchema.methods.comparePassword = function (password) {
-    return bcrypt.compareSync(password, this.password)
+UserSchema.methods.comparePassword = async function (password) {
+    return await bcrypt.compareSync(this.password , password)
 };
 
 
@@ -57,6 +50,16 @@ UserSchema.methods.setrememberToken = function (res) {
         console.log('err in remember token', err)
     });
 };
+
+UserSchema.methods.hasRole = function (role) {
+    let result = roles.filter(role => {
+        return this.roles.indexOf(role) > -1;
+    })
+    return !!result.length;
+};
+
+
+
 
 
 UserSchema.methods.isVip = function () {

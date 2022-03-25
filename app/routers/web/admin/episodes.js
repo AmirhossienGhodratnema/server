@@ -16,12 +16,13 @@ const episodeController = require('app/http/controllers/admin/episodeController'
 // Validation
 const episodeValidation = require('app/validation/episodeValidation');
 
+const gate = require('./../../../hellper/gate')
 
 
 
 router.get('/', episodeController.index);
 
-router.get('/create', episodeController.create);
+router.get('/create', gate.can('episodes'),  episodeController.create);
 router.post('/create', episodeValidation.handel(), episodeController.store);
 
 router.delete('/:id', episodeController.distroy);

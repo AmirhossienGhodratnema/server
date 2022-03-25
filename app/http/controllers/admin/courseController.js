@@ -8,16 +8,21 @@ const sharp = require('sharp');
 // Models
 const Course = require('app/models/courses');
 const Category = require('./../../../models/category');
+const Permission = require('./../../../models/permission');
 
 
 
 // Helper Upload Image
 
 module.exports = new class CourseController extends Controller {
-    async index(req, res) {
+    async index(req, res , next) {
         try {
             let page = req.query.page || 1
             let course = await Course.paginate({}, { page, sort: { createdAt: -1 }, limit: 10 })
+
+            let permission = await Permission.find({}).populate('rolse').exec()
+            return res.json(permission)
+
             res.render('admin/courses/index', { title: 'دوره ها', course });
         } catch (err) {
             next(err)

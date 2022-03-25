@@ -48,10 +48,11 @@ passport.use('local.login', new localStrategy({
 }, (req, email, password, done) => {
     User.findOne({ 'email': email }, (err, user) => {
         if (err) return done(err);
-
-        // Validation user and password for login.
-        if (!user || !user.comparePassword(password)) {
-            return done(null, false, req.flash('massage', 'اطلاعات وارد شده مطابقت ندارد'))
+        if (!user) {
+            return done(null, false, req.flash('massage', 'نام کاربری یا ایمیل مطابقط ندارد'))
+        };
+        if (!user.comparePassword(password)) {
+            return done(null, false, req.flash('massage', 'پسورد مطابقت ندارد'))
         };
 
         done(null, user);

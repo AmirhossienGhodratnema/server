@@ -2,7 +2,7 @@
 const Controller = require('./../controller')
 const User = require('./../../../models/user')
 const Courses = require('./../../../models/courses');
-const user = require('./../../../models/user');
+const Role = require('./../../../models/role');
 
 
 module.exports = new class UserController extends Controller {
@@ -14,6 +14,34 @@ module.exports = new class UserController extends Controller {
             next(err)
         }
     };
+
+
+    async showAddRole(req, res, next) {
+        try {
+            let user = await User.findById(req.params.id);
+            let roles = await Role.find({});
+            return res.render('admin/user/addRole', { title: 'سطح دسترسی', roles, user });
+        } catch (err) {
+            next(err)
+        }
+    };
+
+
+    async storeAddRoleUser(req, res, next) {
+        try {
+            this.isMongoId(req.params.id);
+
+            // return res.json(req.body)
+            let user = await User.findById(req.params.id);
+            if (!user) this.error('چنین کارری .جود ندارد');
+            user.set({ roles: req.body.roles })
+            await user.save();
+            return res.redirect('/admin/users')
+        } catch (err) {
+            next(err)
+        }
+    };
+
 
 
     async distroy(req, res, next) {
@@ -39,15 +67,15 @@ module.exports = new class UserController extends Controller {
     async ToAdmin(req, res, next) {
         try {
 
-            let user = await User.findById(req.params.id)            
+            let user = await User.findById(req.params.id)
 
 
-            user.set({admin : ! user.admin});
+            user.set({ admin: !user.admin });
             await user.save()
 
             return res.redirect('/admin/users')
         } catch (err) {
-           next(err);
+            next(err);
         }
     }
 };

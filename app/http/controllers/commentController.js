@@ -21,20 +21,9 @@ module.exports = new class HomeController extends Controller {
                     if (err) throw err;
                 });
             };
-
             return res.redirect(`/courses/${req.body.course}`);
-
         } catch (err) {
             next(err);
         }
     }
-
-
-
-
-
-
-
-
-
 };

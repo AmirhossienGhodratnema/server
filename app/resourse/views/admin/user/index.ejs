@@ -38,7 +38,7 @@
                                
                                 <form class="btn-group btn-group-sm" action="/admin/users/<%= user.id %>?_method=DELETE" method="POST">
                                     <a href="/admin/users/<%= user.id %>/toAdmin" class="<%= user.admin ? 'btn btn-secondary' : 'btn btn-success' %>" ><%= user.admin ? 'تغیر به کاربر' : 'مدریت'%></a>
-                                    <a href="#" class='btn btn-info'>سطح دسترسی</a>
+                                    <a href="/admin/user/addRole/<%= user.id %>" class='btn btn-info'>سطح دسترسی</a>
                                     <button type="submit" class="btn btn-danger" >حذف</button>
                                 </form>
                             </td>                                                                                                    

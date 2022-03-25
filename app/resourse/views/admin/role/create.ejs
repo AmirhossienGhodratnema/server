@@ -1,0 +1,46 @@
+<div class="col-10">
+  <div class="main-style-div">
+    <div>
+      <div class="d-flex justify-content-between mt-5">
+        <h3 class="font-weight-bold">افزودن سطح دسترسی جدید</h3>
+      </div>
+    </div>
+    <hr />
+    <%- include(viewPath('resourse/views/home/layout/errorMassage.ejs')); -%>
+      <div>
+        <form action="/admin/user/role/create" method="POST" >
+          <div class="form-group">
+            <label for="name">عنوان اجازه</label>
+            <input type="text" class="form-control mt-2" id="name" name="name" />
+          </div>
+
+          <div class="form-group">
+            <label for="lable">توضیح</label>
+            <input type="text" class="form-control mt-2" id="lable" name="lable" />
+          </div>
+
+
+
+          <div class="form-group">
+            <label for="permission" style="margin-bottom: .5rem;">اجازه دسترسی</label>
+            <select class="form-control form-control-chosen " name="permission" id="permission" multiple>
+                <% permissions.forEach(permission => { %>
+                <option value="<%= permission.id %>">
+                  <%= permission.name %>
+                </option>
+              <% }) %>
+            </select>
+          </div>
+
+          <button type="submit" class="btn btn-info m2-4">افزودن</button>
+        </form>
+      </div>
+  </div>
+</div>
+
+
+<link rel="stylesheet" href="/css/chosen.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.6/chosen.jquery.min.js"></script>
+<script>
+  $('.form-control-chosen').chosen({});
+</script>

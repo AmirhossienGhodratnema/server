@@ -37,11 +37,6 @@ CourseSchema.methods.inc = async function () {
     console.log('inc inc inc inc inc inc inc inc inc inc ')
 }
 
-
-
-
-
-
 CourseSchema.virtual('episode', { ref: 'Episodes', localField: '_id', foreignField: 'course' });
 CourseSchema.virtual('comments', { ref: 'Comments', localField: '_id', foreignField: 'course' });
 

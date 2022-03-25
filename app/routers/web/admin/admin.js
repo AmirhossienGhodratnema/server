@@ -13,11 +13,13 @@ const CommentControllerAdmin = require("../../../http/controllers/admin/commentC
 const CategoryController = require("../../../http/controllers/admin/categoryController");
 const UserController = require("../../../http/controllers/admin/userController");
 const PermissionsController = require("../../../http/controllers/admin/permissionsController");
+const RoleController = require("../../../http/controllers/admin/roleController");
 
 
 // Require validations
 const CategoriesValidation = require('./../../../validation/categoriesCreateValidation')
 const PermissionValidation = require('./../../../validation/permissionValidation')
+const RoleValidation = require('./../../../validation/roleValidation')
 
 const upload = require("app/hellper/uploadimage");
 
@@ -54,12 +56,24 @@ router.get('/user/permissions/:id/edit', PermissionsController.edit);
 router.put('/user/permissions/:id/update', PermissionValidation.handel(), PermissionsController.update);
 
 
+router.get('/user/addRole/:id', UserController.showAddRole);
+router.post('/user/addRole/:id', UserController.storeAddRoleUser);
+
+
+router.get('/user/role', RoleController.index);
+router.get('/user/role/create', RoleController.create);
+router.post('/user/role/create', RoleValidation.handel(), RoleController.store);
+router.delete('/user/role/:id', RoleController.distroy);
+router.get('/user/role/:id/edit', RoleController.edit);
+router.put('/user/role/:id/update', RoleValidation.handel(), RoleController.update);
+
+
 router.post('/upload-image', upload.single("upload"), AdminController.uploadImage);
 
 
-router.get('/users' , UserController.index);
-router.delete('/users/:id' , UserController.distroy);
-router.get('/users/:id/toAdmin' , UserController.ToAdmin);
+router.get('/users', UserController.index);
+router.delete('/users/:id', UserController.distroy);
+router.get('/users/:id/toAdmin', UserController.ToAdmin);
 
 
 

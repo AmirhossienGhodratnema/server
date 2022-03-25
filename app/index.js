@@ -12,6 +12,7 @@ const passport = require('passport');
 const rememberLogin = require('app/middleware/rememberlogin');
 const expressLayouts = require('express-ejs-layouts')
 const methodOverride = require('method-override')
+const gate = require('./hellper/gate')
 
 
 // Require Files
@@ -70,6 +71,7 @@ module.exports = class Aplication {
 
         // RememberLogin Not User login.
         app.use(rememberLogin.handel);
+        app.use(gate.middleware());
 
         // Helpers Next Configuration Passport
         app.use((req, res, next) => {

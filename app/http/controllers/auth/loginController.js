@@ -26,8 +26,9 @@ module.exports = new class LoginController extends Controller {
             this.validationRecaptcha(req, res)
                 .then(result => this.validationData(req))
                 .then(result => {
-                    if (result) return this.login(req, res, next)
-                    else {
+                    if (result) {
+                        this.login(req, res, next)
+                    } else {
                         req.flash('formData', req.body);
                         res.redirect('/auth/login');
                     }
